@@ -17,12 +17,29 @@ async function AgreementList() {
     redirect("/auth/login");
   }
 
-  const { data: rows } = await supabase
+  // 自分が関与した agreement_logs から agreement_id を取得
+  const { data: logRows } = await supabase
+    .from("agreement_logs")
+    .select("agreement_id")
+    .eq("actor_id", user.id);
+
+  const actedIds = (logRows ?? []).map((r) => r.agreement_id);
+
+  // 自分が作成 or target_email 一致 or ログに参加した同意書を取得
+  let query = supabase
     .from("agreements")
     .select("*")
-    .or(`creator_id.eq.${user.id},target_email.eq.${user.email}`)
-    .order("created_at", { ascending: false })
-    .returns<AgreementRow[]>();
+    .order("created_at", { ascending: false });
+
+  if (actedIds.length > 0) {
+    query = query.or(
+      `creator_id.eq.${user.id},target_email.eq.${user.email},id.in.(${actedIds.join(",")})`,
+    );
+  } else {
+    query = query.or(`creator_id.eq.${user.id},target_email.eq.${user.email}`);
+  }
+
+  const { data: rows } = await query.returns<AgreementRow[]>();
 
   const agreements = (rows ?? []).map(toAgreement);
 
