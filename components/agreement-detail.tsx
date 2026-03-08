@@ -69,8 +69,8 @@ export function AgreementDetail({
               {new Date(agreement.createdAt).toLocaleString("ja-JP")}
             </div>
             <div>
-              <span className="text-muted-foreground">コンテンツハッシュ: </span>
-              <code className="text-xs break-all">{agreement.contentHash}</code>
+              <span className="text-muted-foreground">更新日: </span>
+              {new Date(agreement.updatedAt).toLocaleString("ja-JP")}
             </div>
           </div>
         </CardContent>

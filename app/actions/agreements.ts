@@ -16,7 +16,6 @@ export async function createAgreement(formData: FormData) {
 
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
-  const targetEmail = (formData.get("targetEmail") as string)?.trim() || null;
 
   if (!title || !content) {
     return { error: "タイトルと内容を入力してください" };
@@ -31,7 +30,7 @@ export async function createAgreement(formData: FormData) {
       content,
       content_hash: contentHash,
       creator_id: user.id,
-      target_email: targetEmail,
+      target_email: null,
     })
     .select("id")
     .single();
@@ -40,7 +39,7 @@ export async function createAgreement(formData: FormData) {
     return { error: "同意書の作成に失敗しました" };
   }
 
-  redirect(`/agreements/${data.id}`);
+  return { agreementId: data.id };
 }
 
 export async function acceptAgreement(id: string, userAgent: string) {
