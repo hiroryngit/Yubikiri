@@ -5,10 +5,12 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { AgreementStatusBadge } from "@/components/agreement-status-badge";
 import { AcceptButton } from "@/components/accept-button";
 import { RevokeButton } from "@/components/revoke-button";
 import type { Agreement, AgreementLog } from "@/types/database";
+import Link from "next/link";
 
 type Props = {
   agreement: Agreement;
@@ -74,12 +76,17 @@ export function AgreementDetail({
             </div>
           </div>
         </CardContent>
-        {(canAccept || canRevoke) && (
-          <CardFooter className="gap-2">
-            {canAccept && <AcceptButton agreementId={agreement.id} />}
-            {canRevoke && <RevokeButton agreementId={agreement.id} />}
-          </CardFooter>
-        )}
+        <CardFooter className="gap-2">
+          {canAccept && <AcceptButton agreementId={agreement.id} />}
+          {canRevoke && <RevokeButton agreementId={agreement.id} />}
+          {!isAuthenticated && agreement.status === "pending" && (
+            <Button asChild>
+              <Link href={`/auth/login?redirect=/agreements/${agreement.id}`}>
+                ログインして同意する
+              </Link>
+            </Button>
+          )}
+        </CardFooter>
       </Card>
 
       {logs.length > 0 && (
