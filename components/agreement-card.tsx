@@ -18,8 +18,8 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
             <CardTitle className="text-lg">{agreement.title}</CardTitle>
             <AgreementStatusBadge status={agreement.status} />
           </div>
-          <CardDescription>
-            対象: {agreement.targetEmail ?? "URL共有"}
+          <CardDescription className="font-mono text-xs truncate">
+            {`/agreements/${agreement.id}`}
           </CardDescription>
         </CardHeader>
         <CardContent>
