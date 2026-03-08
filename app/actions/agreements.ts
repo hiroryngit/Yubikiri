@@ -11,7 +11,7 @@ export async function createAgreement(formData: FormData) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/auth/login");
+    redirect("/auth/login?redirect=/protected/agreements/new");
   }
 
   const title = formData.get("title") as string;
