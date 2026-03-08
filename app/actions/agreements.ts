@@ -85,7 +85,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
     .eq("id", id);
 
   if (updateError) {
-    return { error: "合意の記録に失敗しました" };
+    return { error: `合意の記録に失敗しました: ${updateError.message}` };
   }
 
   // ログ記録
@@ -97,7 +97,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
   });
 
   if (logError) {
-    return { error: "ログの記録に失敗しました" };
+    return { error: `ログの記録に失敗しました: ${logError.message}` };
   }
 
   return { success: true };
@@ -144,7 +144,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
     .eq("id", id);
 
   if (updateError) {
-    return { error: "拒否の記録に失敗しました" };
+    return { error: `拒否の記録に失敗しました: ${updateError.message}` };
   }
 
   const { error: logError } = await supabase.from("agreement_logs").insert({
@@ -155,7 +155,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
   });
 
   if (logError) {
-    return { error: "ログの記録に失敗しました" };
+    return { error: `ログの記録に失敗しました: ${logError.message}` };
   }
 
   return { success: true };
