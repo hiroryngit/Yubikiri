@@ -3,9 +3,10 @@ export type AgreementRow = {
   id: string;
   title: string;
   content: string;
-  status: "pending" | "accepted" | "rejected" | "revoked";
+  status: "pending" | "accepted" | "rejected" | "revoked" | "withdrawn";
   content_hash: string;
   creator_id: string;
+  creator_email: string;
   target_email: string | null;
   created_at: string;
   updated_at: string;
@@ -14,7 +15,7 @@ export type AgreementRow = {
 export type AgreementLogRow = {
   id: string;
   agreement_id: string;
-  action_type: "accept" | "reject" | "revoke";
+  action_type: "accept" | "reject" | "revoke" | "withdraw";
   recorded_at: string;
   user_agent: string | null;
   actor_id: string;
@@ -25,9 +26,10 @@ export type Agreement = {
   id: string;
   title: string;
   content: string;
-  status: "pending" | "accepted" | "rejected" | "revoked";
+  status: "pending" | "accepted" | "rejected" | "revoked" | "withdrawn";
   contentHash: string;
   creatorId: string;
+  creatorEmail: string;
   targetEmail: string | null;
   createdAt: string;
   updatedAt: string;
@@ -36,7 +38,7 @@ export type Agreement = {
 export type AgreementLog = {
   id: string;
   agreementId: string;
-  actionType: "accept" | "reject" | "revoke";
+  actionType: "accept" | "reject" | "revoke" | "withdraw";
   recordedAt: string;
   userAgent: string | null;
   actorId: string;

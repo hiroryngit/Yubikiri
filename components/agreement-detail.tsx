@@ -9,6 +9,7 @@ import { AgreementStatusBadge } from "@/components/agreement-status-badge";
 import { AcceptButton } from "@/components/accept-button";
 import { RejectButton } from "@/components/reject-button";
 import { RevokeButton } from "@/components/revoke-button";
+import { WithdrawButton } from "@/components/withdraw-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
 import type { Agreement, AgreementLog } from "@/types/database";
 
@@ -64,6 +65,10 @@ export function AgreementDetail({
             <p className="whitespace-pre-wrap">{agreement.content}</p>
           </div>
           <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <span className="text-muted-foreground">作成者: </span>
+              {agreement.creatorEmail}
+            </div>
             <div className="col-span-2">
               <span className="text-muted-foreground">承認URL: </span>
               <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
@@ -97,6 +102,9 @@ export function AgreementDetail({
             )
           )}
           {canRevoke && <RevokeButton agreementId={agreement.id} />}
+          {isCreator && agreement.status === "pending" && (
+            <WithdrawButton agreementId={agreement.id} />
+          )}
         </CardFooter>
       </Card>
 
@@ -118,7 +126,9 @@ export function AgreementDetail({
                         ? "合意"
                         : log.actionType === "reject"
                           ? "拒否"
-                          : "解除"}
+                          : log.actionType === "withdraw"
+                            ? "取り下げ"
+                            : "解除"}
                     </span>
                     <span className="text-muted-foreground ml-2">
                       {new Date(log.recordedAt).toLocaleString("ja-JP")}

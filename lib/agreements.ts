@@ -13,6 +13,7 @@ export function toAgreement(row: AgreementRow): Agreement {
     status: row.status,
     contentHash: row.content_hash,
     creatorId: row.creator_id,
+    creatorEmail: row.creator_email,
     targetEmail: row.target_email,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
