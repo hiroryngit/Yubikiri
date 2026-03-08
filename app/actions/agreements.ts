@@ -103,6 +103,64 @@ export async function acceptAgreement(id: string, userAgent: string) {
   return { success: true };
 }
 
+export async function rejectAgreement(id: string, userAgent: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("status, creator_id, target_email")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "同意書が見つかりません" };
+  }
+
+  if (agreement.status !== "pending") {
+    return { error: "この同意書は既に処理済みです" };
+  }
+
+  // accept と同じ権限チェック
+  if (agreement.target_email !== null) {
+    if (agreement.target_email !== user.email) {
+      return { error: "この同意書の対象者ではありません" };
+    }
+  } else {
+    if (agreement.creator_id === user.id) {
+      return { error: "自分が作成した同意書は拒否できません" };
+    }
+  }
+
+  const { error: updateError } = await supabase
+    .from("agreements")
+    .update({ status: "rejected" })
+    .eq("id", id);
+
+  if (updateError) {
+    return { error: "拒否の記録に失敗しました" };
+  }
+
+  const { error: logError } = await supabase.from("agreement_logs").insert({
+    agreement_id: id,
+    action_type: "reject",
+    user_agent: userAgent,
+    actor_id: user.id,
+  });
+
+  if (logError) {
+    return { error: "ログの記録に失敗しました" };
+  }
+
+  return { success: true };
+}
+
 export async function revokeAgreement(id: string, userAgent: string) {
   const supabase = await createClient();
   const {

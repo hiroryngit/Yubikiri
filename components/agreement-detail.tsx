@@ -5,12 +5,12 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { AgreementStatusBadge } from "@/components/agreement-status-badge";
 import { AcceptButton } from "@/components/accept-button";
+import { RejectButton } from "@/components/reject-button";
 import { RevokeButton } from "@/components/revoke-button";
+import { LoginRequiredButton } from "@/components/login-required-button";
 import type { Agreement, AgreementLog } from "@/types/database";
-import Link from "next/link";
 
 type Props = {
   agreement: Agreement;
@@ -77,15 +77,24 @@ export function AgreementDetail({
           </div>
         </CardContent>
         <CardFooter className="gap-2">
-          {canAccept && <AcceptButton agreementId={agreement.id} />}
-          {canRevoke && <RevokeButton agreementId={agreement.id} />}
-          {!isAuthenticated && agreement.status === "pending" && (
-            <Button asChild>
-              <Link href={`/auth/login?redirect=/agreements/${agreement.id}`}>
-                ログインして同意する
-              </Link>
-            </Button>
+          {agreement.status === "pending" && !isCreator && (
+            isAuthenticated ? (
+              <>
+                <AcceptButton agreementId={agreement.id} />
+                <RejectButton agreementId={agreement.id} />
+              </>
+            ) : (
+              <>
+                <LoginRequiredButton agreementId={agreement.id}>
+                  同意する
+                </LoginRequiredButton>
+                <LoginRequiredButton agreementId={agreement.id} variant="outline">
+                  拒否する
+                </LoginRequiredButton>
+              </>
+            )
           )}
+          {canRevoke && <RevokeButton agreementId={agreement.id} />}
         </CardFooter>
       </Card>
 
@@ -103,7 +112,11 @@ export function AgreementDetail({
                 >
                   <div>
                     <span className="font-medium">
-                      {log.actionType === "accept" ? "合意" : "解除"}
+                      {log.actionType === "accept"
+                        ? "合意"
+                        : log.actionType === "reject"
+                          ? "拒否"
+                          : "解除"}
                     </span>
                     <span className="text-muted-foreground ml-2">
                       {new Date(log.recordedAt).toLocaleString("ja-JP")}
