@@ -1,43 +1,72 @@
 import { redirect } from "next/navigation";
-
 import { createClient } from "@/lib/supabase/server";
-import { InfoIcon } from "lucide-react";
-import { FetchDataSteps } from "@/components/tutorial/fetch-data-steps";
+import { toAgreement } from "@/lib/agreements";
+import { AgreementCard } from "@/components/agreement-card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Suspense } from "react";
+import type { AgreementRow } from "@/types/database";
 
-async function UserDetails() {
+async function AgreementList() {
   const supabase = await createClient();
-  const { data, error } = await supabase.auth.getClaims();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (error || !data?.claims) {
+  if (!user) {
     redirect("/auth/login");
   }
 
-  return JSON.stringify(data.claims, null, 2);
+  const { data: rows } = await supabase
+    .from("agreements")
+    .select("*")
+    .or(`creator_id.eq.${user.id},target_email.eq.${user.email}`)
+    .order("created_at", { ascending: false })
+    .returns<AgreementRow[]>();
+
+  const agreements = (rows ?? []).map(toAgreement);
+
+  if (agreements.length === 0) {
+    return (
+      <div className="text-center py-12 text-muted-foreground">
+        <p>まだ同意書がありません。</p>
+        <p className="mt-2">
+          <Link
+            href="/protected/agreements/new"
+            className="text-primary underline"
+          >
+            最初の同意書を作成
+          </Link>
+          しましょう。
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-4">
+      {agreements.map((agreement) => (
+        <AgreementCard key={agreement.id} agreement={agreement} />
+      ))}
+    </div>
+  );
 }
 
-export default function ProtectedPage() {
+export default function DashboardPage() {
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="w-full">
-        <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
-          <InfoIcon size="16" strokeWidth={2} />
-          This is a protected page that you can only see as an authenticated
-          user
-        </div>
+    <div className="flex-1 w-full flex flex-col gap-8">
+      <div className="flex items-center justify-between">
+        <h1 className="font-bold text-2xl">ダッシュボード</h1>
+        <Button asChild>
+          <Link href="/protected/agreements/new">同意書を作成</Link>
+        </Button>
       </div>
-      <div className="flex flex-col gap-2 items-start">
-        <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
-          <Suspense>
-            <UserDetails />
-          </Suspense>
-        </pre>
-      </div>
-      <div>
-        <h2 className="font-bold text-2xl mb-4">Next steps</h2>
-        <FetchDataSteps />
-      </div>
+
+      <Suspense
+        fallback={<p className="text-muted-foreground">読み込み中...</p>}
+      >
+        <AgreementList />
+      </Suspense>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function ProtectedLayout({
+export default function AgreementsLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export default function ProtectedLayout({
             </Suspense>
           </div>
         </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
+        <div className="flex-1 flex flex-col w-full max-w-3xl p-5">
           {children}
         </div>
 
