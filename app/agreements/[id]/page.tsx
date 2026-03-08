@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { toAgreement, toAgreementLog } from "@/lib/agreements";
 import { AgreementDetail } from "@/components/agreement-detail";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import { Suspense } from "react";
 import type { AgreementRow, AgreementLogRow } from "@/types/database";
 
@@ -37,6 +38,11 @@ async function AgreementContent({
     data: { user },
   } = await supabase.auth.getUser();
 
+  const headersList = await headers();
+  const host = headersList.get("host") ?? "localhost:3000";
+  const proto = headersList.get("x-forwarded-proto") ?? "https";
+  const origin = `${proto}://${host}`;
+
   return (
     <AgreementDetail
       agreement={agreement}
@@ -44,6 +50,7 @@ async function AgreementContent({
       currentUserEmail={user?.email ?? null}
       currentUserId={user?.id ?? null}
       isAuthenticated={!!user}
+      origin={origin}
     />
   );
 }

@@ -18,6 +18,7 @@ type Props = {
   currentUserEmail: string | null;
   currentUserId: string | null;
   isAuthenticated: boolean;
+  origin: string;
 };
 
 export function AgreementDetail({
@@ -26,6 +27,7 @@ export function AgreementDetail({
   currentUserEmail,
   currentUserId,
   isAuthenticated,
+  origin,
 }: Props) {
   const isCreator = currentUserId === agreement.creatorId;
   const isTarget =
@@ -62,9 +64,9 @@ export function AgreementDetail({
             <p className="whitespace-pre-wrap">{agreement.content}</p>
           </div>
           <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <span className="text-muted-foreground">対象者: </span>
-              {agreement.targetEmail ?? "未指定（URLで共有）"}
+            <div className="col-span-2">
+              <span className="text-muted-foreground">承認URL: </span>
+              <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
             </div>
             <div>
               <span className="text-muted-foreground">作成日: </span>
