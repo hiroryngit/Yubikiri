@@ -182,6 +182,54 @@ export async function withdrawAgreement(id: string) {
   return { success: true };
 }
 
+export async function rerequestAgreement(id: string, userAgent: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("status, creator_id")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "同意書が見つかりません" };
+  }
+
+  if (agreement.creator_id !== user.id) {
+    return { error: "作成者のみ再申請できます" };
+  }
+
+  if (agreement.status !== "rejected") {
+    return { error: "拒否された同意書のみ再申請できます" };
+  }
+
+  const [updateResult, logResult] = await Promise.all([
+    supabase.from("agreements").update({ status: "pending" }).eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "rerequest",
+      user_agent: userAgent,
+      actor_id: user.id,
+    }),
+  ]);
+
+  if (updateResult.error) {
+    return { error: `再申請に失敗しました: ${updateResult.error.message}` };
+  }
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
+  }
+
+  return { success: true };
+}
+
 export async function revokeAgreement(id: string, userAgent: string) {
   const supabase = await createClient();
   const {

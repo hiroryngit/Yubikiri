@@ -15,7 +15,7 @@ export type AgreementRow = {
 export type AgreementLogRow = {
   id: string;
   agreement_id: string;
-  action_type: "accept" | "reject" | "revoke";
+  action_type: "accept" | "reject" | "revoke" | "rerequest";
   recorded_at: string;
   user_agent: string | null;
   actor_id: string;
@@ -38,7 +38,7 @@ export type Agreement = {
 export type AgreementLog = {
   id: string;
   agreementId: string;
-  actionType: "accept" | "reject" | "revoke";
+  actionType: "accept" | "reject" | "revoke" | "rerequest";
   recordedAt: string;
   userAgent: string | null;
   actorId: string;

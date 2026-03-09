@@ -10,6 +10,7 @@ import { AcceptButton } from "@/components/accept-button";
 import { RejectButton } from "@/components/reject-button";
 import { RevokeButton } from "@/components/revoke-button";
 import { WithdrawButton } from "@/components/withdraw-button";
+import { RerequestButton } from "@/components/rerequest-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
 import type { Agreement, AgreementLog } from "@/types/database";
 
@@ -103,6 +104,9 @@ export function AgreementDetail({
             )
           )}
           {canRevoke && <RevokeButton agreementId={agreement.id} />}
+          {isCreator && agreement.status === "rejected" && (
+            <RerequestButton agreementId={agreement.id} />
+          )}
           {isCreator && (
             <WithdrawButton agreementId={agreement.id} />
           )}
@@ -127,7 +131,9 @@ export function AgreementDetail({
                         ? "合意"
                         : log.actionType === "reject"
                           ? "拒否"
-                          : "解除"}
+                          : log.actionType === "rerequest"
+                            ? "再申請"
+                            : "解除"}
                     </span>
                     <span className="text-muted-foreground ml-2">
                       {new Date(log.recordedAt).toLocaleString("ja-JP")}
