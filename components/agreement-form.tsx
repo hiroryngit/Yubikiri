@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createAgreement } from "@/app/actions/agreements";
+import { createClient } from "@/lib/supabase/client";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -25,17 +26,37 @@ export function AgreementForm() {
     if (draft && !autoSubmitted.current) {
       autoSubmitted.current = true;
       const { title: t, content: c } = JSON.parse(draft);
-      // 下書きは即削除（ループ防止）
       sessionStorage.removeItem(DRAFT_KEY);
-      // フォームに値を復元
       setTitle(t);
       setContent(c);
-      // セッションが確立するまで少し待ってから送信
-      setTimeout(() => submitAgreement(t, c, true), 500);
+      // クライアント側で認証を確認してから送信
+      waitForAuthAndSubmit(t, c);
     }
   }, []);
 
-  async function submitAgreement(t: string, c: string, isAutoRetry = false) {
+  async function waitForAuthAndSubmit(t: string, c: string) {
+    setPending(true);
+    setError(null);
+
+    const supabase = createClient();
+
+    // セッションが確立するまで最大5秒待つ
+    for (let i = 0; i < 10; i++) {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        // 認証OK → サーバーアクション実行
+        await doCreate(t, c);
+        return;
+      }
+      await new Promise((r) => setTimeout(r, 500));
+    }
+
+    // 5秒待ってもログインできていない
+    setError("ログインが完了していません。ページをリロードしてもう一度お試しください。");
+    setPending(false);
+  }
+
+  async function doCreate(t: string, c: string) {
     setPending(true);
     setError(null);
 
@@ -47,16 +68,8 @@ export function AgreementForm() {
 
     if (result && "error" in result) {
       if (result.error === "login_required") {
-        if (isAutoRetry) {
-          // 自動送信でもログインできていない場合はフォームに値を残してエラー表示
-          setError("ログインが必要です。下のボタンからログインしてください。");
-          setPending(false);
-          return;
-        }
-        // 手動送信: 下書きを保存してログインへ
-        sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ title: t, content: c }));
+        setError("セッションが切れています。ページをリロードしてもう一度お試しください。");
         setPending(false);
-        router.push("/auth/login?redirect=/agreements/new");
         return;
       }
       setError(result.error ?? null);
@@ -73,7 +86,19 @@ export function AgreementForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    await submitAgreement(title, content);
+
+    // まずクライアント側で認証チェック
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      // 未ログイン: 下書き保存してログインへ
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ title, content }));
+      router.push("/auth/login?redirect=/agreements/new");
+      return;
+    }
+
+    await doCreate(title, content);
   }
 
   if (shareUrl) {
