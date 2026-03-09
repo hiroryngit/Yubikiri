@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createAgreement } from "@/app/actions/agreements";
 import { createClient } from "@/lib/supabase/client";
+import { pushReturnUrl } from "@/lib/return-stack";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -29,7 +30,6 @@ export function AgreementForm() {
       sessionStorage.removeItem(DRAFT_KEY);
       setTitle(t);
       setContent(c);
-      // クライアント側で認証を確認してから送信
       waitForAuthAndSubmit(t, c);
     }
   }, []);
@@ -44,14 +44,12 @@ export function AgreementForm() {
     for (let i = 0; i < 10; i++) {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // 認証OK → サーバーアクション実行
         await doCreate(t, c);
         return;
       }
       await new Promise((r) => setTimeout(r, 500));
     }
 
-    // 5秒待ってもログインできていない
     setError("ログインが完了していません。ページをリロードしてもう一度お試しください。");
     setPending(false);
   }
@@ -87,14 +85,15 @@ export function AgreementForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // まずクライアント側で認証チェック
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
-      // 未ログイン: 下書き保存してログインへ
+      // 下書きを sessionStorage に保存
       sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ title, content }));
-      router.push("/auth/login?redirect=/agreements/new");
+      // 戻り先を return stack に積む
+      pushReturnUrl("/agreements/new");
+      router.push("/auth/login");
       return;
     }
 

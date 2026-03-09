@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import { popReturnUrl, pushReturnUrl, hasReturnUrl } from "@/lib/return-stack";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function LoginForm({
   className,
@@ -27,7 +28,13 @@ export function LoginForm({
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const redirectTo = searchParams.get("redirect") || "/";
+  // middleware からのリダイレクト: クエリパラメータの redirect をスタックに変換
+  useEffect(() => {
+    const redirect = searchParams.get("redirect");
+    if (redirect && !hasReturnUrl()) {
+      pushReturnUrl(redirect);
+    }
+  }, [searchParams]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +48,10 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
-      router.push(redirectTo);
+
+      // スタックから戻り先を取得
+      const returnUrl = popReturnUrl() || "/";
+      router.push(returnUrl);
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -53,9 +63,7 @@ export function LoginForm({
     const supabase = createClient();
     setError(null);
 
-    // 戻り先を cookie に保存（OAuth リダイレクトでクエリパラメータが消える場合の対策）
-    document.cookie = `auth_redirect=${encodeURIComponent(redirectTo)};path=/;max-age=600;SameSite=Lax`;
-
+    // Google OAuth → callback → "/" に着地 → AuthReturnHandler がスタックからリダイレクト
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {

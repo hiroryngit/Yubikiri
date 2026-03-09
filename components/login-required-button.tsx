@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { pushReturnUrl } from "@/lib/return-stack";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -17,8 +18,8 @@ export function LoginRequiredButton({
   const router = useRouter();
 
   function handleClick() {
-    alert("ログインが必要です");
-    router.push(`/auth/login?redirect=/agreements/${agreementId}`);
+    pushReturnUrl(`/agreements/${agreementId}`);
+    router.push("/auth/login");
   }
 
   return (

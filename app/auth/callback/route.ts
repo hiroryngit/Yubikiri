@@ -6,19 +6,10 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
 
-  // 戻り先: クエリパラメータ → cookie → デフォルト "/"
-  const next =
-    searchParams.get("next") ??
-    decodeURIComponent(request.cookies.get("auth_redirect")?.value ?? "") ??
-    "/";
-
-  const redirectUrl = `${origin}${next || "/"}`;
-
   if (code) {
-    const response = NextResponse.redirect(redirectUrl);
-
-    // auth_redirect cookie を削除
-    response.cookies.set("auth_redirect", "", { path: "/", maxAge: 0 });
+    // セッション確立後は必ず "/" にリダイレクト
+    // クライアント側の AuthReturnHandler が localStorage のスタックから戻り先を処理
+    const response = NextResponse.redirect(`${origin}/`);
 
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
