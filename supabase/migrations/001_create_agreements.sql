@@ -3,7 +3,7 @@ create table agreements (
   id uuid primary key default gen_random_uuid(),
   title text not null,
   content text not null,
-  status text not null default 'pending' check (status in ('pending', 'accepted', 'rejected', 'revoked', 'withdrawn')),
+  status text not null default 'pending' check (status in ('pending', 'accepted', 'rejected', 'revoked')),
   content_hash text not null,
   creator_id uuid not null references auth.users(id),
   creator_email text not null,
@@ -16,7 +16,7 @@ create table agreements (
 create table agreement_logs (
   id uuid primary key default gen_random_uuid(),
   agreement_id uuid not null references agreements(id) on delete cascade,
-  action_type text not null check (action_type in ('accept', 'reject', 'revoke', 'withdraw')),
+  action_type text not null check (action_type in ('accept', 'reject', 'revoke')),
   recorded_at timestamptz not null default now(),
   user_agent text,
   actor_id uuid not null references auth.users(id)
@@ -55,6 +55,10 @@ create policy "agreements_update" on agreements
     or (select email from auth.users where id = auth.uid()) = target_email
     or (target_email is null and auth.uid() is not null)
   );
+
+-- agreements: DELETE は作成者のみ
+create policy "agreements_delete" on agreements
+  for delete using (auth.uid() = creator_id);
 
 -- agreement_logs: INSERT のみ許可（認証ユーザー）
 create policy "agreement_logs_insert" on agreement_logs

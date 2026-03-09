@@ -11,15 +11,17 @@ export function WithdrawButton({ agreementId }: { agreementId: string }) {
   const router = useRouter();
 
   async function handleWithdraw() {
+    if (!confirm("この同意書を取り下げますか？取り下げると完全に削除されます。")) {
+      return;
+    }
     setLoading(true);
     setError(null);
-    const userAgent = navigator.userAgent;
-    const result = await withdrawAgreement(agreementId, userAgent);
+    const result = await withdrawAgreement(agreementId);
     if (result?.error) {
       setError(result.error);
       setLoading(false);
     } else {
-      router.refresh();
+      router.push("/protected");
     }
   }
 

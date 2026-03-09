@@ -102,7 +102,7 @@ export function AgreementDetail({
             )
           )}
           {canRevoke && <RevokeButton agreementId={agreement.id} />}
-          {isCreator && agreement.status === "pending" && (
+          {isCreator && (
             <WithdrawButton agreementId={agreement.id} />
           )}
         </CardFooter>
@@ -126,9 +126,7 @@ export function AgreementDetail({
                         ? "合意"
                         : log.actionType === "reject"
                           ? "拒否"
-                          : log.actionType === "withdraw"
-                            ? "取り下げ"
-                            : "解除"}
+                          : "解除"}
                     </span>
                     <span className="text-muted-foreground ml-2">
                       {new Date(log.recordedAt).toLocaleString("ja-JP")}
