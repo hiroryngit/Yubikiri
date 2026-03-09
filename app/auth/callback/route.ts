@@ -5,12 +5,20 @@ import type { CookieOptions } from "@supabase/ssr";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/";
 
-  const redirectUrl = `${origin}${next}`;
+  // 戻り先: クエリパラメータ → cookie → デフォルト "/"
+  const next =
+    searchParams.get("next") ??
+    decodeURIComponent(request.cookies.get("auth_redirect")?.value ?? "") ??
+    "/";
+
+  const redirectUrl = `${origin}${next || "/"}`;
 
   if (code) {
     const response = NextResponse.redirect(redirectUrl);
+
+    // auth_redirect cookie を削除
+    response.cookies.set("auth_redirect", "", { path: "/", maxAge: 0 });
 
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,

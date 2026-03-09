@@ -53,10 +53,13 @@ export function LoginForm({
     const supabase = createClient();
     setError(null);
 
+    // 戻り先を cookie に保存（OAuth リダイレクトでクエリパラメータが消える場合の対策）
+    document.cookie = `auth_redirect=${encodeURIComponent(redirectTo)};path=/;max-age=600;SameSite=Lax`;
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(redirectTo)}`,
+        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
 
