@@ -52,7 +52,6 @@ export async function acceptAgreement(id: string, userAgent: string) {
     return { error: "ログインが必要です" };
   }
 
-  // ステータス確認 & 権限チェック
   const { data: agreement, error: fetchError } = await supabase
     .from("agreements")
     .select("status, target_email, creator_id")
@@ -77,7 +76,6 @@ export async function acceptAgreement(id: string, userAgent: string) {
     }
   }
 
-  // ステータス更新とログ記録を並列実行
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "accepted" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -85,6 +83,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
       action_type: "accept",
       user_agent: userAgent,
       actor_id: user.id,
+      actor_email: user.email,
     }),
   ]);
 
@@ -132,7 +131,6 @@ export async function rejectAgreement(id: string, userAgent: string) {
     }
   }
 
-  // ステータス更新とログ記録を並列実行
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "rejected" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -140,6 +138,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
       action_type: "reject",
       user_agent: userAgent,
       actor_id: user.id,
+      actor_email: user.email,
     }),
   ]);
 
@@ -163,8 +162,6 @@ export async function withdrawAgreement(id: string) {
     return { error: "ログインが必要です" };
   }
 
-  // RLS で creator_id = auth.uid() のみ削除可能
-  // agreement_logs は ON DELETE CASCADE で自動削除
   const { error: deleteError, count } = await supabase
     .from("agreements")
     .delete({ count: "exact" })
@@ -217,11 +214,74 @@ export async function rerequestAgreement(id: string, userAgent: string) {
       action_type: "rerequest",
       user_agent: userAgent,
       actor_id: user.id,
+      actor_email: user.email,
     }),
   ]);
 
   if (updateResult.error) {
     return { error: `再申請に失敗しました: ${updateResult.error.message}` };
+  }
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
+  }
+
+  return { success: true };
+}
+
+export async function editAgreement(id: string, formData: FormData) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("creator_id")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "同意書が見つかりません" };
+  }
+
+  if (agreement.creator_id !== user.id) {
+    return { error: "作成者のみ編集できます" };
+  }
+
+  const title = formData.get("title") as string;
+  const content = formData.get("content") as string;
+
+  if (!title || !content) {
+    return { error: "タイトルと内容を入力してください" };
+  }
+
+  const contentHash = await generateContentHash(content);
+
+  const [updateResult, logResult] = await Promise.all([
+    supabase
+      .from("agreements")
+      .update({
+        title,
+        content,
+        content_hash: contentHash,
+        status: "pending",
+      })
+      .eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "edit",
+      user_agent: null,
+      actor_id: user.id,
+      actor_email: user.email,
+    }),
+  ]);
+
+  if (updateResult.error) {
+    return { error: `編集に失敗しました: ${updateResult.error.message}` };
   }
   if (logResult.error) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
@@ -259,7 +319,6 @@ export async function revokeAgreement(id: string, userAgent: string) {
     agreement.target_email === user.email;
 
   if (!isTarget) {
-    // accept ログの actor かチェック
     const { data: acceptLog } = await supabase
       .from("agreement_logs")
       .select("actor_id")
@@ -274,7 +333,6 @@ export async function revokeAgreement(id: string, userAgent: string) {
     }
   }
 
-  // ステータス更新とログ記録を並列実行
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "revoked" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -282,6 +340,7 @@ export async function revokeAgreement(id: string, userAgent: string) {
       action_type: "revoke",
       user_agent: userAgent,
       actor_id: user.id,
+      actor_email: user.email,
     }),
   ]);
 

@@ -28,6 +28,7 @@ export function toAgreementLog(row: AgreementLogRow): AgreementLog {
     recordedAt: row.recorded_at,
     userAgent: row.user_agent,
     actorId: row.actor_id,
+    actorEmail: row.actor_email,
   };
 }
 

@@ -15,10 +15,11 @@ export type AgreementRow = {
 export type AgreementLogRow = {
   id: string;
   agreement_id: string;
-  action_type: "accept" | "reject" | "revoke" | "rerequest";
+  action_type: "accept" | "reject" | "revoke" | "rerequest" | "edit";
   recorded_at: string;
   user_agent: string | null;
   actor_id: string;
+  actor_email: string | null;
 };
 
 // アプリケーション型 (camelCase)
@@ -38,8 +39,9 @@ export type Agreement = {
 export type AgreementLog = {
   id: string;
   agreementId: string;
-  actionType: "accept" | "reject" | "revoke" | "rerequest";
+  actionType: "accept" | "reject" | "revoke" | "rerequest" | "edit";
   recordedAt: string;
   userAgent: string | null;
   actorId: string;
+  actorEmail: string | null;
 };

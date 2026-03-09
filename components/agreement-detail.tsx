@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -5,6 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { AgreementStatusBadge } from "@/components/agreement-status-badge";
 import { AcceptButton } from "@/components/accept-button";
 import { RejectButton } from "@/components/reject-button";
@@ -12,6 +16,7 @@ import { RevokeButton } from "@/components/revoke-button";
 import { WithdrawButton } from "@/components/withdraw-button";
 import { RerequestButton } from "@/components/rerequest-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
+import { AgreementEditForm } from "@/components/agreement-edit-form";
 import type { Agreement, AgreementLog } from "@/types/database";
 
 type Props = {
@@ -23,6 +28,14 @@ type Props = {
   origin: string;
 };
 
+const ACTION_LABELS: Record<string, string> = {
+  accept: "合意",
+  reject: "拒否",
+  rerequest: "再申請",
+  edit: "編集（再申請）",
+  revoke: "解除",
+};
+
 export function AgreementDetail({
   agreement,
   logs,
@@ -31,16 +44,16 @@ export function AgreementDetail({
   isAuthenticated,
   origin,
 }: Props) {
+  const [editing, setEditing] = useState(false);
+
   const isCreator = currentUserId === agreement.creatorId;
   const isTarget =
     agreement.targetEmail !== null &&
     currentUserEmail === agreement.targetEmail;
-  // accept 可能: target_email 指定ならそのユーザーのみ、null なら creator 以外の誰でも
   const canAccept =
     isAuthenticated &&
     agreement.status === "pending" &&
     (agreement.targetEmail !== null ? isTarget : !isCreator);
-  // revoke 可能: 当事者（creator, target, または accept した人）
   const isAcceptor = logs.some(
     (log) => log.actionType === "accept" && log.actorId === currentUserId,
   );
@@ -60,57 +73,75 @@ export function AgreementDetail({
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <h3 className="text-sm font-medium text-muted-foreground mb-1">
-              内容
-            </h3>
-            <p className="whitespace-pre-wrap">{agreement.content}</p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <span className="text-muted-foreground">作成者: </span>
-              {agreement.creatorEmail}
-            </div>
-            <div className="col-span-2">
-              <span className="text-muted-foreground">承認URL: </span>
-              <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
-            </div>
-            <div>
-              <span className="text-muted-foreground">作成日: </span>
-              {new Date(agreement.createdAt).toLocaleString("ja-JP")}
-            </div>
-            <div>
-              <span className="text-muted-foreground">更新日: </span>
-              {new Date(agreement.updatedAt).toLocaleString("ja-JP")}
-            </div>
-          </div>
+          {editing ? (
+            <AgreementEditForm
+              agreementId={agreement.id}
+              initialTitle={agreement.title}
+              initialContent={agreement.content}
+              onCancel={() => setEditing(false)}
+            />
+          ) : (
+            <>
+              <div>
+                <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                  内容
+                </h3>
+                <p className="whitespace-pre-wrap">{agreement.content}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-muted-foreground">作成者: </span>
+                  {agreement.creatorEmail}
+                </div>
+                <div className="col-span-2">
+                  <span className="text-muted-foreground">承認URL: </span>
+                  <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">作成日: </span>
+                  {new Date(agreement.createdAt).toLocaleString("ja-JP")}
+                </div>
+                <div>
+                  <span className="text-muted-foreground">更新日: </span>
+                  {new Date(agreement.updatedAt).toLocaleString("ja-JP")}
+                </div>
+              </div>
+            </>
+          )}
         </CardContent>
-        <CardFooter className="gap-2">
-          {agreement.status === "pending" && !isCreator && (
-            isAuthenticated ? (
+        {!editing && (
+          <CardFooter className="gap-2">
+            {agreement.status === "pending" && !isCreator && (
+              isAuthenticated ? (
+                <>
+                  <AcceptButton agreementId={agreement.id} />
+                  <RejectButton agreementId={agreement.id} />
+                </>
+              ) : (
+                <>
+                  <LoginRequiredButton agreementId={agreement.id}>
+                    同意する
+                  </LoginRequiredButton>
+                  <LoginRequiredButton agreementId={agreement.id} variant="outline">
+                    拒否する
+                  </LoginRequiredButton>
+                </>
+              )
+            )}
+            {canRevoke && <RevokeButton agreementId={agreement.id} />}
+            {isCreator && agreement.status === "rejected" && (
+              <RerequestButton agreementId={agreement.id} />
+            )}
+            {isCreator && (
               <>
-                <AcceptButton agreementId={agreement.id} />
-                <RejectButton agreementId={agreement.id} />
+                <Button variant="outline" onClick={() => setEditing(true)}>
+                  編集する
+                </Button>
+                <WithdrawButton agreementId={agreement.id} />
               </>
-            ) : (
-              <>
-                <LoginRequiredButton agreementId={agreement.id}>
-                  同意する
-                </LoginRequiredButton>
-                <LoginRequiredButton agreementId={agreement.id} variant="outline">
-                  拒否する
-                </LoginRequiredButton>
-              </>
-            )
-          )}
-          {canRevoke && <RevokeButton agreementId={agreement.id} />}
-          {isCreator && agreement.status === "rejected" && (
-            <RerequestButton agreementId={agreement.id} />
-          )}
-          {isCreator && (
-            <WithdrawButton agreementId={agreement.id} />
-          )}
-        </CardFooter>
+            )}
+          </CardFooter>
+        )}
       </Card>
 
       {logs.length > 0 && (
@@ -127,23 +158,17 @@ export function AgreementDetail({
                 >
                   <div>
                     <span className="font-medium">
-                      {log.actionType === "accept"
-                        ? "合意"
-                        : log.actionType === "reject"
-                          ? "拒否"
-                          : log.actionType === "rerequest"
-                            ? "再申請"
-                            : "解除"}
+                      {ACTION_LABELS[log.actionType] ?? log.actionType}
                     </span>
+                    {log.actorEmail && (
+                      <span className="text-muted-foreground ml-2">
+                        by {log.actorEmail}
+                      </span>
+                    )}
                     <span className="text-muted-foreground ml-2">
                       {new Date(log.recordedAt).toLocaleString("ja-JP")}
                     </span>
                   </div>
-                  {log.userAgent && (
-                    <span className="text-xs text-muted-foreground max-w-xs truncate">
-                      {log.userAgent}
-                    </span>
-                  )}
                 </div>
               ))}
             </div>
