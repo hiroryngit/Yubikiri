@@ -45,8 +45,9 @@ export function AgreementDetail({
   );
   const canRevoke =
     isAuthenticated &&
+    !isCreator &&
     agreement.status === "accepted" &&
-    (isCreator || isTarget || isAcceptor);
+    (isTarget || isAcceptor);
 
   return (
     <div className="space-y-6">
