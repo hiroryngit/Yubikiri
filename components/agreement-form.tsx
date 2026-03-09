@@ -25,12 +25,17 @@ export function AgreementForm() {
     if (draft && !autoSubmitted.current) {
       autoSubmitted.current = true;
       const { title: t, content: c } = JSON.parse(draft);
+      // 下書きは即削除（ループ防止）
       sessionStorage.removeItem(DRAFT_KEY);
-      submitAgreement(t, c);
+      // フォームに値を復元
+      setTitle(t);
+      setContent(c);
+      // セッションが確立するまで少し待ってから送信
+      setTimeout(() => submitAgreement(t, c, true), 500);
     }
   }, []);
 
-  async function submitAgreement(t: string, c: string) {
+  async function submitAgreement(t: string, c: string, isAutoRetry = false) {
     setPending(true);
     setError(null);
 
@@ -42,9 +47,15 @@ export function AgreementForm() {
 
     if (result && "error" in result) {
       if (result.error === "login_required") {
-        // 下書きを保存してログインへ
+        if (isAutoRetry) {
+          // 自動送信でもログインできていない場合はフォームに値を残してエラー表示
+          setError("ログインが必要です。下のボタンからログインしてください。");
+          setPending(false);
+          return;
+        }
+        // 手動送信: 下書きを保存してログインへ
         sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ title: t, content: c }));
-        alert("ログインが必要です");
+        setPending(false);
         router.push("/auth/login?redirect=/agreements/new");
         return;
       }
