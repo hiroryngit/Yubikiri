@@ -22,6 +22,7 @@ export function WithdrawButton({ agreementId }: { agreementId: string }) {
       setLoading(false);
     } else {
       router.push("/protected");
+      router.refresh();
     }
   }
 
