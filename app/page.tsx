@@ -33,7 +33,7 @@ export default function Home() {
           </p>
           <div className="flex gap-4">
             <Button asChild size="lg">
-              <Link href="/protected/agreements/new">同意書を作成する</Link>
+              <Link href="/agreements/new">同意書を作成する</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/protected">ダッシュボード</Link>

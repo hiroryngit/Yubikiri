@@ -2,7 +2,6 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { generateContentHash } from "@/lib/agreements";
-import { redirect } from "next/navigation";
 
 export async function createAgreement(formData: FormData) {
   const supabase = await createClient();
@@ -11,7 +10,7 @@ export async function createAgreement(formData: FormData) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/auth/login?redirect=/protected/agreements/new");
+    return { error: "login_required" };
   }
 
   const title = formData.get("title") as string;

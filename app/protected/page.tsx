@@ -49,7 +49,7 @@ async function AgreementList() {
         <p>まだ同意書がありません。</p>
         <p className="mt-2">
           <Link
-            href="/protected/agreements/new"
+            href="/agreements/new"
             className="text-primary underline"
           >
             最初の同意書を作成
@@ -75,7 +75,7 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-2xl">ダッシュボード</h1>
         <Button asChild>
-          <Link href="/protected/agreements/new">同意書を作成</Link>
+          <Link href="/agreements/new">同意書を作成</Link>
         </Button>
       </div>
 

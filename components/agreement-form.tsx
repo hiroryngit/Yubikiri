@@ -5,16 +5,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createAgreement } from "@/app/actions/agreements";
 import { useActionState, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export function AgreementForm() {
   const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const router = useRouter();
   const [state, formAction, pending] = useActionState(
     async (
       _prev: { error?: string; agreementId?: string } | null,
       formData: FormData,
     ) => {
       const result = await createAgreement(formData);
+      if (result && "error" in result && result.error === "login_required") {
+        alert("ログインが必要です");
+        router.push("/auth/login?redirect=/agreements/new");
+        return null;
+      }
       if (result && "agreementId" in result) {
         const url = `${window.location.origin}/agreements/${result.agreementId}`;
         setShareUrl(url);
@@ -43,7 +50,10 @@ export function AgreementForm() {
           </Button>
         </div>
         <div className="flex gap-2">
-          <Link href={shareUrl} className="text-sm underline underline-offset-4">
+          <Link
+            href={shareUrl}
+            className="text-sm underline underline-offset-4"
+          >
             同意書を確認する
           </Link>
         </div>
