@@ -53,7 +53,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
     return { error: "ログインが必要です" };
   }
 
-  // 現在のステータスを確認
+  // ステータス確認 & 権限チェック
   const { data: agreement, error: fetchError } = await supabase
     .from("agreements")
     .select("status, target_email, creator_id")
@@ -68,7 +68,6 @@ export async function acceptAgreement(id: string, userAgent: string) {
     return { error: "この同意書は既に処理済みです" };
   }
 
-  // target_email が設定されている場合はそのメールのユーザーのみ、null なら creator 以外の誰でも
   if (agreement.target_email !== null) {
     if (agreement.target_email !== user.email) {
       return { error: "この同意書の対象者ではありません" };
@@ -79,26 +78,22 @@ export async function acceptAgreement(id: string, userAgent: string) {
     }
   }
 
-  // ステータス更新
-  const { error: updateError } = await supabase
-    .from("agreements")
-    .update({ status: "accepted" })
-    .eq("id", id);
+  // ステータス更新とログ記録を並列実行
+  const [updateResult, logResult] = await Promise.all([
+    supabase.from("agreements").update({ status: "accepted" }).eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "accept",
+      user_agent: userAgent,
+      actor_id: user.id,
+    }),
+  ]);
 
-  if (updateError) {
-    return { error: `合意の記録に失敗しました: ${updateError.message}` };
+  if (updateResult.error) {
+    return { error: `合意の記録に失敗しました: ${updateResult.error.message}` };
   }
-
-  // ログ記録
-  const { error: logError } = await supabase.from("agreement_logs").insert({
-    agreement_id: id,
-    action_type: "accept",
-    user_agent: userAgent,
-    actor_id: user.id,
-  });
-
-  if (logError) {
-    return { error: `ログの記録に失敗しました: ${logError.message}` };
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
   return { success: true };
@@ -128,7 +123,6 @@ export async function rejectAgreement(id: string, userAgent: string) {
     return { error: "この同意書は既に処理済みです" };
   }
 
-  // accept と同じ権限チェック
   if (agreement.target_email !== null) {
     if (agreement.target_email !== user.email) {
       return { error: "この同意書の対象者ではありません" };
@@ -139,24 +133,22 @@ export async function rejectAgreement(id: string, userAgent: string) {
     }
   }
 
-  const { error: updateError } = await supabase
-    .from("agreements")
-    .update({ status: "rejected" })
-    .eq("id", id);
+  // ステータス更新とログ記録を並列実行
+  const [updateResult, logResult] = await Promise.all([
+    supabase.from("agreements").update({ status: "rejected" }).eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "reject",
+      user_agent: userAgent,
+      actor_id: user.id,
+    }),
+  ]);
 
-  if (updateError) {
-    return { error: `拒否の記録に失敗しました: ${updateError.message}` };
+  if (updateResult.error) {
+    return { error: `拒否の記録に失敗しました: ${updateResult.error.message}` };
   }
-
-  const { error: logError } = await supabase.from("agreement_logs").insert({
-    agreement_id: id,
-    action_type: "reject",
-    user_agent: userAgent,
-    actor_id: user.id,
-  });
-
-  if (logError) {
-    return { error: `ログの記録に失敗しました: ${logError.message}` };
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
   return { success: true };
@@ -172,28 +164,20 @@ export async function withdrawAgreement(id: string) {
     return { error: "ログインが必要です" };
   }
 
-  const { data: agreement, error: fetchError } = await supabase
+  // RLS で creator_id = auth.uid() のみ削除可能
+  // agreement_logs は ON DELETE CASCADE で自動削除
+  const { error: deleteError, count } = await supabase
     .from("agreements")
-    .select("creator_id")
+    .delete({ count: "exact" })
     .eq("id", id)
-    .single();
-
-  if (fetchError || !agreement) {
-    return { error: "同意書が見つかりません" };
-  }
-
-  if (agreement.creator_id !== user.id) {
-    return { error: "作成者のみ取り下げできます" };
-  }
-
-  // agreement_logs は ON DELETE CASCADE で自動削除される
-  const { error: deleteError } = await supabase
-    .from("agreements")
-    .delete()
-    .eq("id", id);
+    .eq("creator_id", user.id);
 
   if (deleteError) {
     return { error: `取り下げに失敗しました: ${deleteError.message}` };
+  }
+
+  if (count === 0) {
+    return { error: "同意書が見つからないか、作成者ではありません" };
   }
 
   return { success: true };
@@ -223,44 +207,41 @@ export async function revokeAgreement(id: string, userAgent: string) {
     return { error: "合意済みの同意書のみ解除できます" };
   }
 
-  // 当事者チェック
-  const isCreator = agreement.creator_id === user.id;
-  const isTarget = agreement.target_email !== null && agreement.target_email === user.email;
+  const isTarget =
+    agreement.target_email !== null &&
+    agreement.target_email === user.email;
 
-  // target_email が null の場合、accept ログの actor も当事者とみなす
-  let isAcceptor = false;
-  if (!isCreator && !isTarget && agreement.target_email === null) {
+  if (!isTarget) {
+    // accept ログの actor かチェック
     const { data: acceptLog } = await supabase
       .from("agreement_logs")
       .select("actor_id")
       .eq("agreement_id", id)
       .eq("action_type", "accept")
+      .eq("actor_id", user.id)
       .limit(1)
-      .single();
-    isAcceptor = acceptLog?.actor_id === user.id;
+      .maybeSingle();
+
+    if (!acceptLog) {
+      return { error: "この同意書の当事者ではありません" };
+    }
   }
 
-  if (!isCreator && !isTarget && !isAcceptor) {
-    return { error: "この同意書の当事者ではありません" };
-  }
+  // ステータス更新とログ記録を並列実行
+  const [updateResult, logResult] = await Promise.all([
+    supabase.from("agreements").update({ status: "revoked" }).eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "revoke",
+      user_agent: userAgent,
+      actor_id: user.id,
+    }),
+  ]);
 
-  const { error: updateError } = await supabase
-    .from("agreements")
-    .update({ status: "revoked" })
-    .eq("id", id);
-
-  if (updateError) {
+  if (updateResult.error) {
     return { error: "合意解除に失敗しました" };
   }
-
-  const { error: logError } = await supabase.from("agreement_logs").insert({
-    agreement_id: id,
-    action_type: "revoke",
-    user_agent: userAgent,
-    actor_id: user.id,
-  });
-
-  if (logError) {
+  if (logResult.error) {
     return { error: "ログの記録に失敗しました" };
   }
 
