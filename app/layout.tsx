@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { DraftRedirect } from "@/components/draft-redirect";
+import { Suspense } from "react";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -34,6 +36,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Suspense>
+            <DraftRedirect />
+          </Suspense>
           {children}
         </ThemeProvider>
       </body>
