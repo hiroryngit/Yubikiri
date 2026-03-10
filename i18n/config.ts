@@ -5,7 +5,7 @@ export const locales = [
   "id", "ms", "tr", "pl", "nl",
   "sv", "da", "fi", "no", "uk",
   "cs", "ro", "hu", "el", "he",
-  "bn", "ta", "tl", "sw",
+  "bn", "ta",
 ] as const;
 
 export type Locale = (typeof locales)[number];
@@ -45,6 +45,4 @@ export const localeNames: Record<Locale, string> = {
   he: "עברית",
   bn: "বাংলা",
   ta: "தமிழ்",
-  tl: "Filipino",
-  sw: "Kiswahili",
 };

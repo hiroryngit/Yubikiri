@@ -60,7 +60,7 @@ export function IntlProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const interval = setInterval(() => {
       const current = getLocaleFromCookie();
-      if (current !== locale && current !== defaultLocale) {
+      if (current !== locale) {
         loadMessages(current).then((msgs) => {
           setLocale(current);
           setMessages(msgs);
