@@ -53,22 +53,26 @@ async function loadMessages(locale: Locale) {
 }
 
 export function IntlProvider({ children }: { children: ReactNode }) {
-  const initialLocale = getInitialLocale();
-  const [locale, setLocale] = useState<Locale>(initialLocale);
-  const [messages, setMessages] = useState<typeof ja>(getInitialMessages(initialLocale));
-  const [ready, setReady] = useState(!!messageMap[initialLocale]);
+  // SSRではデフォルトで初期化し、マウント後に正しいロケールに切り替える
+  const [locale, setLocale] = useState<Locale>(defaultLocale);
+  const [messages, setMessages] = useState<typeof ja>(ja);
+  const [ready, setReady] = useState(false);
 
-  // 初回：静的importにないロケールの場合、非同期で読み込む
+  // マウント後にcookie/ブラウザ言語を検出してダイレクトに表示
   useEffect(() => {
-    if (!messageMap[locale]) {
-      loadMessages(locale).then((msgs) => {
-        setMessages(msgs);
-        setReady(true);
-        document.documentElement.lang = locale;
-      });
-    } else {
-      document.documentElement.lang = locale;
+    const detected = getInitialLocale();
+    if (messageMap[detected]) {
+      setLocale(detected);
+      setMessages(messageMap[detected]);
+      document.documentElement.lang = detected;
       setReady(true);
+    } else {
+      loadMessages(detected).then((msgs) => {
+        setLocale(detected);
+        setMessages(msgs);
+        document.documentElement.lang = detected;
+        setReady(true);
+      });
     }
   }, []);
 
