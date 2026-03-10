@@ -147,7 +147,7 @@ export function AgreementForm() {
         <textarea
           id="content"
           name="content"
-          className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex min-h-[140px] w-full rounded-md border border-input bg-transparent px-3 py-2.5 text-base sm:text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           placeholder={t("agreement.contentPlaceholder")}
           required
           value={content}

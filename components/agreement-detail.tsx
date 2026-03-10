@@ -91,23 +91,25 @@ export function AgreementDetail({
                 </h3>
                 <p className="whitespace-pre-wrap">{agreement.content}</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-muted-foreground">{t("agreement.creator")}: </span>
-                  {agreement.creatorEmail}
+                  <p className="text-muted-foreground text-xs mb-1">{t("agreement.creator")}</p>
+                  <p className="break-all">{agreement.creatorEmail}</p>
                 </div>
-                <div className="sm:col-span-2 flex items-center gap-2 flex-wrap">
-                  <span className="text-muted-foreground">{t("agreement.approvalUrl")}: </span>
-                  <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
-                  <CopyButton text={`${origin}/agreements/${agreement.id}`} size="sm" />
-                </div>
-                <div>
-                  <span className="text-muted-foreground">{t("agreement.createdAt")}: </span>
-                  {new Date(agreement.createdAt).toLocaleString(locale)}
+                <div className="sm:col-span-2">
+                  <p className="text-muted-foreground text-xs mb-1">{t("agreement.approvalUrl")}</p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
+                    <CopyButton text={`${origin}/agreements/${agreement.id}`} size="sm" />
+                  </div>
                 </div>
                 <div>
-                  <span className="text-muted-foreground">{t("agreement.updatedAt")}: </span>
-                  {new Date(agreement.updatedAt).toLocaleString(locale)}
+                  <p className="text-muted-foreground text-xs mb-1">{t("agreement.createdAt")}</p>
+                  <p>{new Date(agreement.createdAt).toLocaleString(locale)}</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground text-xs mb-1">{t("agreement.updatedAt")}</p>
+                  <p>{new Date(agreement.updatedAt).toLocaleString(locale)}</p>
                 </div>
               </div>
             </>
@@ -185,19 +187,19 @@ export function AgreementDetail({
                 return (
                   <div
                     key={log.id}
-                    className="text-sm border-b pb-2 last:border-0 space-y-1"
+                    className="text-sm border-b pb-3 last:border-0 space-y-1.5"
                   >
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 flex-wrap">
                       <span className="font-medium">
                         {t(`actionLog.${log.actionType}`)}
                       </span>
                       {log.actorEmail && (
-                        <span className="text-muted-foreground">
+                        <span className="text-muted-foreground text-xs sm:text-sm break-all">
                           by {log.actorEmail}
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground flex-wrap">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs text-muted-foreground flex-wrap">
                       <span>
                         {new Date(log.recordedAt).toLocaleString(locale)}
                       </span>

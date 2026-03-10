@@ -18,5 +18,5 @@ export function AgreementStatusBadge({
   status: "pending" | "accepted" | "rejected" | "revoked" | "withdraw_pending" | "revoke_pending";
 }) {
   const t = useTranslations("status");
-  return <Badge variant={variantMap[status]}>{t(status)}</Badge>;
+  return <Badge variant={variantMap[status]} className="shrink-0 whitespace-nowrap">{t(status)}</Badge>;
 }

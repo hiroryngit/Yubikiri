@@ -9,11 +9,11 @@ export function HomeContent() {
   const t = useTranslations();
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center gap-8 max-w-2xl px-5 text-center">
-      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+    <div className="flex-1 flex flex-col items-center justify-center gap-6 sm:gap-8 max-w-2xl px-6 sm:px-5 text-center">
+      <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
         {t("home.hero")}
       </h1>
-      <p className="text-lg text-muted-foreground max-w-lg">
+      <p className="text-base sm:text-lg text-muted-foreground max-w-lg">
         {t("home.description")}
       </p>
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
