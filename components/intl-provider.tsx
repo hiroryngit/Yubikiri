@@ -10,14 +10,14 @@ import en from "@/messages/en.json";
 
 const messageMap: Record<string, typeof ja> = { ja, en };
 
-function getLocaleFromCookie(): Locale {
-  if (typeof document === "undefined") return defaultLocale;
+function getLocaleFromCookie(): Locale | null {
+  if (typeof document === "undefined") return null;
   const match = document.cookie.match(/(?:^|;\s*)locale=([^;]*)/);
   if (match) {
     const val = match[1] as Locale;
     if (locales.includes(val)) return val;
   }
-  return defaultLocale;
+  return null;
 }
 
 function getLocaleFromBrowser(): Locale {
@@ -28,6 +28,17 @@ function getLocaleFromBrowser(): Locale {
     if (locales.includes(prefix)) return prefix;
   }
   return defaultLocale;
+}
+
+// 初期ロケールを同期的に決定（SSR時はデフォルト、クライアントではcookie/ブラウザ言語）
+function getInitialLocale(): Locale {
+  const fromCookie = getLocaleFromCookie();
+  if (fromCookie) return fromCookie;
+  return getLocaleFromBrowser();
+}
+
+function getInitialMessages(locale: Locale): typeof ja {
+  return messageMap[locale] ?? ja;
 }
 
 async function loadMessages(locale: Locale) {
@@ -42,24 +53,30 @@ async function loadMessages(locale: Locale) {
 }
 
 export function IntlProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>(defaultLocale);
-  const [messages, setMessages] = useState<typeof ja>(ja);
+  const initialLocale = getInitialLocale();
+  const [locale, setLocale] = useState<Locale>(initialLocale);
+  const [messages, setMessages] = useState<typeof ja>(getInitialMessages(initialLocale));
+  const [ready, setReady] = useState(!!messageMap[initialLocale]);
 
+  // 初回：静的importにないロケールの場合、非同期で読み込む
   useEffect(() => {
-    const detected = getLocaleFromCookie() !== defaultLocale
-      ? getLocaleFromCookie()
-      : getLocaleFromBrowser();
-    loadMessages(detected).then((msgs) => {
-      setLocale(detected);
-      setMessages(msgs);
-      document.documentElement.lang = detected;
-    });
+    if (!messageMap[locale]) {
+      loadMessages(locale).then((msgs) => {
+        setMessages(msgs);
+        setReady(true);
+        document.documentElement.lang = locale;
+      });
+    } else {
+      document.documentElement.lang = locale;
+      setReady(true);
+    }
   }, []);
 
   // cookie変更を検知して再ロード
   useEffect(() => {
     const interval = setInterval(() => {
-      const current = getLocaleFromCookie();
+      const fromCookie = getLocaleFromCookie();
+      const current = fromCookie ?? defaultLocale;
       if (current !== locale) {
         loadMessages(current).then((msgs) => {
           setLocale(current);
@@ -70,6 +87,9 @@ export function IntlProvider({ children }: { children: ReactNode }) {
     }, 500);
     return () => clearInterval(interval);
   }, [locale]);
+
+  // 非同期読み込み中は何も表示しない（一瞬だけ）
+  if (!ready) return null;
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
