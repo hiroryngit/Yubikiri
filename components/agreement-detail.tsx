@@ -14,6 +14,8 @@ import { AcceptButton } from "@/components/accept-button";
 import { RejectButton } from "@/components/reject-button";
 import { RevokeButton } from "@/components/revoke-button";
 import { WithdrawButton } from "@/components/withdraw-button";
+import { WithdrawApproveButton } from "@/components/withdraw-approve-button";
+import { WithdrawRejectButton } from "@/components/withdraw-reject-button";
 import { RerequestButton } from "@/components/rerequest-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
 import { AgreementEditForm } from "@/components/agreement-edit-form";
@@ -37,6 +39,9 @@ const ACTION_LABELS: Record<string, string> = {
   rerequest: "再申請",
   edit: "編集（再申請）",
   revoke: "解除",
+  withdraw_request: "取り下げ申請",
+  withdraw_approve: "取り下げ承認",
+  withdraw_reject: "取り下げ拒否",
 };
 
 export function AgreementDetail({
@@ -136,7 +141,17 @@ export function AgreementDetail({
             {isCreator && agreement.status === "rejected" && (
               <RerequestButton agreementId={agreement.id} />
             )}
-            {isCreator && (
+            {/* 取り下げ申請中: 相手に承認/拒否ボタンを表示 */}
+            {agreement.status === "withdraw_pending" && !isCreator && isAuthenticated && (
+              <>
+                <WithdrawApproveButton agreementId={agreement.id} />
+                <WithdrawRejectButton agreementId={agreement.id} />
+              </>
+            )}
+            {agreement.status === "withdraw_pending" && isCreator && (
+              <p className="text-sm text-muted-foreground">相手の承認を待っています...</p>
+            )}
+            {isCreator && agreement.status !== "withdraw_pending" && (
               <>
                 <Button variant="outline" onClick={() => setEditing(true)}>
                   編集する

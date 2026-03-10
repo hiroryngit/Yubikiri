@@ -15,6 +15,7 @@ export function toAgreement(row: AgreementRow): Agreement {
     creatorId: row.creator_id,
     creatorEmail: row.creator_email,
     targetEmail: row.target_email,
+    previousStatus: row.previous_status,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };

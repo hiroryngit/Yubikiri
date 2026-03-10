@@ -163,7 +163,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
   return { success: true };
 }
 
-export async function withdrawAgreement(id: string) {
+export async function withdrawAgreement(id: string, userAgent: string) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -173,18 +173,174 @@ export async function withdrawAgreement(id: string) {
     return { error: "ログインが必要です" };
   }
 
-  const { error: deleteError, count } = await supabase
+  const { data: agreement, error: fetchError } = await supabase
     .from("agreements")
-    .delete({ count: "exact" })
+    .select("status, creator_id")
     .eq("id", id)
-    .eq("creator_id", user.id);
+    .single();
 
-  if (deleteError) {
-    return { error: `取り下げに失敗しました: ${deleteError.message}` };
+  if (fetchError || !agreement) {
+    return { error: "お約束事が見つかりません" };
   }
 
-  if (count === 0) {
-    return { error: "お約束事が見つからないか、作成者ではありません" };
+  if (agreement.creator_id !== user.id) {
+    return { error: "作成者のみ取り下げ申請できます" };
+  }
+
+  if (agreement.status === "withdraw_pending") {
+    return { error: "既に取り下げ申請中です" };
+  }
+
+  // まだ誰も関わっていない（pending状態）なら即削除
+  if (agreement.status === "pending") {
+    const { error: deleteError, count } = await supabase
+      .from("agreements")
+      .delete({ count: "exact" })
+      .eq("id", id)
+      .eq("creator_id", user.id);
+
+    if (deleteError || count === 0) {
+      return { error: "取り下げに失敗しました" };
+    }
+    return { success: true, deleted: true };
+  }
+
+  // 相手が関わっている場合は承認を求める
+  const req = await getRequestInfo();
+
+  const [updateResult, logResult] = await Promise.all([
+    supabase
+      .from("agreements")
+      .update({ status: "withdraw_pending", previous_status: agreement.status })
+      .eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "withdraw_request",
+      user_agent: userAgent,
+      actor_id: user.id,
+      actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_region: req.ipRegion,
+    }),
+  ]);
+
+  if (updateResult.error) {
+    return { error: `取り下げ申請に失敗しました: ${updateResult.error.message}` };
+  }
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
+  }
+
+  return { success: true, deleted: false };
+}
+
+export async function approveWithdraw(id: string, userAgent: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("status, creator_id")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "お約束事が見つかりません" };
+  }
+
+  if (agreement.status !== "withdraw_pending") {
+    return { error: "取り下げ申請中ではありません" };
+  }
+
+  if (agreement.creator_id === user.id) {
+    return { error: "作成者自身は取り下げを承認できません" };
+  }
+
+  const req = await getRequestInfo();
+
+  // ログを残してから削除（CASCADEでログも消えるが、承認の記録として先に入れる）
+  await supabase.from("agreement_logs").insert({
+    agreement_id: id,
+    action_type: "withdraw_approve",
+    user_agent: userAgent,
+    actor_id: user.id,
+    actor_email: user.email,
+    ip_address: req.ipAddress,
+    ip_country: req.ipCountry,
+    ip_region: req.ipRegion,
+  });
+
+  const { error: deleteError } = await supabase
+    .from("agreements")
+    .delete()
+    .eq("id", id);
+
+  if (deleteError) {
+    return { error: `削除に失敗しました: ${deleteError.message}` };
+  }
+
+  return { success: true };
+}
+
+export async function rejectWithdraw(id: string, userAgent: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("status, creator_id, previous_status")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "お約束事が見つかりません" };
+  }
+
+  if (agreement.status !== "withdraw_pending") {
+    return { error: "取り下げ申請中ではありません" };
+  }
+
+  if (agreement.creator_id === user.id) {
+    return { error: "作成者自身は取り下げ拒否できません" };
+  }
+
+  const req = await getRequestInfo();
+
+  const [updateResult, logResult] = await Promise.all([
+    supabase
+      .from("agreements")
+      .update({ status: agreement.previous_status ?? "accepted", previous_status: null })
+      .eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "withdraw_reject",
+      user_agent: userAgent,
+      actor_id: user.id,
+      actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_region: req.ipRegion,
+    }),
+  ]);
+
+  if (updateResult.error) {
+    return { error: `拒否に失敗しました: ${updateResult.error.message}` };
+  }
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
   return { success: true };
