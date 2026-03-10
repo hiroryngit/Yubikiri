@@ -19,6 +19,7 @@ import { LoginRequiredButton } from "@/components/login-required-button";
 import { AgreementEditForm } from "@/components/agreement-edit-form";
 import type { Agreement, AgreementLog } from "@/types/database";
 import { parseUserAgent } from "@/lib/parse-user-agent";
+import { formatGeoLocation } from "@/lib/geo";
 
 type Props = {
   agreement: Agreement;
@@ -156,6 +157,7 @@ export function AgreementDetail({
                 const device = log.userAgent
                   ? parseUserAgent(log.userAgent)
                   : null;
+                const geo = formatGeoLocation(log.ipCountry, log.ipRegion);
                 return (
                   <div
                     key={log.id}
@@ -183,9 +185,7 @@ export function AgreementDetail({
                       {log.ipAddress && (
                         <span>
                           IP: {log.ipAddress}
-                          {log.ipRegion || log.ipCountry
-                            ? ` (${[log.ipRegion, log.ipCountry].filter(Boolean).join(", ")})`
-                            : ""}
+                          {geo ? ` (${geo})` : ""}
                         </span>
                       )}
                     </div>
