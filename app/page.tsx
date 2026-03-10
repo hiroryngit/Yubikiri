@@ -29,7 +29,7 @@ export default function Home() {
           <p className="text-lg text-muted-foreground max-w-lg">
             Yubikiri
             は、個人間の合意をデータベースに記録し、証拠として残すサービスです。
-            PDFに頼らず、タイムスタンプとメタデータで合意の証跡を保全します。
+            タイムスタンプとメタデータで合意の証跡を保全します。
           </p>
           <div className="flex gap-4">
             <Button asChild size="lg">
