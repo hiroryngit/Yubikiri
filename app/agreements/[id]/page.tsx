@@ -1,10 +1,16 @@
 import { createClient } from "@/lib/supabase/server";
 import { toAgreement, toAgreementLog } from "@/lib/agreements";
 import { AgreementDetail } from "@/components/agreement-detail";
-import { notFound } from "next/navigation";
 import { headers } from "next/headers";
 import { Suspense } from "react";
 import type { AgreementRow, AgreementLogRow } from "@/types/database";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
+import Link from "next/link";
 
 async function AgreementContent({
   params,
@@ -21,7 +27,24 @@ async function AgreementContent({
     .single<AgreementRow>();
 
   if (error || !row) {
-    notFound();
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>アクセスできません</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="text-muted-foreground">
+            このお約束事は取り下げられたか、存在しないURLです。
+          </p>
+          <Link
+            href="/"
+            className="text-sm underline underline-offset-4"
+          >
+            トップページに戻る
+          </Link>
+        </CardContent>
+      </Card>
+    );
   }
 
   const { data: logRows } = await supabase

@@ -3,12 +3,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { withdrawAgreement } from "@/app/actions/agreements";
-import { useRouter } from "next/navigation";
 
 export function WithdrawButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
 
   async function handleWithdraw() {
     if (!confirm("このお約束事を取り下げますか？取り下げると完全に削除されます。")) {
@@ -21,8 +19,8 @@ export function WithdrawButton({ agreementId }: { agreementId: string }) {
       setError(result.error);
       setLoading(false);
     } else {
-      router.push("/protected");
-      router.refresh();
+      // フルリロードでダッシュボードへ。キャッシュが残らないので即反映される
+      window.location.href = "/protected";
     }
   }
 
