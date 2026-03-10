@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { AuthReturnHandler } from "@/components/auth-return-handler";
+import { AuthStateListener } from "@/components/auth-state-listener";
 import { Suspense } from "react";
 import "./globals.css";
 
@@ -39,6 +40,7 @@ export default function RootLayout({
           <Suspense>
             <AuthReturnHandler />
           </Suspense>
+          <AuthStateListener />
           {children}
         </ThemeProvider>
       </body>
