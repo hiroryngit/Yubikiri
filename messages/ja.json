@@ -56,6 +56,10 @@
     "sessionExpired": "セッションが切れています。ページをリロードしてもう一度お試しください。",
     "loginNotComplete": "ログインが完了していません。ページをリロードしてもう一度お試しください。",
     "history": "操作履歴",
+    "translate": "翻訳する",
+    "showOriginal": "原文を表示",
+    "translating": "翻訳中...",
+    "translationFailed": "翻訳に失敗しました",
     "waitingWithdrawApproval": "相手の取り下げ承認を待っています...",
     "waitingRevokeApproval": "作成者の解除承認を待っています..."
   },

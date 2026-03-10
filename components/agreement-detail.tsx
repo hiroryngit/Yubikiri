@@ -26,7 +26,7 @@ import type { Agreement, AgreementLog } from "@/types/database";
 import { parseUserAgent } from "@/lib/parse-user-agent";
 import { formatGeoLocation } from "@/lib/geo";
 import { useTranslations, useLocale } from "next-intl";
-import { Pencil, History } from "lucide-react";
+import { Pencil, History, Languages } from "lucide-react";
 
 type Props = {
   agreement: Agreement;
@@ -46,8 +46,40 @@ export function AgreementDetail({
   origin,
 }: Props) {
   const [editing, setEditing] = useState(false);
+  const [translated, setTranslated] = useState<{ title: string; content: string } | null>(null);
+  const [showTranslation, setShowTranslation] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [translateError, setTranslateError] = useState<string | null>(null);
   const t = useTranslations();
   const locale = useLocale();
+
+  async function handleTranslate() {
+    if (translated) {
+      setShowTranslation(true);
+      return;
+    }
+    setTranslating(true);
+    setTranslateError(null);
+    try {
+      const res = await fetch("/api/translate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: agreement.title,
+          content: agreement.content,
+          targetLocale: locale,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setTranslated(data);
+      setShowTranslation(true);
+    } catch (e) {
+      setTranslateError(e instanceof Error ? e.message : t("agreement.translationFailed"));
+    } finally {
+      setTranslating(false);
+    }
+  }
 
   const isCreator = currentUserId === agreement.creatorId;
   const isTarget =
@@ -71,7 +103,9 @@ export function AgreementDetail({
       <Card>
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
-            <CardTitle className="leading-tight">{agreement.title}</CardTitle>
+            <CardTitle className="leading-tight">
+              {showTranslation && translated ? translated.title : agreement.title}
+            </CardTitle>
             <AgreementStatusBadge status={agreement.status} />
           </div>
         </CardHeader>
@@ -86,10 +120,31 @@ export function AgreementDetail({
           ) : (
             <>
               <div>
-                <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                  {t("agreement.content")}
-                </h3>
-                <p className="whitespace-pre-wrap">{agreement.content}</p>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-sm font-medium text-muted-foreground">
+                    {t("agreement.content")}
+                  </h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={showTranslation ? () => setShowTranslation(false) : handleTranslate}
+                    disabled={translating}
+                    className="text-xs h-7 px-2"
+                  >
+                    <Languages className="h-3.5 w-3.5 mr-1" />
+                    {translating
+                      ? t("agreement.translating")
+                      : showTranslation
+                        ? t("agreement.showOriginal")
+                        : t("agreement.translate")}
+                  </Button>
+                </div>
+                {translateError && (
+                  <p className="text-xs text-destructive mb-2">{translateError}</p>
+                )}
+                <p className="whitespace-pre-wrap">
+                  {showTranslation && translated ? translated.content : agreement.content}
+                </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
                 <div>

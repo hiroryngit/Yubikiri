@@ -56,6 +56,10 @@
     "sessionExpired": "Your session has expired. Please reload the page and try again.",
     "loginNotComplete": "Login is not complete. Please reload the page and try again.",
     "history": "Activity log",
+    "translate": "Translate",
+    "showOriginal": "Show original",
+    "translating": "Translating...",
+    "translationFailed": "Translation failed",
     "waitingWithdrawApproval": "Waiting for the other party to approve withdrawal...",
     "waitingRevokeApproval": "Waiting for the creator to approve revocation..."
   },
