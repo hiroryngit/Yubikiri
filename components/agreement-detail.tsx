@@ -17,6 +17,7 @@ import { WithdrawButton } from "@/components/withdraw-button";
 import { RerequestButton } from "@/components/rerequest-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
 import { AgreementEditForm } from "@/components/agreement-edit-form";
+import { CopyButton } from "@/components/copy-button";
 import type { Agreement, AgreementLog } from "@/types/database";
 import { parseUserAgent } from "@/lib/parse-user-agent";
 import { formatGeoLocation } from "@/lib/geo";
@@ -95,9 +96,10 @@ export function AgreementDetail({
                   <span className="text-muted-foreground">作成者: </span>
                   {agreement.creatorEmail}
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-2 flex items-center gap-2 flex-wrap">
                   <span className="text-muted-foreground">承認URL: </span>
                   <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
+                  <CopyButton text={`${origin}/agreements/${agreement.id}`} size="sm" />
                 </div>
                 <div>
                   <span className="text-muted-foreground">作成日: </span>

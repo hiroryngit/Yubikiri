@@ -9,6 +9,7 @@ import { pushReturnUrl } from "@/lib/return-stack";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { CopyButton } from "@/components/copy-button";
 
 const DRAFT_KEY = "yubikiri_draft";
 
@@ -108,15 +109,7 @@ export function AgreementForm() {
         </p>
         <div className="flex items-center gap-2">
           <Input value={shareUrl} readOnly className="font-mono text-xs" />
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => {
-              navigator.clipboard.writeText(shareUrl);
-            }}
-          >
-            コピー
-          </Button>
+          <CopyButton text={shareUrl} />
         </div>
         <div className="flex gap-2">
           <Link
