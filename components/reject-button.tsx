@@ -4,11 +4,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { rejectAgreement } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function RejectButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const t = useTranslations();
 
   async function handleReject() {
     setLoading(true);
@@ -26,7 +28,7 @@ export function RejectButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="outline" onClick={handleReject} disabled={loading}>
-        {loading ? "処理中..." : "拒否する"}
+        {loading ? t("common.processing") : t("action.reject")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}
     </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Card,
@@ -8,8 +10,12 @@ import {
 } from "@/components/ui/card";
 import { AgreementStatusBadge } from "@/components/agreement-status-badge";
 import type { Agreement } from "@/types/database";
+import { useTranslations, useLocale } from "next-intl";
 
 export function AgreementCard({ agreement }: { agreement: Agreement }) {
+  const t = useTranslations();
+  const locale = useLocale();
+
   return (
     <Link href={`/agreements/${agreement.id}`}>
       <Card className="hover:bg-accent/50 transition-colors">
@@ -27,7 +33,7 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
             {agreement.content}
           </p>
           <p className="text-xs text-muted-foreground mt-2">
-            作成日: {new Date(agreement.createdAt).toLocaleDateString("ja-JP")}
+            {t("dashboard.createdAt")}: {new Date(agreement.createdAt).toLocaleDateString(locale)}
           </p>
         </CardContent>
       </Card>

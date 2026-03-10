@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CopyButton } from "@/components/copy-button";
+import { useTranslations } from "next-intl";
 
 const DRAFT_KEY = "yubikiri_draft";
 
@@ -21,55 +22,55 @@ export function AgreementForm() {
   const [content, setContent] = useState("");
   const router = useRouter();
   const autoSubmitted = useRef(false);
+  const t = useTranslations();
 
   // ログイン後に戻ってきたら保存済みの下書きを復元して自動送信
   useEffect(() => {
     const draft = sessionStorage.getItem(DRAFT_KEY);
     if (draft && !autoSubmitted.current) {
       autoSubmitted.current = true;
-      const { title: t, content: c } = JSON.parse(draft);
+      const { title: draftTitle, content: draftContent } = JSON.parse(draft);
       sessionStorage.removeItem(DRAFT_KEY);
-      setTitle(t);
-      setContent(c);
+      setTitle(draftTitle);
+      setContent(draftContent);
       // 下書き復元時は return stack を消費しておく（AuthReturnHandler の重複リダイレクト防止）
       if (hasReturnUrl()) popReturnUrl();
-      waitForAuthAndSubmit(t, c);
+      waitForAuthAndSubmit(draftTitle, draftContent);
     }
   }, []);
 
-  async function waitForAuthAndSubmit(t: string, c: string) {
+  async function waitForAuthAndSubmit(titleVal: string, contentVal: string) {
     setPending(true);
     setError(null);
 
     const supabase = createClient();
 
-    // セッションが確立するまで最大5秒待つ
     for (let i = 0; i < 10; i++) {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        await doCreate(t, c);
+        await doCreate(titleVal, contentVal);
         return;
       }
       await new Promise((r) => setTimeout(r, 500));
     }
 
-    setError("ログインが完了していません。ページをリロードしてもう一度お試しください。");
+    setError(t("agreement.loginNotComplete"));
     setPending(false);
   }
 
-  async function doCreate(t: string, c: string) {
+  async function doCreate(titleVal: string, contentVal: string) {
     setPending(true);
     setError(null);
 
     const formData = new FormData();
-    formData.set("title", t);
-    formData.set("content", c);
+    formData.set("title", titleVal);
+    formData.set("content", contentVal);
 
     const result = await createAgreement(formData);
 
     if (result && "error" in result) {
       if (result.error === "login_required") {
-        setError("セッションが切れています。ページをリロードしてもう一度お試しください。");
+        setError(t("agreement.sessionExpired"));
         setPending(false);
         return;
       }
@@ -92,9 +93,7 @@ export function AgreementForm() {
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
-      // 下書きを sessionStorage に保存
       sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ title, content }));
-      // 戻り先を return stack に積む
       pushReturnUrl("/agreements/new");
       router.push("/auth/login");
       return;
@@ -107,7 +106,7 @@ export function AgreementForm() {
     return (
       <div className="space-y-4">
         <p className="text-sm font-medium text-green-600">
-          お約束事を発行しました！以下のURLを相手に共有してください。
+          {t("agreement.created")}
         </p>
         <div className="flex items-center gap-2">
           <Input value={shareUrl} readOnly className="font-mono text-xs" />
@@ -118,7 +117,7 @@ export function AgreementForm() {
             href={shareUrl}
             className="text-sm underline underline-offset-4"
           >
-            お約束事を確認する
+            {t("agreement.viewDetail")}
           </Link>
         </div>
       </div>
@@ -128,11 +127,11 @@ export function AgreementForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="title">タイトル</Label>
+        <Label htmlFor="title">{t("agreement.titleLabel")}</Label>
         <Input
           id="title"
           name="title"
-          placeholder="例: 書籍の貸し借りについて"
+          placeholder={t("agreement.titlePlaceholder")}
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -140,12 +139,12 @@ export function AgreementForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="content">内容</Label>
+        <Label htmlFor="content">{t("agreement.contentLabel")}</Label>
         <textarea
           id="content"
           name="content"
           className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          placeholder="合意の内容を記載してください"
+          placeholder={t("agreement.contentPlaceholder")}
           required
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -155,7 +154,7 @@ export function AgreementForm() {
       {error && <p className="text-sm text-destructive">{error}</p>}
 
       <Button type="submit" disabled={pending}>
-        {pending ? "発行中..." : "お約束事を発行する"}
+        {pending ? t("agreement.submitting") : t("agreement.submitButton")}
       </Button>
     </form>
   );

@@ -2,8 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { toAgreement } from "@/lib/agreements";
 import { AgreementCard } from "@/components/agreement-card";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { DashboardHeader } from "@/components/dashboard-header";
+import { DashboardEmpty } from "@/components/dashboard-empty";
 import { Suspense } from "react";
 import type { AgreementRow } from "@/types/database";
 
@@ -17,7 +17,6 @@ async function AgreementList() {
     redirect("/auth/login");
   }
 
-  // 自分が関与した agreement_logs から agreement_id を取得
   const { data: logRows } = await supabase
     .from("agreement_logs")
     .select("agreement_id")
@@ -25,7 +24,6 @@ async function AgreementList() {
 
   const actedIds = (logRows ?? []).map((r) => r.agreement_id);
 
-  // 自分が作成 or target_email 一致 or ログに参加したお約束事を取得
   let query = supabase
     .from("agreements")
     .select("*")
@@ -44,20 +42,7 @@ async function AgreementList() {
   const agreements = (rows ?? []).map(toAgreement);
 
   if (agreements.length === 0) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">
-        <p>まだお約束事がありません。</p>
-        <p className="mt-2">
-          <Link
-            href="/agreements/new"
-            className="text-primary underline"
-          >
-            最初のお約束事を作成
-          </Link>
-          しましょう。
-        </p>
-      </div>
-    );
+    return <DashboardEmpty />;
   }
 
   return (
@@ -72,16 +57,8 @@ async function AgreementList() {
 export default function DashboardPage() {
   return (
     <div className="flex-1 w-full flex flex-col gap-8">
-      <div className="flex items-center justify-between">
-        <h1 className="font-bold text-2xl">ダッシュボード</h1>
-        <Button asChild>
-          <Link href="/agreements/new">お約束事を作成</Link>
-        </Button>
-      </div>
-
-      <Suspense
-        fallback={<p className="text-muted-foreground">読み込み中...</p>}
-      >
+      <DashboardHeader />
+      <Suspense fallback={<p className="text-muted-foreground">...</p>}>
         <AgreementList />
       </Suspense>
     </div>

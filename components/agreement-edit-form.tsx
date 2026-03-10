@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { editAgreement } from "@/app/actions/agreements";
+import { useTranslations } from "next-intl";
 
 type Props = {
   agreementId: string;
@@ -23,6 +24,7 @@ export function AgreementEditForm({
   const [content, setContent] = useState(initialContent);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const t = useTranslations();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -47,11 +49,11 @@ export function AgreementEditForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <p className="text-sm text-amber-600">
-        保存すると再申請扱いになり、相手に再度承認を求めます。
+        {t("agreement.editWarning")}
       </p>
 
       <div className="space-y-2">
-        <Label htmlFor="edit-title">タイトル</Label>
+        <Label htmlFor="edit-title">{t("agreement.titleLabel")}</Label>
         <Input
           id="edit-title"
           value={title}
@@ -61,7 +63,7 @@ export function AgreementEditForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="edit-content">内容</Label>
+        <Label htmlFor="edit-content">{t("agreement.contentLabel")}</Label>
         <textarea
           id="edit-content"
           className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
@@ -75,10 +77,10 @@ export function AgreementEditForm({
 
       <div className="flex gap-2">
         <Button type="submit" disabled={pending}>
-          {pending ? "保存中..." : "保存して再申請"}
+          {pending ? t("agreement.saving") : t("agreement.saveAndRerequest")}
         </Button>
         <Button type="button" variant="outline" onClick={onCancel} disabled={pending}>
-          キャンセル
+          {t("common.cancel")}
         </Button>
       </div>
     </form>

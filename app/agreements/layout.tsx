@@ -1,5 +1,6 @@
 import { AuthButton } from "@/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -16,9 +17,12 @@ export default function AgreementsLayout({
             <div className="flex gap-5 items-center font-semibold">
               <Link href={"/"}>Yubikiri</Link>
             </div>
-            <Suspense>
-              <AuthButton />
-            </Suspense>
+            <div className="flex items-center gap-3">
+              <LocaleSwitcher />
+              <Suspense>
+                <AuthButton />
+              </Suspense>
+            </div>
           </div>
         </nav>
         <div className="flex-1 flex flex-col w-full max-w-3xl p-5">
@@ -26,7 +30,7 @@ export default function AgreementsLayout({
         </div>
 
         <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>Yubikiri - 口約束からの脱却</p>
+          <p>Yubikiri</p>
           <ThemeSwitcher />
         </footer>
       </div>

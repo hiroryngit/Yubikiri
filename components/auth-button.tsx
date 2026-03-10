@@ -1,28 +1,39 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "./logout-button";
+import { useTranslations } from "next-intl";
+import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
 
-export async function AuthButton() {
-  const supabase = await createClient();
+export function AuthButton() {
+  const t = useTranslations();
+  const [email, setEmail] = useState<string | null>(null);
+  const [loaded, setLoaded] = useState(false);
 
-  // You can also use getUser() which will be slower.
-  const { data } = await supabase.auth.getClaims();
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setEmail(user?.email ?? null);
+      setLoaded(true);
+    });
+  }, []);
 
-  const user = data?.claims;
+  if (!loaded) return null;
 
-  return user ? (
+  return email ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      {t("auth.greeting", { email })}
       <LogoutButton />
     </div>
   ) : (
     <div className="flex gap-2">
       <Button asChild size="sm" variant={"outline"}>
-        <Link href="/auth/login">Sign in</Link>
+        <Link href="/auth/login">{t("common.signIn")}</Link>
       </Button>
       <Button asChild size="sm" variant={"default"}>
-        <Link href="/auth/sign-up">Sign up</Link>
+        <Link href="/auth/sign-up">{t("common.signUp")}</Link>
       </Button>
     </div>
   );

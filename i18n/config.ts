@@ -1,0 +1,50 @@
+export const locales = [
+  "ja", "en", "zh", "zh-TW", "ko",
+  "es", "fr", "de", "it", "pt",
+  "ru", "ar", "hi", "th", "vi",
+  "id", "ms", "tr", "pl", "nl",
+  "sv", "da", "fi", "no", "uk",
+  "cs", "ro", "hu", "el", "he",
+  "bn", "ta", "tl", "sw",
+] as const;
+
+export type Locale = (typeof locales)[number];
+
+export const defaultLocale: Locale = "ja";
+
+export const localeNames: Record<Locale, string> = {
+  ja: "日本語",
+  en: "English",
+  zh: "简体中文",
+  "zh-TW": "繁體中文",
+  ko: "한국어",
+  es: "Español",
+  fr: "Français",
+  de: "Deutsch",
+  it: "Italiano",
+  pt: "Português",
+  ru: "Русский",
+  ar: "العربية",
+  hi: "हिन्दी",
+  th: "ไทย",
+  vi: "Tiếng Việt",
+  id: "Bahasa Indonesia",
+  ms: "Bahasa Melayu",
+  tr: "Türkçe",
+  pl: "Polski",
+  nl: "Nederlands",
+  sv: "Svenska",
+  da: "Dansk",
+  fi: "Suomi",
+  no: "Norsk",
+  uk: "Українська",
+  cs: "Čeština",
+  ro: "Română",
+  hu: "Magyar",
+  el: "Ελληνικά",
+  he: "עברית",
+  bn: "বাংলা",
+  ta: "தமிழ்",
+  tl: "Filipino",
+  sw: "Kiswahili",
+};

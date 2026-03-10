@@ -1,9 +1,11 @@
 import { AuthButton } from "@/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import { Button } from "@/components/ui/button";
 import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
 import { Suspense } from "react";
+import { HomeContent } from "@/components/home-content";
 
 export default function Home() {
   return (
@@ -14,35 +16,21 @@ export default function Home() {
             <div className="flex gap-5 items-center font-semibold">
               <Link href={"/"}>Yubikiri</Link>
             </div>
-            {hasEnvVars && (
-              <Suspense>
-                <AuthButton />
-              </Suspense>
-            )}
+            <div className="flex items-center gap-3">
+              <LocaleSwitcher />
+              {hasEnvVars && (
+                <Suspense>
+                  <AuthButton />
+                </Suspense>
+              )}
+            </div>
           </div>
         </nav>
 
-        <div className="flex-1 flex flex-col items-center justify-center gap-8 max-w-2xl px-5 text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            口約束からの脱却
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-lg">
-            Yubikiri
-            は、個人間の合意をデータベースに記録し、証拠として残すサービスです。
-            タイムスタンプとメタデータで合意の証跡を保全します。
-          </p>
-          <div className="flex gap-4">
-            <Button asChild size="lg">
-              <Link href="/agreements/new">お約束事を発行する</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/protected">ダッシュボード</Link>
-            </Button>
-          </div>
-        </div>
+        <HomeContent />
 
         <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>Yubikiri - 口約束からの脱却</p>
+          <p>Yubikiri</p>
           <ThemeSwitcher />
         </footer>
       </div>

@@ -1,12 +1,15 @@
-import { Badge } from "@/components/ui/badge";
+"use client";
 
-const statusConfig = {
-  pending: { label: "承認待ち", variant: "outline" as const },
-  accepted: { label: "合意済み", variant: "default" as const },
-  rejected: { label: "拒否済み", variant: "secondary" as const },
-  revoked: { label: "解除済み", variant: "destructive" as const },
-  withdraw_pending: { label: "取り下げ申請中", variant: "destructive" as const },
-  revoke_pending: { label: "解除申請中", variant: "destructive" as const },
+import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "next-intl";
+
+const variantMap = {
+  pending: "outline" as const,
+  accepted: "default" as const,
+  rejected: "secondary" as const,
+  revoked: "destructive" as const,
+  withdraw_pending: "destructive" as const,
+  revoke_pending: "destructive" as const,
 };
 
 export function AgreementStatusBadge({
@@ -14,6 +17,6 @@ export function AgreementStatusBadge({
 }: {
   status: "pending" | "accepted" | "rejected" | "revoked" | "withdraw_pending" | "revoke_pending";
 }) {
-  const config = statusConfig[status];
-  return <Badge variant={config.variant}>{config.label}</Badge>;
+  const t = useTranslations("status");
+  return <Badge variant={variantMap[status]}>{t(status)}</Badge>;
 }

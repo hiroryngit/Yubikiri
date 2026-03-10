@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function LoginForm({
   className,
@@ -27,8 +28,8 @@ export function LoginForm({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const t = useTranslations();
 
-  // middleware からのリダイレクト: クエリパラメータの redirect をスタックに変換
   useEffect(() => {
     const redirect = searchParams.get("redirect");
     if (redirect && !hasReturnUrl()) {
@@ -49,7 +50,6 @@ export function LoginForm({
       });
       if (error) throw error;
 
-      // スタックから戻り先を取得
       const returnUrl = popReturnUrl() || "/";
       router.push(returnUrl);
     } catch (error: unknown) {
@@ -63,7 +63,6 @@ export function LoginForm({
     const supabase = createClient();
     setError(null);
 
-    // Google OAuth → callback → "/" に着地 → AuthReturnHandler がスタックからリダイレクト
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -80,16 +79,16 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">{t("auth.loginTitle")}</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {t("auth.loginDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("auth.email")}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -101,12 +100,12 @@ export function LoginForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t("auth.password")}</Label>
                   <Link
                     href="/auth/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
-                    Forgot your password?
+                    {t("auth.forgotPassword")}
                   </Link>
                 </div>
                 <Input
@@ -119,14 +118,14 @@ export function LoginForm({
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Logging in..." : "Login"}
+                {isLoading ? t("auth.loggingIn") : t("common.login")}
               </Button>
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-card px-2 text-muted-foreground">or</span>
+                  <span className="bg-card px-2 text-muted-foreground">{t("common.or")}</span>
                 </div>
               </div>
               <Button
@@ -135,16 +134,16 @@ export function LoginForm({
                 className="w-full"
                 onClick={handleGoogleLogin}
               >
-                Googleでログイン
+                {t("auth.googleLogin")}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+              {t("auth.noAccount")}{" "}
               <Link
                 href="/auth/sign-up"
                 className="underline underline-offset-4"
               >
-                Sign up
+                {t("common.signUp")}
               </Link>
             </div>
           </form>

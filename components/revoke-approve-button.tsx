@@ -3,13 +3,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { approveRevoke } from "@/app/actions/agreements";
+import { useTranslations } from "next-intl";
 
 export function RevokeApproveButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations();
 
   async function handleApprove() {
-    if (!confirm("合意の解除を承認しますか？\nこのお約束事は完全に削除されます。")) return;
+    if (!confirm(t("action.confirmRevokeApprove"))) return;
     setLoading(true);
     setError(null);
     const userAgent = navigator.userAgent;
@@ -25,7 +27,7 @@ export function RevokeApproveButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="destructive" onClick={handleApprove} disabled={loading}>
-        {loading ? "処理中..." : "解除を承認"}
+        {loading ? t("common.processing") : t("action.revokeApprove")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}
     </div>

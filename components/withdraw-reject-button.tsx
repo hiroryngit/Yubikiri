@@ -4,14 +4,16 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { rejectWithdraw } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export function WithdrawRejectButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const t = useTranslations();
 
   async function handleReject() {
-    if (!confirm("取り下げを拒否しますか？")) return;
+    if (!confirm(t("action.confirmWithdrawReject"))) return;
     setLoading(true);
     setError(null);
     const userAgent = navigator.userAgent;
@@ -27,7 +29,7 @@ export function WithdrawRejectButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="outline" onClick={handleReject} disabled={loading}>
-        {loading ? "処理中..." : "取り下げを拒否"}
+        {loading ? t("common.processing") : t("action.withdrawReject")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}
     </div>

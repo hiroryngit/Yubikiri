@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { IntlProvider } from "@/components/intl-provider";
 import { AuthReturnHandler } from "@/components/auth-return-handler";
 import { AuthStateListener } from "@/components/auth-state-listener";
 import { Suspense } from "react";
@@ -12,9 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Yubikiri - 口約束からの脱却",
-  description:
-    "個人間の合意をデータベースに記録し、証拠として残すサービスです。",
+  title: "Yubikiri",
+  description: "Record personal agreements as evidence with timestamps and metadata.",
 };
 
 const geistSans = Geist({
@@ -37,11 +37,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Suspense>
-            <AuthReturnHandler />
-          </Suspense>
-          <AuthStateListener />
-          {children}
+          <IntlProvider>
+            <Suspense>
+              <AuthReturnHandler />
+            </Suspense>
+            <AuthStateListener />
+            {children}
+          </IntlProvider>
         </ThemeProvider>
       </body>
     </html>

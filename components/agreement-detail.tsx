@@ -25,6 +25,7 @@ import { CopyButton } from "@/components/copy-button";
 import type { Agreement, AgreementLog } from "@/types/database";
 import { parseUserAgent } from "@/lib/parse-user-agent";
 import { formatGeoLocation } from "@/lib/geo";
+import { useTranslations, useLocale } from "next-intl";
 
 type Props = {
   agreement: Agreement;
@@ -33,20 +34,6 @@ type Props = {
   currentUserId: string | null;
   isAuthenticated: boolean;
   origin: string;
-};
-
-const ACTION_LABELS: Record<string, string> = {
-  accept: "合意",
-  reject: "拒否",
-  rerequest: "再申請",
-  edit: "編集（再申請）",
-  revoke: "解除",
-  withdraw_request: "取り下げ申請",
-  withdraw_approve: "取り下げ承認",
-  withdraw_reject: "取り下げ拒否",
-  revoke_request: "解除申請",
-  revoke_approve: "解除承認",
-  revoke_reject: "解除拒否",
 };
 
 export function AgreementDetail({
@@ -58,6 +45,8 @@ export function AgreementDetail({
   origin,
 }: Props) {
   const [editing, setEditing] = useState(false);
+  const t = useTranslations();
+  const locale = useLocale();
 
   const isCreator = currentUserId === agreement.creatorId;
   const isTarget =
@@ -97,27 +86,27 @@ export function AgreementDetail({
             <>
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-1">
-                  内容
+                  {t("agreement.content")}
                 </h3>
                 <p className="whitespace-pre-wrap">{agreement.content}</p>
               </div>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-muted-foreground">作成者: </span>
+                  <span className="text-muted-foreground">{t("agreement.creator")}: </span>
                   {agreement.creatorEmail}
                 </div>
                 <div className="col-span-2 flex items-center gap-2 flex-wrap">
-                  <span className="text-muted-foreground">承認URL: </span>
+                  <span className="text-muted-foreground">{t("agreement.approvalUrl")}: </span>
                   <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
                   <CopyButton text={`${origin}/agreements/${agreement.id}`} size="sm" />
                 </div>
                 <div>
-                  <span className="text-muted-foreground">作成日: </span>
-                  {new Date(agreement.createdAt).toLocaleString("ja-JP")}
+                  <span className="text-muted-foreground">{t("agreement.createdAt")}: </span>
+                  {new Date(agreement.createdAt).toLocaleString(locale)}
                 </div>
                 <div>
-                  <span className="text-muted-foreground">更新日: </span>
-                  {new Date(agreement.updatedAt).toLocaleString("ja-JP")}
+                  <span className="text-muted-foreground">{t("agreement.updatedAt")}: </span>
+                  {new Date(agreement.updatedAt).toLocaleString(locale)}
                 </div>
               </div>
             </>
@@ -134,10 +123,10 @@ export function AgreementDetail({
               ) : (
                 <>
                   <LoginRequiredButton agreementId={agreement.id}>
-                    同意する
+                    {t("action.accept")}
                   </LoginRequiredButton>
                   <LoginRequiredButton agreementId={agreement.id} variant="outline">
-                    拒否する
+                    {t("action.reject")}
                   </LoginRequiredButton>
                 </>
               )
@@ -146,7 +135,6 @@ export function AgreementDetail({
             {isCreator && agreement.status === "rejected" && (
               <RerequestButton agreementId={agreement.id} />
             )}
-            {/* 取り下げ申請中: 相手に承認/拒否ボタンを表示 */}
             {agreement.status === "withdraw_pending" && !isCreator && isAuthenticated && (
               <>
                 <WithdrawApproveButton agreementId={agreement.id} />
@@ -154,9 +142,8 @@ export function AgreementDetail({
               </>
             )}
             {agreement.status === "withdraw_pending" && isCreator && (
-              <p className="text-sm text-muted-foreground">相手の取り下げ承認を待っています...</p>
+              <p className="text-sm text-muted-foreground">{t("agreement.waitingWithdrawApproval")}</p>
             )}
-            {/* 解除申請中: 作成者に承認/拒否ボタンを表示 */}
             {agreement.status === "revoke_pending" && isCreator && isAuthenticated && (
               <>
                 <RevokeApproveButton agreementId={agreement.id} />
@@ -164,12 +151,12 @@ export function AgreementDetail({
               </>
             )}
             {agreement.status === "revoke_pending" && !isCreator && isAuthenticated && (
-              <p className="text-sm text-muted-foreground">作成者の解除承認を待っています...</p>
+              <p className="text-sm text-muted-foreground">{t("agreement.waitingRevokeApproval")}</p>
             )}
             {isCreator && !["withdraw_pending", "revoke_pending"].includes(agreement.status) && (
               <>
                 <Button variant="outline" onClick={() => setEditing(true)}>
-                  編集する
+                  {t("common.edit")}
                 </Button>
                 <WithdrawButton agreementId={agreement.id} />
               </>
@@ -181,7 +168,7 @@ export function AgreementDetail({
       {logs.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">操作履歴</CardTitle>
+            <CardTitle className="text-lg">{t("agreement.history")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
@@ -197,7 +184,7 @@ export function AgreementDetail({
                   >
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-medium">
-                        {ACTION_LABELS[log.actionType] ?? log.actionType}
+                        {t(`actionLog.${log.actionType}`)}
                       </span>
                       {log.actorEmail && (
                         <span className="text-muted-foreground">
@@ -207,7 +194,7 @@ export function AgreementDetail({
                     </div>
                     <div className="flex items-center gap-3 text-xs text-muted-foreground flex-wrap">
                       <span>
-                        {new Date(log.recordedAt).toLocaleString("ja-JP")}
+                        {new Date(log.recordedAt).toLocaleString(locale)}
                       </span>
                       {device && (
                         <span>
