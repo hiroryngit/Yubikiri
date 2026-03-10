@@ -105,15 +105,7 @@ export function LoginForm({
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password" className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" />{t("auth.password")}</Label>
-                  <Link
-                    href="/auth/forgot-password"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    {t("auth.forgotPassword")}
-                  </Link>
-                </div>
+                <Label htmlFor="password" className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" />{t("auth.password")}</Label>
                 <Input
                   id="password"
                   type="password"
@@ -147,14 +139,24 @@ export function LoginForm({
                 {t("auth.googleLogin")}
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
-              {t("auth.noAccount")}{" "}
-              <Link
-                href="/auth/sign-up"
-                className="underline underline-offset-4"
-              >
-                {t("common.signUp")}
-              </Link>
+            <div className="mt-6 space-y-3 text-center text-sm">
+              <div>
+                <Link
+                  href="/auth/forgot-password"
+                  className="text-muted-foreground underline-offset-4 hover:underline"
+                >
+                  {t("auth.forgotPassword")}
+                </Link>
+              </div>
+              <div>
+                {t("auth.noAccount")}{" "}
+                <Link
+                  href="/auth/sign-up"
+                  className="underline underline-offset-4"
+                >
+                  {t("common.signUp")}
+                </Link>
+              </div>
             </div>
           </form>
         </CardContent>

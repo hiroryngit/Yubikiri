@@ -25,7 +25,7 @@ export default function AgreementsLayout({
             </div>
           </div>
         </nav>
-        <div className="flex-1 flex flex-col w-full max-w-3xl px-4 sm:px-6 py-4 sm:py-8">
+        <div className="flex-1 flex flex-col w-full max-w-3xl px-5 sm:px-8 py-6 sm:py-10">
           {children}
         </div>
 

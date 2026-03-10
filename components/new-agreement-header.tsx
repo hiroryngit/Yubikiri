@@ -13,9 +13,9 @@ export function NewAgreementHeader({ variant = "public" }: { variant?: "public" 
     : t("agreement.newDescription");
 
   return (
-    <>
-      <h1 className="font-bold text-2xl">{title}</h1>
-      <p className="text-muted-foreground">{desc}</p>
-    </>
+    <div className="space-y-2">
+      <h1 className="font-bold text-xl sm:text-2xl">{title}</h1>
+      <p className="text-sm sm:text-base text-muted-foreground">{desc}</p>
+    </div>
   );
 }

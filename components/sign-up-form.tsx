@@ -15,6 +15,9 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useCustomValidity } from "@/lib/use-custom-validity";
+import { Mail, Lock, UserPlus } from "lucide-react";
 
 export function SignUpForm({
   className,
@@ -26,6 +29,8 @@ export function SignUpForm({
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const t = useTranslations();
+  const validity = useCustomValidity();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +39,7 @@ export function SignUpForm({
     setError(null);
 
     if (password !== repeatPassword) {
-      setError("Passwords do not match");
+      setError(t("auth.passwordMismatch"));
       setIsLoading(false);
       return;
     }
@@ -60,14 +65,14 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Sign up</CardTitle>
-          <CardDescription>Create a new account</CardDescription>
+          <CardTitle className="text-2xl">{t("auth.signUpTitle")}</CardTitle>
+          <CardDescription>{t("auth.signUpDescription")}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="flex items-center gap-1.5"><Mail className="h-3.5 w-3.5" />{t("auth.email")}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -75,41 +80,44 @@ export function SignUpForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onInvalid={validity.onInvalid}
+                  onInput={validity.onInput}
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
+                <Label htmlFor="password" className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" />{t("auth.password")}</Label>
                 <Input
                   id="password"
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onInvalid={validity.onInvalid}
+                  onInput={validity.onInput}
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="repeat-password">Repeat Password</Label>
-                </div>
+                <Label htmlFor="repeat-password" className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" />{t("auth.repeatPassword")}</Label>
                 <Input
                   id="repeat-password"
                   type="password"
                   required
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
+                  onInvalid={validity.onInvalid}
+                  onInput={validity.onInput}
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating an account..." : "Sign up"}
+                <UserPlus className="h-4 w-4 mr-2" />
+                {isLoading ? t("auth.signingUp") : t("common.signUp")}
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Already have an account?{" "}
+            <div className="mt-6 text-center text-sm">
+              {t("auth.hasAccount")}{" "}
               <Link href="/auth/login" className="underline underline-offset-4">
-                Login
+                {t("common.login")}
               </Link>
             </div>
           </form>

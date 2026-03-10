@@ -127,8 +127,8 @@ export function AgreementForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-2">
+    <form onSubmit={handleSubmit} className="space-y-7">
+      <div className="space-y-2.5">
         <Label htmlFor="title">{t("agreement.titleLabel")}</Label>
         <Input
           id="title"
@@ -142,7 +142,7 @@ export function AgreementForm() {
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <Label htmlFor="content">{t("agreement.contentLabel")}</Label>
         <textarea
           id="content"

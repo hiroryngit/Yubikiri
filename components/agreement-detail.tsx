@@ -75,7 +75,7 @@ export function AgreementDetail({
             <AgreementStatusBadge status={agreement.status} />
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-5">
           {editing ? (
             <AgreementEditForm
               agreementId={agreement.id}
@@ -91,7 +91,7 @@ export function AgreementDetail({
                 </h3>
                 <p className="whitespace-pre-wrap">{agreement.content}</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
                 <div>
                   <p className="text-muted-foreground text-xs mb-1">{t("agreement.creator")}</p>
                   <p className="break-all">{agreement.creatorEmail}</p>
@@ -178,7 +178,7 @@ export function AgreementDetail({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {logs.map((log) => {
                 const device = log.userAgent
                   ? parseUserAgent(log.userAgent)
@@ -187,7 +187,7 @@ export function AgreementDetail({
                 return (
                   <div
                     key={log.id}
-                    className="text-sm border-b pb-3 last:border-0 space-y-1.5"
+                    className="text-sm border-b pb-4 last:border-0 space-y-2"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 flex-wrap">
                       <span className="font-medium">
