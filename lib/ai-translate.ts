@@ -15,7 +15,7 @@ function getProviders(): Provider[] {
       name: "groq",
       baseUrl: "https://api.groq.com/openai/v1/chat/completions",
       apiKey: process.env.GROQ_API_KEY,
-      model: "llama-3.3-70b-versatile",
+      model: "llama-3.1-8b-instant", // Free: 131k tokens/min, 30 RPM
     });
   }
   if (process.env.CEREBRAS_API_KEY) {
@@ -23,7 +23,7 @@ function getProviders(): Provider[] {
       name: "cerebras",
       baseUrl: "https://api.cerebras.ai/v1/chat/completions",
       apiKey: process.env.CEREBRAS_API_KEY,
-      model: "llama-3.3-70b",
+      model: "llama3.1-8b", // Free: high throughput
     });
   }
   if (process.env.SILICONFLOW_API_KEY) {
@@ -31,7 +31,7 @@ function getProviders(): Provider[] {
       name: "siliconflow",
       baseUrl: "https://api.siliconflow.cn/v1/chat/completions",
       apiKey: process.env.SILICONFLOW_API_KEY,
-      model: "Qwen/Qwen2.5-7B-Instruct",
+      model: "Qwen/Qwen2.5-7B-Instruct", // Free tier model
     });
   }
   if (process.env.GITHUB_MODELS_API_KEY) {
@@ -39,7 +39,7 @@ function getProviders(): Provider[] {
       name: "github-models",
       baseUrl: "https://models.inference.ai.azure.com/chat/completions",
       apiKey: process.env.GITHUB_MODELS_API_KEY,
-      model: "gpt-4o-mini",
+      model: "gpt-4o-mini", // Free: 150 req/day
     });
   }
 
