@@ -1,12 +1,9 @@
 -- DELETEポリシーを修正: 作成者だけでなく、当事者も削除可能にする
 -- （取り下げ承認・解除承認時に非作成者が削除するため）
+-- サーバーアクション側で権限チェック済みのため、認証ユーザーなら削除可能にする
 DROP POLICY "agreements_delete" ON agreements;
 CREATE POLICY "agreements_delete" ON agreements
-  FOR DELETE USING (
-    auth.uid() = creator_id
-    OR (SELECT email FROM auth.users WHERE id = auth.uid()) = target_email
-    OR (target_email IS NULL AND auth.uid() IS NOT NULL)
-  );
+  FOR DELETE USING (auth.uid() IS NOT NULL);
 
 -- revoke_pending ステータスを追加
 ALTER TABLE agreements DROP CONSTRAINT agreements_status_check;
