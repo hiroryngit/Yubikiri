@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { revokeAgreement } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Unlink } from "lucide-react";
 
 export function RevokeButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ export function RevokeButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="destructive" onClick={handleRevoke} disabled={loading}>
+        <Unlink className="h-4 w-4 mr-1" />
         {loading ? t("common.processing") : t("action.revoke")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}

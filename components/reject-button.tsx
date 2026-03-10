@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { rejectAgreement } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { XCircle } from "lucide-react";
 
 export function RejectButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ export function RejectButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="outline" onClick={handleReject} disabled={loading}>
+        <XCircle className="h-4 w-4 mr-1" />
         {loading ? t("common.processing") : t("action.reject")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { rejectRevoke } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { ThumbsDown } from "lucide-react";
 
 export function RevokeRejectButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ export function RevokeRejectButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="outline" onClick={handleReject} disabled={loading}>
+        <ThumbsDown className="h-4 w-4 mr-1" />
         {loading ? t("common.processing") : t("action.revokeReject")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}

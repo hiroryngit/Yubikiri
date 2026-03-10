@@ -26,6 +26,7 @@ import type { Agreement, AgreementLog } from "@/types/database";
 import { parseUserAgent } from "@/lib/parse-user-agent";
 import { formatGeoLocation } from "@/lib/geo";
 import { useTranslations, useLocale } from "next-intl";
+import { Pencil, History } from "lucide-react";
 
 type Props = {
   agreement: Agreement;
@@ -156,6 +157,7 @@ export function AgreementDetail({
             {isCreator && !["withdraw_pending", "revoke_pending"].includes(agreement.status) && (
               <>
                 <Button variant="outline" onClick={() => setEditing(true)}>
+                  <Pencil className="h-4 w-4 mr-1" />
                   {t("common.edit")}
                 </Button>
                 <WithdrawButton agreementId={agreement.id} />
@@ -168,7 +170,10 @@ export function AgreementDetail({
       {logs.length > 0 && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">{t("agreement.history")}</CardTitle>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <History className="h-5 w-5" />
+              {t("agreement.history")}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { approveWithdraw } from "@/app/actions/agreements";
 import { useTranslations } from "next-intl";
+import { ThumbsUp } from "lucide-react";
 
 export function WithdrawApproveButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
@@ -27,6 +28,7 @@ export function WithdrawApproveButton({ agreementId }: { agreementId: string }) 
   return (
     <div>
       <Button variant="destructive" onClick={handleApprove} disabled={loading}>
+        <ThumbsUp className="h-4 w-4 mr-1" />
         {loading ? t("common.processing") : t("action.withdrawApprove")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { rerequestAgreement } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { RefreshCw } from "lucide-react";
 
 export function RerequestButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ export function RerequestButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="outline" onClick={handleRerequest} disabled={loading}>
+        <RefreshCw className="h-4 w-4 mr-1" />
         {loading ? t("common.processing") : t("action.rerequest")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}

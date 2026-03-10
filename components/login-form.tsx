@@ -18,6 +18,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useCustomValidity } from "@/lib/use-custom-validity";
+import { GoogleIcon } from "@/components/google-icon";
+import { Mail, Lock, LogIn } from "lucide-react";
 
 export function LoginForm({
   className,
@@ -90,7 +92,7 @@ export function LoginForm({
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">{t("auth.email")}</Label>
+                <Label htmlFor="email" className="flex items-center gap-1.5"><Mail className="h-3.5 w-3.5" />{t("auth.email")}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -104,7 +106,7 @@ export function LoginForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">{t("auth.password")}</Label>
+                  <Label htmlFor="password" className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" />{t("auth.password")}</Label>
                   <Link
                     href="/auth/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
@@ -124,6 +126,7 @@ export function LoginForm({
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
+                <LogIn className="h-4 w-4 mr-2" />
                 {isLoading ? t("auth.loggingIn") : t("common.login")}
               </Button>
               <div className="relative">
@@ -140,6 +143,7 @@ export function LoginForm({
                 className="w-full"
                 onClick={handleGoogleLogin}
               >
+                <GoogleIcon className="mr-2" />
                 {t("auth.googleLogin")}
               </Button>
             </div>

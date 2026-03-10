@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { LogOut } from "lucide-react";
 
 export function LogoutButton() {
   const router = useRouter();
@@ -15,5 +16,5 @@ export function LogoutButton() {
     router.push("/auth/login");
   };
 
-  return <Button onClick={logout}>{t("common.logout")}</Button>;
+  return <Button onClick={logout}><LogOut className="h-4 w-4 mr-2" />{t("common.logout")}</Button>;
 }

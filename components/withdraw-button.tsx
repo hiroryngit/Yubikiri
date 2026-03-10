@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { withdrawAgreement } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Trash2 } from "lucide-react";
 
 export function WithdrawButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
@@ -33,6 +34,7 @@ export function WithdrawButton({ agreementId }: { agreementId: string }) {
   return (
     <div>
       <Button variant="destructive" onClick={handleWithdraw} disabled={loading}>
+        <Trash2 className="h-4 w-4 mr-1" />
         {loading ? t("common.processing") : t("action.withdraw")}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}

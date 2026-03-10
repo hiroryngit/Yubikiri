@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { FilePlus, LayoutDashboard } from "lucide-react";
 
 export function HomeContent() {
   const t = useTranslations();
@@ -17,10 +18,10 @@ export function HomeContent() {
       </p>
       <div className="flex gap-4">
         <Button asChild size="lg">
-          <Link href="/agreements/new">{t("home.createButton")}</Link>
+          <Link href="/agreements/new"><FilePlus className="h-4 w-4 mr-2" />{t("home.createButton")}</Link>
         </Button>
         <Button asChild size="lg" variant="outline">
-          <Link href="/protected">{t("home.dashboardButton")}</Link>
+          <Link href="/protected"><LayoutDashboard className="h-4 w-4 mr-2" />{t("home.dashboardButton")}</Link>
         </Button>
       </div>
     </div>
