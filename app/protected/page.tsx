@@ -25,7 +25,7 @@ async function AgreementList() {
 
   const actedIds = (logRows ?? []).map((r) => r.agreement_id);
 
-  // 自分が作成 or target_email 一致 or ログに参加した同意書を取得
+  // 自分が作成 or target_email 一致 or ログに参加したお約束事を取得
   let query = supabase
     .from("agreements")
     .select("*")
@@ -46,13 +46,13 @@ async function AgreementList() {
   if (agreements.length === 0) {
     return (
       <div className="text-center py-12 text-muted-foreground">
-        <p>まだ同意書がありません。</p>
+        <p>まだお約束事がありません。</p>
         <p className="mt-2">
           <Link
             href="/agreements/new"
             className="text-primary underline"
           >
-            最初の同意書を作成
+            最初のお約束事を作成
           </Link>
           しましょう。
         </p>
@@ -75,7 +75,7 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-2xl">ダッシュボード</h1>
         <Button asChild>
-          <Link href="/agreements/new">同意書を作成</Link>
+          <Link href="/agreements/new">お約束事を作成</Link>
         </Button>
       </div>
 

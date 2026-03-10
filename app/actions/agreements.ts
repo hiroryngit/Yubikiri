@@ -36,7 +36,7 @@ export async function createAgreement(formData: FormData) {
     .single();
 
   if (error) {
-    return { error: "同意書の作成に失敗しました" };
+    return { error: "お約束事の作成に失敗しました" };
   }
 
   return { agreementId: data.id };
@@ -59,20 +59,20 @@ export async function acceptAgreement(id: string, userAgent: string) {
     .single();
 
   if (fetchError || !agreement) {
-    return { error: "同意書が見つかりません" };
+    return { error: "お約束事が見つかりません" };
   }
 
   if (agreement.status !== "pending") {
-    return { error: "この同意書は既に処理済みです" };
+    return { error: "このお約束事は既に処理済みです" };
   }
 
   if (agreement.target_email !== null) {
     if (agreement.target_email !== user.email) {
-      return { error: "この同意書の対象者ではありません" };
+      return { error: "このお約束事の対象者ではありません" };
     }
   } else {
     if (agreement.creator_id === user.id) {
-      return { error: "自分が作成した同意書には合意できません" };
+      return { error: "自分が作成したお約束事には合意できません" };
     }
   }
 
@@ -114,20 +114,20 @@ export async function rejectAgreement(id: string, userAgent: string) {
     .single();
 
   if (fetchError || !agreement) {
-    return { error: "同意書が見つかりません" };
+    return { error: "お約束事が見つかりません" };
   }
 
   if (agreement.status !== "pending") {
-    return { error: "この同意書は既に処理済みです" };
+    return { error: "このお約束事は既に処理済みです" };
   }
 
   if (agreement.target_email !== null) {
     if (agreement.target_email !== user.email) {
-      return { error: "この同意書の対象者ではありません" };
+      return { error: "このお約束事の対象者ではありません" };
     }
   } else {
     if (agreement.creator_id === user.id) {
-      return { error: "自分が作成した同意書は拒否できません" };
+      return { error: "自分が作成したお約束事は拒否できません" };
     }
   }
 
@@ -173,7 +173,7 @@ export async function withdrawAgreement(id: string) {
   }
 
   if (count === 0) {
-    return { error: "同意書が見つからないか、作成者ではありません" };
+    return { error: "お約束事が見つからないか、作成者ではありません" };
   }
 
   return { success: true };
@@ -196,7 +196,7 @@ export async function rerequestAgreement(id: string, userAgent: string) {
     .single();
 
   if (fetchError || !agreement) {
-    return { error: "同意書が見つかりません" };
+    return { error: "お約束事が見つかりません" };
   }
 
   if (agreement.creator_id !== user.id) {
@@ -204,7 +204,7 @@ export async function rerequestAgreement(id: string, userAgent: string) {
   }
 
   if (agreement.status !== "rejected") {
-    return { error: "拒否された同意書のみ再申請できます" };
+    return { error: "拒否されたお約束事のみ再申請できます" };
   }
 
   const [updateResult, logResult] = await Promise.all([
@@ -245,7 +245,7 @@ export async function editAgreement(id: string, formData: FormData) {
     .single();
 
   if (fetchError || !agreement) {
-    return { error: "同意書が見つかりません" };
+    return { error: "お約束事が見つかりません" };
   }
 
   if (agreement.creator_id !== user.id) {
@@ -307,11 +307,11 @@ export async function revokeAgreement(id: string, userAgent: string) {
     .single();
 
   if (fetchError || !agreement) {
-    return { error: "同意書が見つかりません" };
+    return { error: "お約束事が見つかりません" };
   }
 
   if (agreement.status !== "accepted") {
-    return { error: "合意済みの同意書のみ解除できます" };
+    return { error: "合意済みのお約束事のみ解除できます" };
   }
 
   const isTarget =
@@ -329,7 +329,7 @@ export async function revokeAgreement(id: string, userAgent: string) {
       .maybeSingle();
 
     if (!acceptLog) {
-      return { error: "この同意書の当事者ではありません" };
+      return { error: "このお約束事の当事者ではありません" };
     }
   }
 
