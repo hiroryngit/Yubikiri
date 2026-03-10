@@ -89,7 +89,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
       actor_email: user.email,
       ip_address: req.ipAddress,
       ip_country: req.ipCountry,
-      ip_city: req.ipCity,
+      ip_region: req.ipRegion,
     }),
   ]);
 
@@ -149,7 +149,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
       actor_email: user.email,
       ip_address: req.ipAddress,
       ip_country: req.ipCountry,
-      ip_city: req.ipCity,
+      ip_region: req.ipRegion,
     }),
   ]);
 
@@ -230,7 +230,7 @@ export async function rerequestAgreement(id: string, userAgent: string) {
       actor_email: user.email,
       ip_address: req.ipAddress,
       ip_country: req.ipCountry,
-      ip_city: req.ipCity,
+      ip_region: req.ipRegion,
     }),
   ]);
 
@@ -296,7 +296,7 @@ export async function editAgreement(id: string, formData: FormData) {
       actor_email: user.email,
       ip_address: req.ipAddress,
       ip_country: req.ipCountry,
-      ip_city: req.ipCity,
+      ip_region: req.ipRegion,
     }),
   ]);
 
@@ -365,7 +365,7 @@ export async function revokeAgreement(id: string, userAgent: string) {
       actor_email: user.email,
       ip_address: req.ipAddress,
       ip_country: req.ipCountry,
-      ip_city: req.ipCity,
+      ip_region: req.ipRegion,
     }),
   ]);
 

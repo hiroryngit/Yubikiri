@@ -31,7 +31,7 @@ export function toAgreementLog(row: AgreementLogRow): AgreementLog {
     actorEmail: row.actor_email,
     ipAddress: row.ip_address,
     ipCountry: row.ip_country,
-    ipCity: row.ip_city,
+    ipRegion: row.ip_region,
   };
 }
 

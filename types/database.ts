@@ -22,7 +22,7 @@ export type AgreementLogRow = {
   actor_email: string | null;
   ip_address: string | null;
   ip_country: string | null;
-  ip_city: string | null;
+  ip_region: string | null;
 };
 
 // アプリケーション型 (camelCase)
@@ -49,5 +49,5 @@ export type AgreementLog = {
   actorEmail: string | null;
   ipAddress: string | null;
   ipCountry: string | null;
-  ipCity: string | null;
+  ipRegion: string | null;
 };

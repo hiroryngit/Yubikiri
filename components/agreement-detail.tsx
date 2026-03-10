@@ -183,8 +183,8 @@ export function AgreementDetail({
                       {log.ipAddress && (
                         <span>
                           IP: {log.ipAddress}
-                          {log.ipCity || log.ipCountry
-                            ? ` (${[log.ipCity, log.ipCountry].filter(Boolean).join(", ")})`
+                          {log.ipRegion || log.ipCountry
+                            ? ` (${[log.ipRegion, log.ipCountry].filter(Boolean).join(", ")})`
                             : ""}
                         </span>
                       )}

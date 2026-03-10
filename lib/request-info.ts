@@ -10,9 +10,8 @@ export async function getRequestInfo() {
     h.get("x-real-ip") ??
     null;
   const ipCountry = h.get("x-vercel-ip-country") ?? null;
-  const ipCity = h.get("x-vercel-ip-city")
-    ? decodeURIComponent(h.get("x-vercel-ip-city")!)
-    : null;
+  // 都道府県レベル（市区町村はIP判定では不正確なため使わない）
+  const ipRegion = h.get("x-vercel-ip-country-region") ?? null;
 
-  return { ipAddress, ipCountry, ipCity };
+  return { ipAddress, ipCountry, ipRegion };
 }
