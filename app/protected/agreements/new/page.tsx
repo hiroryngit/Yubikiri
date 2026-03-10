@@ -3,7 +3,7 @@ import { AgreementForm } from "@/components/agreement-form";
 export default function NewAgreementPage() {
   return (
     <div className="flex-1 w-full flex flex-col gap-6">
-      <h1 className="font-bold text-2xl">同意書を作成</h1>
+      <h1 className="font-bold text-2xl">お約束事の発行</h1>
       <p className="text-muted-foreground">
         作成後にURLを共有して合意を得ることができます。
       </p>
