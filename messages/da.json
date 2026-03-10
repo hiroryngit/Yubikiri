@@ -11,7 +11,9 @@
     "signIn": "Log ind",
     "signUp": "Opret konto",
     "or": "eller",
-    "tagline": "Mere end mundtlige løfter"
+    "tagline": "Mere end mundtlige løfter",
+    "requiredField": "Udfyld venligst dette felt",
+    "invalidEmail": "Indtast venligst en gyldig e-mailadresse"
   },
   "home": {
     "hero": "Mere end mundtlige løfter",

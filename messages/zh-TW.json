@@ -11,7 +11,9 @@
     "signIn": "登入",
     "signUp": "註冊",
     "or": "或",
-    "tagline": "超越口頭承諾"
+    "tagline": "超越口頭承諾",
+    "requiredField": "請填寫此欄位",
+    "invalidEmail": "請輸入有效的電子郵件地址"
   },
   "home": {
     "hero": "超越口頭承諾",

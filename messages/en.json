@@ -11,7 +11,9 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "or": "or",
-    "tagline": "Beyond verbal promises"
+    "tagline": "Beyond verbal promises",
+    "requiredField": "Please fill in this field",
+    "invalidEmail": "Please enter a valid email address"
   },
   "home": {
     "hero": "Beyond verbal promises",

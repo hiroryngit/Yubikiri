@@ -11,7 +11,9 @@
     "signIn": "Logga in",
     "signUp": "Registrera",
     "or": "eller",
-    "tagline": "Bortom muntliga löften"
+    "tagline": "Bortom muntliga löften",
+    "requiredField": "Fyll i detta fält",
+    "invalidEmail": "Ange en giltig e-postadress"
   },
   "home": {
     "hero": "Bortom muntliga löften",

@@ -11,7 +11,9 @@
     "signIn": "Masuk",
     "signUp": "Daftar",
     "or": "atau",
-    "tagline": "Lebih dari sekadar janji lisan"
+    "tagline": "Lebih dari sekadar janji lisan",
+    "requiredField": "Harap isi kolom ini",
+    "invalidEmail": "Harap masukkan alamat email yang valid"
   },
   "home": {
     "hero": "Lebih dari sekadar janji lisan",

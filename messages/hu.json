@@ -11,7 +11,9 @@
     "signIn": "Bejelentkezés",
     "signUp": "Regisztráció",
     "or": "vagy",
-    "tagline": "Több mint szóbeli ígéretek"
+    "tagline": "Több mint szóbeli ígéretek",
+    "requiredField": "Kérjük, töltse ki ezt a mezőt",
+    "invalidEmail": "Kérjük, adjon meg érvényes e-mail címet"
   },
   "home": {
     "hero": "Több mint szóbeli ígéretek",

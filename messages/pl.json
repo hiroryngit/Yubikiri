@@ -11,7 +11,9 @@
     "signIn": "Zaloguj się",
     "signUp": "Zarejestruj się",
     "or": "lub",
-    "tagline": "Więcej niż ustne obietnice"
+    "tagline": "Więcej niż ustne obietnice",
+    "requiredField": "Proszę wypełnić to pole",
+    "invalidEmail": "Proszę podać prawidłowy adres e-mail"
   },
   "home": {
     "hero": "Więcej niż ustne obietnice",

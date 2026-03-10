@@ -11,7 +11,9 @@
     "signIn": "Se connecter",
     "signUp": "S'inscrire",
     "or": "ou",
-    "tagline": "Au-delà des promesses verbales"
+    "tagline": "Au-delà des promesses verbales",
+    "requiredField": "Veuillez remplir ce champ",
+    "invalidEmail": "Veuillez entrer une adresse e-mail valide"
   },
   "home": {
     "hero": "Au-delà des promesses verbales",

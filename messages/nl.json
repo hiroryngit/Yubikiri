@@ -11,7 +11,9 @@
     "signIn": "Inloggen",
     "signUp": "Registreren",
     "or": "of",
-    "tagline": "Verder dan mondelinge beloftes"
+    "tagline": "Verder dan mondelinge beloftes",
+    "requiredField": "Vul dit veld in",
+    "invalidEmail": "Voer een geldig e-mailadres in"
   },
   "home": {
     "hero": "Verder dan mondelinge beloftes",

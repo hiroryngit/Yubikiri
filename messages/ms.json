@@ -11,7 +11,9 @@
     "signIn": "Log masuk",
     "signUp": "Daftar",
     "or": "atau",
-    "tagline": "Melebihi janji lisan"
+    "tagline": "Melebihi janji lisan",
+    "requiredField": "Sila isi ruangan ini",
+    "invalidEmail": "Sila masukkan alamat e-mel yang sah"
   },
   "home": {
     "hero": "Melebihi janji lisan",

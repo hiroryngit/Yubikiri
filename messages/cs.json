@@ -11,7 +11,9 @@
     "signIn": "Přihlásit se",
     "signUp": "Zaregistrovat se",
     "or": "nebo",
-    "tagline": "Více než ústní sliby"
+    "tagline": "Více než ústní sliby",
+    "requiredField": "Vyplňte toto pole",
+    "invalidEmail": "Zadejte platnou e-mailovou adresu"
   },
   "home": {
     "hero": "Více než ústní sliby",

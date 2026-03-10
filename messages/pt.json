@@ -11,7 +11,9 @@
     "signIn": "Entrar",
     "signUp": "Cadastrar",
     "or": "ou",
-    "tagline": "Além das promessas verbais"
+    "tagline": "Além das promessas verbais",
+    "requiredField": "Preencha este campo",
+    "invalidEmail": "Insira um endereço de e-mail válido"
   },
   "home": {
     "hero": "Além das promessas verbais",

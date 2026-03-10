@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CopyButton } from "@/components/copy-button";
 import { useTranslations } from "next-intl";
+import { useCustomValidity } from "@/lib/use-custom-validity";
 
 const DRAFT_KEY = "yubikiri_draft";
 
@@ -23,6 +24,7 @@ export function AgreementForm() {
   const router = useRouter();
   const autoSubmitted = useRef(false);
   const t = useTranslations();
+  const validity = useCustomValidity();
 
   // ログイン後に戻ってきたら保存済みの下書きを復元して自動送信
   useEffect(() => {
@@ -135,6 +137,8 @@ export function AgreementForm() {
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          onInvalid={validity.onInvalid}
+          onInput={validity.onInput}
         />
       </div>
 
@@ -148,6 +152,8 @@ export function AgreementForm() {
           required
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          onInvalid={validity.onInvalid}
+          onInput={validity.onInput}
         />
       </div>
 

@@ -11,7 +11,9 @@
     "signIn": "Logg inn",
     "signUp": "Registrer deg",
     "or": "eller",
-    "tagline": "Mer enn muntlige løfter"
+    "tagline": "Mer enn muntlige løfter",
+    "requiredField": "Vennligst fyll ut dette feltet",
+    "invalidEmail": "Vennligst oppgi en gyldig e-postadresse"
   },
   "home": {
     "hero": "Mer enn muntlige løfter",

@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useCustomValidity } from "@/lib/use-custom-validity";
 
 export function LoginForm({
   className,
@@ -29,6 +30,7 @@ export function LoginForm({
   const router = useRouter();
   const searchParams = useSearchParams();
   const t = useTranslations();
+  const validity = useCustomValidity();
 
   useEffect(() => {
     const redirect = searchParams.get("redirect");
@@ -96,6 +98,8 @@ export function LoginForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onInvalid={validity.onInvalid}
+                  onInput={validity.onInput}
                 />
               </div>
               <div className="grid gap-2">
@@ -114,6 +118,8 @@ export function LoginForm({
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onInvalid={validity.onInvalid}
+                  onInput={validity.onInput}
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}

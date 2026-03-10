@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { editAgreement } from "@/app/actions/agreements";
 import { useTranslations } from "next-intl";
+import { useCustomValidity } from "@/lib/use-custom-validity";
 
 type Props = {
   agreementId: string;
@@ -25,6 +26,7 @@ export function AgreementEditForm({
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const t = useTranslations();
+  const validity = useCustomValidity();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -59,6 +61,8 @@ export function AgreementEditForm({
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
+          onInvalid={validity.onInvalid}
+          onInput={validity.onInput}
         />
       </div>
 
@@ -70,6 +74,8 @@ export function AgreementEditForm({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
+          onInvalid={validity.onInvalid}
+          onInput={validity.onInput}
         />
       </div>
 

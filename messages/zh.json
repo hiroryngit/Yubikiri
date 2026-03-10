@@ -11,7 +11,9 @@
     "signIn": "登录",
     "signUp": "注册",
     "or": "或",
-    "tagline": "告别口头约定"
+    "tagline": "告别口头约定",
+    "requiredField": "请填写此字段",
+    "invalidEmail": "请输入有效的电子邮件地址"
   },
   "home": {
     "hero": "告别口头约定",

@@ -11,7 +11,9 @@
     "signIn": "Accedi",
     "signUp": "Registrati",
     "or": "o",
-    "tagline": "Oltre le promesse verbali"
+    "tagline": "Oltre le promesse verbali",
+    "requiredField": "Compila questo campo",
+    "invalidEmail": "Inserisci un indirizzo email valido"
   },
   "home": {
     "hero": "Oltre le promesse verbali",

@@ -11,7 +11,9 @@
     "signIn": "Iniciar sesión",
     "signUp": "Registrarse",
     "or": "o",
-    "tagline": "Más allá de las promesas verbales"
+    "tagline": "Más allá de las promesas verbales",
+    "requiredField": "Por favor, complete este campo",
+    "invalidEmail": "Por favor, ingrese una dirección de correo válida"
   },
   "home": {
     "hero": "Más allá de las promesas verbales",
