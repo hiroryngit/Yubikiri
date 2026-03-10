@@ -191,8 +191,17 @@ export async function withdrawAgreement(id: string, userAgent: string) {
     return { error: "既に取り下げ申請中です" };
   }
 
-  // まだ誰も関わっていない（pending状態）なら即削除
-  if (agreement.status === "pending") {
+  // 合意した相手がいるか確認
+  const { data: acceptLog } = await supabase
+    .from("agreement_logs")
+    .select("actor_id")
+    .eq("agreement_id", id)
+    .eq("action_type", "accept")
+    .limit(1)
+    .maybeSingle();
+
+  // まだ誰も合意していないなら即削除
+  if (!acceptLog) {
     const { error: deleteError, count } = await supabase
       .from("agreements")
       .delete({ count: "exact" })
@@ -205,7 +214,7 @@ export async function withdrawAgreement(id: string, userAgent: string) {
     return { success: true, deleted: true };
   }
 
-  // 相手が関わっている場合は承認を求める
+  // 合意した相手がいる場合は承認を求める
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
