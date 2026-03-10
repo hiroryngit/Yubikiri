@@ -171,13 +171,21 @@ export function AgreementDetail({
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground flex-wrap">
                       <span>
                         {new Date(log.recordedAt).toLocaleString("ja-JP")}
                       </span>
                       {device && (
                         <span>
                           {device.browser} / {device.os}
+                        </span>
+                      )}
+                      {log.ipAddress && (
+                        <span>
+                          IP: {log.ipAddress}
+                          {log.ipCity || log.ipCountry
+                            ? ` (${[log.ipCity, log.ipCountry].filter(Boolean).join(", ")})`
+                            : ""}
                         </span>
                       )}
                     </div>

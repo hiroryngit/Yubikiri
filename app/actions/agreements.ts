@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { generateContentHash } from "@/lib/agreements";
+import { getRequestInfo } from "@/lib/request-info";
 
 export async function createAgreement(formData: FormData) {
   const supabase = await createClient();
@@ -76,6 +77,8 @@ export async function acceptAgreement(id: string, userAgent: string) {
     }
   }
 
+  const req = await getRequestInfo();
+
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "accepted" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -84,6 +87,9 @@ export async function acceptAgreement(id: string, userAgent: string) {
       user_agent: userAgent,
       actor_id: user.id,
       actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_city: req.ipCity,
     }),
   ]);
 
@@ -131,6 +137,8 @@ export async function rejectAgreement(id: string, userAgent: string) {
     }
   }
 
+  const req = await getRequestInfo();
+
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "rejected" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -139,6 +147,9 @@ export async function rejectAgreement(id: string, userAgent: string) {
       user_agent: userAgent,
       actor_id: user.id,
       actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_city: req.ipCity,
     }),
   ]);
 
@@ -207,6 +218,8 @@ export async function rerequestAgreement(id: string, userAgent: string) {
     return { error: "拒否されたお約束事のみ再申請できます" };
   }
 
+  const req = await getRequestInfo();
+
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "pending" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -215,6 +228,9 @@ export async function rerequestAgreement(id: string, userAgent: string) {
       user_agent: userAgent,
       actor_id: user.id,
       actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_city: req.ipCity,
     }),
   ]);
 
@@ -260,6 +276,7 @@ export async function editAgreement(id: string, formData: FormData) {
   }
 
   const contentHash = await generateContentHash(content);
+  const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
     supabase
@@ -277,6 +294,9 @@ export async function editAgreement(id: string, formData: FormData) {
       user_agent: null,
       actor_id: user.id,
       actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_city: req.ipCity,
     }),
   ]);
 
@@ -333,6 +353,8 @@ export async function revokeAgreement(id: string, userAgent: string) {
     }
   }
 
+  const req = await getRequestInfo();
+
   const [updateResult, logResult] = await Promise.all([
     supabase.from("agreements").update({ status: "revoked" }).eq("id", id),
     supabase.from("agreement_logs").insert({
@@ -341,6 +363,9 @@ export async function revokeAgreement(id: string, userAgent: string) {
       user_agent: userAgent,
       actor_id: user.id,
       actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_city: req.ipCity,
     }),
   ]);
 

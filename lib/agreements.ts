@@ -29,6 +29,9 @@ export function toAgreementLog(row: AgreementLogRow): AgreementLog {
     userAgent: row.user_agent,
     actorId: row.actor_id,
     actorEmail: row.actor_email,
+    ipAddress: row.ip_address,
+    ipCountry: row.ip_country,
+    ipCity: row.ip_city,
   };
 }
 
