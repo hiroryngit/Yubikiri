@@ -14,20 +14,21 @@ const JP_PREFECTURES: Record<string, string> = {
   "45": "宮崎県", "46": "鹿児島県", "47": "沖縄県",
 };
 
-/** 国コード → 国名（よく使うもの） */
-const COUNTRIES: Record<string, string> = {
-  JP: "日本", US: "アメリカ", GB: "イギリス", DE: "ドイツ",
-  FR: "フランス", CN: "中国", KR: "韓国", TW: "台湾",
-  AU: "オーストラリア", CA: "カナダ", SG: "シンガポール",
-  TH: "タイ", VN: "ベトナム", PH: "フィリピン", IN: "インド",
-  BR: "ブラジル", IT: "イタリア", ES: "スペイン", NL: "オランダ",
-  SE: "スウェーデン", RU: "ロシア", HK: "香港",
-};
+/** 国コード(ISO 3166-1 alpha-2) → 日本語名。Intl.DisplayNames API で全世界対応 */
+const countryNames = new Intl.DisplayNames(["ja"], { type: "region" });
+
+function getCountryName(code: string): string {
+  try {
+    return countryNames.of(code) ?? code;
+  } catch {
+    return code;
+  }
+}
 
 /**
  * IP地域情報を人間が読める文字列に変換する。
  * 日本: 都道府県名を返す（例: "熊本県, 日本"）
- * 海外: 国名を返す（例: "アメリカ"）、地域コードがあれば付加
+ * 海外: 国名を返す（例: "アメリカ合衆国"）
  */
 export function formatGeoLocation(
   country: string | null,
@@ -35,10 +36,9 @@ export function formatGeoLocation(
 ): string | null {
   if (!country) return null;
 
-  const countryName = COUNTRIES[country] ?? country;
+  const countryName = getCountryName(country);
 
   if (country === "JP" && region) {
-    // 日本の都道府県コード（"43" など）
     const prefName = JP_PREFECTURES[region.padStart(2, "0")];
     if (prefName) return `${prefName}, ${countryName}`;
   }
