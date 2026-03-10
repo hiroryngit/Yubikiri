@@ -9,8 +9,8 @@ export function DashboardHeader() {
   const t = useTranslations();
 
   return (
-    <div className="flex items-center justify-between">
-      <h1 className="font-bold text-2xl">{t("dashboard.title")}</h1>
+    <div className="flex items-center justify-between gap-3">
+      <h1 className="font-bold text-xl sm:text-2xl">{t("dashboard.title")}</h1>
       <Button asChild>
         <Link href="/agreements/new"><Plus className="h-4 w-4 mr-1" />{t("dashboard.createButton")}</Link>
       </Button>

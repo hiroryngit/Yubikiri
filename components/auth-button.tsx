@@ -23,8 +23,8 @@ export function AuthButton() {
   if (!loaded) return null;
 
   return email ? (
-    <div className="flex items-center gap-4">
-      {t("auth.greeting", { email })}
+    <div className="flex items-center gap-2 sm:gap-4">
+      <span className="hidden sm:inline text-sm truncate max-w-[150px]">{email}</span>
       <LogoutButton />
     </div>
   ) : (

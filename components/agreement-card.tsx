@@ -20,8 +20,8 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
     <Link href={`/agreements/${agreement.id}`}>
       <Card className="hover:bg-accent/50 transition-colors">
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">{agreement.title}</CardTitle>
+          <div className="flex items-start justify-between gap-2">
+            <CardTitle className="text-lg leading-tight">{agreement.title}</CardTitle>
             <AgreementStatusBadge status={agreement.status} />
           </div>
           <CardDescription className="font-mono text-xs truncate">

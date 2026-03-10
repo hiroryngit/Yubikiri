@@ -70,8 +70,8 @@ export function AgreementDetail({
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle>{agreement.title}</CardTitle>
+          <div className="flex items-start justify-between gap-2">
+            <CardTitle className="leading-tight">{agreement.title}</CardTitle>
             <AgreementStatusBadge status={agreement.status} />
           </div>
         </CardHeader>
@@ -91,12 +91,12 @@ export function AgreementDetail({
                 </h3>
                 <p className="whitespace-pre-wrap">{agreement.content}</p>
               </div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
                 <div>
                   <span className="text-muted-foreground">{t("agreement.creator")}: </span>
                   {agreement.creatorEmail}
                 </div>
-                <div className="col-span-2 flex items-center gap-2 flex-wrap">
+                <div className="sm:col-span-2 flex items-center gap-2 flex-wrap">
                   <span className="text-muted-foreground">{t("agreement.approvalUrl")}: </span>
                   <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
                   <CopyButton text={`${origin}/agreements/${agreement.id}`} size="sm" />
@@ -114,7 +114,7 @@ export function AgreementDetail({
           )}
         </CardContent>
         {!editing && (
-          <CardFooter className="gap-2">
+          <CardFooter className="gap-2 flex-wrap">
             {agreement.status === "pending" && !isCreator && (
               isAuthenticated ? (
                 <>

@@ -16,11 +16,11 @@ export function HomeContent() {
       <p className="text-lg text-muted-foreground max-w-lg">
         {t("home.description")}
       </p>
-      <div className="flex gap-4">
-        <Button asChild size="lg">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+        <Button asChild size="lg" className="w-full sm:w-auto">
           <Link href="/agreements/new"><FilePlus className="h-4 w-4 mr-2" />{t("home.createButton")}</Link>
         </Button>
-        <Button asChild size="lg" variant="outline">
+        <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
           <Link href="/protected"><LayoutDashboard className="h-4 w-4 mr-2" />{t("home.dashboardButton")}</Link>
         </Button>
       </div>
