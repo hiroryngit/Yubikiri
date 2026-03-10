@@ -16,6 +16,8 @@ import { RevokeButton } from "@/components/revoke-button";
 import { WithdrawButton } from "@/components/withdraw-button";
 import { WithdrawApproveButton } from "@/components/withdraw-approve-button";
 import { WithdrawRejectButton } from "@/components/withdraw-reject-button";
+import { RevokeApproveButton } from "@/components/revoke-approve-button";
+import { RevokeRejectButton } from "@/components/revoke-reject-button";
 import { RerequestButton } from "@/components/rerequest-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
 import { AgreementEditForm } from "@/components/agreement-edit-form";
@@ -42,6 +44,9 @@ const ACTION_LABELS: Record<string, string> = {
   withdraw_request: "取り下げ申請",
   withdraw_approve: "取り下げ承認",
   withdraw_reject: "取り下げ拒否",
+  revoke_request: "解除申請",
+  revoke_approve: "解除承認",
+  revoke_reject: "解除拒否",
 };
 
 export function AgreementDetail({
@@ -149,9 +154,19 @@ export function AgreementDetail({
               </>
             )}
             {agreement.status === "withdraw_pending" && isCreator && (
-              <p className="text-sm text-muted-foreground">相手の承認を待っています...</p>
+              <p className="text-sm text-muted-foreground">相手の取り下げ承認を待っています...</p>
             )}
-            {isCreator && agreement.status !== "withdraw_pending" && (
+            {/* 解除申請中: 作成者に承認/拒否ボタンを表示 */}
+            {agreement.status === "revoke_pending" && isCreator && isAuthenticated && (
+              <>
+                <RevokeApproveButton agreementId={agreement.id} />
+                <RevokeRejectButton agreementId={agreement.id} />
+              </>
+            )}
+            {agreement.status === "revoke_pending" && !isCreator && isAuthenticated && (
+              <p className="text-sm text-muted-foreground">作成者の解除承認を待っています...</p>
+            )}
+            {isCreator && !["withdraw_pending", "revoke_pending"].includes(agreement.status) && (
               <>
                 <Button variant="outline" onClick={() => setEditing(true)}>
                   編集する

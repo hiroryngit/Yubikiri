@@ -2,20 +2,20 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { revokeAgreement } from "@/app/actions/agreements";
+import { rejectRevoke } from "@/app/actions/agreements";
 import { useRouter } from "next/navigation";
 
-export function RevokeButton({ agreementId }: { agreementId: string }) {
+export function RevokeRejectButton({ agreementId }: { agreementId: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  async function handleRevoke() {
-    if (!confirm("合意の解除を申請しますか？\n相手が承認するまで解除は完了しません。")) return;
+  async function handleReject() {
+    if (!confirm("合意の解除を拒否しますか？")) return;
     setLoading(true);
     setError(null);
     const userAgent = navigator.userAgent;
-    const result = await revokeAgreement(agreementId, userAgent);
+    const result = await rejectRevoke(agreementId, userAgent);
     if (result?.error) {
       setError(result.error);
       setLoading(false);
@@ -26,8 +26,8 @@ export function RevokeButton({ agreementId }: { agreementId: string }) {
 
   return (
     <div>
-      <Button variant="destructive" onClick={handleRevoke} disabled={loading}>
-        {loading ? "処理中..." : "合意を解除する"}
+      <Button variant="outline" onClick={handleReject} disabled={loading}>
+        {loading ? "処理中..." : "解除を拒否"}
       </Button>
       {error && <p className="text-sm text-destructive mt-2">{error}</p>}
     </div>

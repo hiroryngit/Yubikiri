@@ -487,9 +487,10 @@ export async function revokeAgreement(id: string, userAgent: string) {
   }
 
   if (agreement.status !== "accepted") {
-    return { error: "合意済みのお約束事のみ解除できます" };
+    return { error: "合意済みのお約束事のみ解除申請できます" };
   }
 
+  // 当事者チェック（非作成者＝合意した側のみ解除申請可能）
   const isTarget =
     agreement.target_email !== null &&
     agreement.target_email === user.email;
@@ -512,10 +513,13 @@ export async function revokeAgreement(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase.from("agreements").update({ status: "revoked" }).eq("id", id),
+    supabase
+      .from("agreements")
+      .update({ status: "revoke_pending", previous_status: agreement.status })
+      .eq("id", id),
     supabase.from("agreement_logs").insert({
       agreement_id: id,
-      action_type: "revoke",
+      action_type: "revoke_request",
       user_agent: userAgent,
       actor_id: user.id,
       actor_email: user.email,
@@ -526,10 +530,120 @@ export async function revokeAgreement(id: string, userAgent: string) {
   ]);
 
   if (updateResult.error) {
-    return { error: "合意解除に失敗しました" };
+    return { error: "解除申請に失敗しました" };
   }
   if (logResult.error) {
     return { error: "ログの記録に失敗しました" };
+  }
+
+  return { success: true };
+}
+
+export async function approveRevoke(id: string, userAgent: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("status, creator_id")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "お約束事が見つかりません" };
+  }
+
+  if (agreement.status !== "revoke_pending") {
+    return { error: "解除申請中ではありません" };
+  }
+
+  if (agreement.creator_id !== user.id) {
+    return { error: "作成者のみ解除を承認できます" };
+  }
+
+  const req = await getRequestInfo();
+
+  await supabase.from("agreement_logs").insert({
+    agreement_id: id,
+    action_type: "revoke_approve",
+    user_agent: userAgent,
+    actor_id: user.id,
+    actor_email: user.email,
+    ip_address: req.ipAddress,
+    ip_country: req.ipCountry,
+    ip_region: req.ipRegion,
+  });
+
+  const { error: deleteError } = await supabase
+    .from("agreements")
+    .delete()
+    .eq("id", id);
+
+  if (deleteError) {
+    return { error: `削除に失敗しました: ${deleteError.message}` };
+  }
+
+  return { success: true };
+}
+
+export async function rejectRevoke(id: string, userAgent: string) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { error: "ログインが必要です" };
+  }
+
+  const { data: agreement, error: fetchError } = await supabase
+    .from("agreements")
+    .select("status, creator_id, previous_status")
+    .eq("id", id)
+    .single();
+
+  if (fetchError || !agreement) {
+    return { error: "お約束事が見つかりません" };
+  }
+
+  if (agreement.status !== "revoke_pending") {
+    return { error: "解除申請中ではありません" };
+  }
+
+  if (agreement.creator_id !== user.id) {
+    return { error: "作成者のみ解除を拒否できます" };
+  }
+
+  const req = await getRequestInfo();
+
+  const [updateResult, logResult] = await Promise.all([
+    supabase
+      .from("agreements")
+      .update({ status: agreement.previous_status ?? "accepted", previous_status: null })
+      .eq("id", id),
+    supabase.from("agreement_logs").insert({
+      agreement_id: id,
+      action_type: "revoke_reject",
+      user_agent: userAgent,
+      actor_id: user.id,
+      actor_email: user.email,
+      ip_address: req.ipAddress,
+      ip_country: req.ipCountry,
+      ip_region: req.ipRegion,
+    }),
+  ]);
+
+  if (updateResult.error) {
+    return { error: `拒否に失敗しました: ${updateResult.error.message}` };
+  }
+  if (logResult.error) {
+    return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
   return { success: true };

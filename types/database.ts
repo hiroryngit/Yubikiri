@@ -3,7 +3,7 @@ export type AgreementRow = {
   id: string;
   title: string;
   content: string;
-  status: "pending" | "accepted" | "rejected" | "revoked" | "withdraw_pending";
+  status: "pending" | "accepted" | "rejected" | "revoked" | "withdraw_pending" | "revoke_pending";
   content_hash: string;
   creator_id: string;
   creator_email: string;
@@ -16,7 +16,7 @@ export type AgreementRow = {
 export type AgreementLogRow = {
   id: string;
   agreement_id: string;
-  action_type: "accept" | "reject" | "revoke" | "rerequest" | "edit" | "withdraw_request" | "withdraw_approve" | "withdraw_reject";
+  action_type: "accept" | "reject" | "revoke" | "rerequest" | "edit" | "withdraw_request" | "withdraw_approve" | "withdraw_reject" | "revoke_request" | "revoke_approve" | "revoke_reject";
   recorded_at: string;
   user_agent: string | null;
   actor_id: string;
@@ -31,7 +31,7 @@ export type Agreement = {
   id: string;
   title: string;
   content: string;
-  status: "pending" | "accepted" | "rejected" | "revoked" | "withdraw_pending";
+  status: "pending" | "accepted" | "rejected" | "revoked" | "withdraw_pending" | "revoke_pending";
   contentHash: string;
   creatorId: string;
   creatorEmail: string;
@@ -44,7 +44,7 @@ export type Agreement = {
 export type AgreementLog = {
   id: string;
   agreementId: string;
-  actionType: "accept" | "reject" | "revoke" | "rerequest" | "edit" | "withdraw_request" | "withdraw_approve" | "withdraw_reject";
+  actionType: "accept" | "reject" | "revoke" | "rerequest" | "edit" | "withdraw_request" | "withdraw_approve" | "withdraw_reject" | "revoke_request" | "revoke_approve" | "revoke_reject";
   recordedAt: string;
   userAgent: string | null;
   actorId: string;
