@@ -37,13 +37,19 @@ function saveStack(stack: StackEntry[]): void {
   }
 }
 
-/** ログイン前に戻り先URLをスタックに積む */
+/** ログイン前に戻り先URLをスタックに積む。cookie にも書き込み、OAuth callback で読めるようにする */
 export function pushReturnUrl(url: string): void {
   const stack = getStack();
   // 同じURLの重複を防ぐ
   if (stack.length > 0 && stack[stack.length - 1].url === url) return;
   stack.push({ url, timestamp: Date.now() });
   saveStack(stack);
+  // サーバー側(callback route)でも読めるように cookie に最新の戻り先を書く
+  try {
+    document.cookie = `yubikiri_return=${encodeURIComponent(url)}; path=/; max-age=300; SameSite=Lax`;
+  } catch {
+    // SSR環境では無視
+  }
 }
 
 /** ログイン後に戻り先URLをスタックから取り出す */
@@ -52,6 +58,12 @@ export function popReturnUrl(): string | null {
   if (stack.length === 0) return null;
   const entry = stack.pop()!;
   saveStack(stack);
+  // cookie も消す
+  try {
+    document.cookie = "yubikiri_return=; path=/; max-age=0";
+  } catch {
+    // SSR環境では無視
+  }
   return entry.url;
 }
 

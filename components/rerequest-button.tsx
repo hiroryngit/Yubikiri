@@ -11,7 +11,7 @@ export function RerequestButton({ agreementId }: { agreementId: string }) {
   const router = useRouter();
 
   async function handleRerequest() {
-    if (!confirm("この同意書を再申請しますか？")) return;
+    if (!confirm("このお約束事を再申請しますか？")) return;
     setLoading(true);
     setError(null);
     const userAgent = navigator.userAgent;

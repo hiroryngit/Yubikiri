@@ -104,7 +104,7 @@ export function AgreementForm() {
     return (
       <div className="space-y-4">
         <p className="text-sm font-medium text-green-600">
-          同意書を作成しました！以下のURLを相手に共有してください。
+          お約束事を発行しました！以下のURLを相手に共有してください。
         </p>
         <div className="flex items-center gap-2">
           <Input value={shareUrl} readOnly className="font-mono text-xs" />
@@ -123,7 +123,7 @@ export function AgreementForm() {
             href={shareUrl}
             className="text-sm underline underline-offset-4"
           >
-            同意書を確認する
+            お約束事を確認する
           </Link>
         </div>
       </div>
@@ -160,7 +160,7 @@ export function AgreementForm() {
       {error && <p className="text-sm text-destructive">{error}</p>}
 
       <Button type="submit" disabled={pending}>
-        {pending ? "作成中..." : "同意書を作成"}
+        {pending ? "発行中..." : "お約束事を発行する"}
       </Button>
     </form>
   );

@@ -7,9 +7,14 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
 
   if (code) {
-    // セッション確立後は必ず "/" にリダイレクト
-    // クライアント側の AuthReturnHandler が localStorage のスタックから戻り先を処理
-    const response = NextResponse.redirect(`${origin}/`);
+    // cookie から戻り先を取得（pushReturnUrl で設定される）
+    const returnCookie = request.cookies.get("yubikiri_return")?.value;
+    const returnUrl = returnCookie ? decodeURIComponent(returnCookie) : "/";
+
+    const response = NextResponse.redirect(`${origin}${returnUrl}`);
+
+    // 戻り先 cookie を削除
+    response.cookies.set("yubikiri_return", "", { path: "/", maxAge: 0 });
 
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,

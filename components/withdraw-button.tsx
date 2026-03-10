@@ -11,7 +11,7 @@ export function WithdrawButton({ agreementId }: { agreementId: string }) {
   const router = useRouter();
 
   async function handleWithdraw() {
-    if (!confirm("この同意書を取り下げますか？取り下げると完全に削除されます。")) {
+    if (!confirm("このお約束事を取り下げますか？取り下げると完全に削除されます。")) {
       return;
     }
     setLoading(true);
