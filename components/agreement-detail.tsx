@@ -18,6 +18,7 @@ import { RerequestButton } from "@/components/rerequest-button";
 import { LoginRequiredButton } from "@/components/login-required-button";
 import { AgreementEditForm } from "@/components/agreement-edit-form";
 import type { Agreement, AgreementLog } from "@/types/database";
+import { parseUserAgent } from "@/lib/parse-user-agent";
 
 type Props = {
   agreement: Agreement;
@@ -151,26 +152,38 @@ export function AgreementDetail({
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {logs.map((log) => (
-                <div
-                  key={log.id}
-                  className="flex justify-between items-center text-sm border-b pb-2 last:border-0"
-                >
-                  <div>
-                    <span className="font-medium">
-                      {ACTION_LABELS[log.actionType] ?? log.actionType}
-                    </span>
-                    {log.actorEmail && (
-                      <span className="text-muted-foreground ml-2">
-                        by {log.actorEmail}
+              {logs.map((log) => {
+                const device = log.userAgent
+                  ? parseUserAgent(log.userAgent)
+                  : null;
+                return (
+                  <div
+                    key={log.id}
+                    className="text-sm border-b pb-2 last:border-0 space-y-1"
+                  >
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="font-medium">
+                        {ACTION_LABELS[log.actionType] ?? log.actionType}
                       </span>
-                    )}
-                    <span className="text-muted-foreground ml-2">
-                      {new Date(log.recordedAt).toLocaleString("ja-JP")}
-                    </span>
+                      {log.actorEmail && (
+                        <span className="text-muted-foreground">
+                          by {log.actorEmail}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span>
+                        {new Date(log.recordedAt).toLocaleString("ja-JP")}
+                      </span>
+                      {device && (
+                        <span>
+                          {device.browser} / {device.os}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>
