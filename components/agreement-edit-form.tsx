@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { editAgreement } from "@/app/actions/agreements";
-import { useRouter } from "next/navigation";
 
 type Props = {
   agreementId: string;
@@ -24,7 +23,6 @@ export function AgreementEditForm({
   const [content, setContent] = useState(initialContent);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -43,7 +41,7 @@ export function AgreementEditForm({
       return;
     }
 
-    router.refresh();
+    window.location.reload();
   }
 
   return (
