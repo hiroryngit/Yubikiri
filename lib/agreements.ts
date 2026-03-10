@@ -16,6 +16,7 @@ export function toAgreement(row: AgreementRow): Agreement {
     creatorEmail: row.creator_email,
     targetEmail: row.target_email,
     previousStatus: row.previous_status,
+    originalLocale: row.original_locale,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };

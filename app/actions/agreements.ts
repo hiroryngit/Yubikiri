@@ -16,6 +16,7 @@ export async function createAgreement(formData: FormData) {
 
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
+  const originalLocale = (formData.get("original_locale") as string) || "ja";
 
   if (!title || !content) {
     return { error: "タイトルと内容を入力してください" };
@@ -32,6 +33,7 @@ export async function createAgreement(formData: FormData) {
       creator_id: user.id,
       creator_email: user.email!,
       target_email: null,
+      original_locale: originalLocale,
     })
     .select("id")
     .single();

@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { CopyButton } from "@/components/copy-button";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useCustomValidity } from "@/lib/use-custom-validity";
 
 const DRAFT_KEY = "yubikiri_draft";
@@ -24,6 +24,7 @@ export function AgreementForm() {
   const router = useRouter();
   const autoSubmitted = useRef(false);
   const t = useTranslations();
+  const locale = useLocale();
   const validity = useCustomValidity();
 
   // ログイン後に戻ってきたら保存済みの下書きを復元して自動送信
@@ -67,6 +68,7 @@ export function AgreementForm() {
     const formData = new FormData();
     formData.set("title", titleVal);
     formData.set("content", contentVal);
+    formData.set("original_locale", locale);
 
     const result = await createAgreement(formData);
 

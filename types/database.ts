@@ -9,6 +9,7 @@ export type AgreementRow = {
   creator_email: string;
   target_email: string | null;
   previous_status: string | null;
+  original_locale: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -37,6 +38,7 @@ export type Agreement = {
   creatorEmail: string;
   targetEmail: string | null;
   previousStatus: string | null;
+  originalLocale: string | null;
   createdAt: string;
   updatedAt: string;
 };

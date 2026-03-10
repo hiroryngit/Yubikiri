@@ -35,8 +35,9 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: agreement.title, content: agreement.content, targetLocale: locale }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      const text = await res.text();
+      if (!res.ok || !text) throw new Error("failed");
+      const data = JSON.parse(text);
       setTranslated(data);
       setShowTranslation(true);
     } catch {
@@ -46,6 +47,7 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
     }
   }
 
+  const canTranslate = agreement.originalLocale !== locale;
   const displayTitle = showTranslation && translated ? translated.title : agreement.title;
   const displayContent = showTranslation && translated ? translated.content : agreement.content;
 
@@ -56,13 +58,15 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-lg leading-tight">{displayTitle}</CardTitle>
             <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={handleTranslate}
-                className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
-                title={showTranslation ? t("agreement.showOriginal") : t("agreement.translate")}
-              >
-                <Languages className={`h-4 w-4 ${translating ? "animate-pulse" : ""} ${showTranslation ? "text-primary" : ""}`} />
-              </button>
+              {canTranslate && (
+                <button
+                  onClick={handleTranslate}
+                  className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
+                  title={showTranslation ? t("agreement.showOriginal") : t("agreement.translate")}
+                >
+                  <Languages className={`h-4 w-4 ${translating ? "animate-pulse" : ""} ${showTranslation ? "text-primary" : ""}`} />
+                </button>
+              )}
               <AgreementStatusBadge status={agreement.status} />
             </div>
           </div>

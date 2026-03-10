@@ -70,8 +70,14 @@ export function AgreementDetail({
           targetLocale: locale,
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new Error(t("agreement.translationFailed"));
+      }
+      if (!res.ok) throw new Error(data.error || t("agreement.translationFailed"));
       setTranslated(data);
       setShowTranslation(true);
     } catch (e) {
@@ -97,6 +103,7 @@ export function AgreementDetail({
     !isCreator &&
     agreement.status === "accepted" &&
     (isTarget || isAcceptor);
+  const canTranslate = agreement.originalLocale !== locale;
 
   return (
     <div className="space-y-6">
@@ -124,20 +131,22 @@ export function AgreementDetail({
                   <h3 className="text-sm font-medium text-muted-foreground">
                     {t("agreement.content")}
                   </h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={showTranslation ? () => setShowTranslation(false) : handleTranslate}
-                    disabled={translating}
-                    className="text-xs h-7 px-2"
-                  >
-                    <Languages className="h-3.5 w-3.5 mr-1" />
-                    {translating
-                      ? t("agreement.translating")
-                      : showTranslation
-                        ? t("agreement.showOriginal")
-                        : t("agreement.translate")}
-                  </Button>
+                  {canTranslate && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={showTranslation ? () => setShowTranslation(false) : handleTranslate}
+                      disabled={translating}
+                      className="text-xs h-7 px-2"
+                    >
+                      <Languages className="h-3.5 w-3.5 mr-1" />
+                      {translating
+                        ? t("agreement.translating")
+                        : showTranslation
+                          ? t("agreement.showOriginal")
+                          : t("agreement.translate")}
+                    </Button>
+                  )}
                 </div>
                 {translateError && (
                   <p className="text-xs text-destructive mb-2">{translateError}</p>

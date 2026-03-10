@@ -78,13 +78,22 @@ async function callProvider(
   });
 
   if (!res.ok) {
-    const text = await res.text();
+    const text = await res.text().catch(() => "");
     throw new Error(`${provider.name}: ${res.status} ${text.slice(0, 200)}`);
   }
 
-  const data = await res.json();
+  const text = await res.text();
+  if (!text) throw new Error(`${provider.name}: empty response body`);
+
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error(`${provider.name}: invalid JSON response: ${text.slice(0, 200)}`);
+  }
+
   const raw = data.choices?.[0]?.message?.content?.trim();
-  if (!raw) throw new Error(`${provider.name}: empty response`);
+  if (!raw) throw new Error(`${provider.name}: empty message content`);
 
   // Extract JSON from response (handle markdown code blocks)
   let jsonStr = raw;
