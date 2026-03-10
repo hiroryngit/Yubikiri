@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Copy, Check } from "lucide-react";
 
 type Props = {
   text: string;
@@ -10,7 +11,7 @@ type Props = {
   className?: string;
 };
 
-export function CopyButton({ text, variant = "outline", size = "sm", className }: Props) {
+export function CopyButton({ text, variant = "ghost", size = "icon", className }: Props) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -26,8 +27,9 @@ export function CopyButton({ text, variant = "outline", size = "sm", className }
       size={size}
       onClick={handleCopy}
       className={className}
+      title="コピー"
     >
-      {copied ? "コピーしました！" : "コピー"}
+      {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
     </Button>
   );
 }
