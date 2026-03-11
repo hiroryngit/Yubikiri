@@ -1,24 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 export function LogoutToast() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const t = useTranslations();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (searchParams.get("logged_out") === "true") {
       setVisible(true);
-      // URL からパラメータを除去
-      router.replace("/", { scroll: false });
+      window.history.replaceState(null, "", "/");
       const timer = setTimeout(() => setVisible(false), 3000);
       return () => clearTimeout(timer);
     }
-  }, [searchParams, router]);
+  }, [searchParams]);
 
   if (!visible) return null;
 
