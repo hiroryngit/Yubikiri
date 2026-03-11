@@ -13,7 +13,8 @@
     "or": "veya",
     "tagline": "Sözlü vaatlerin ötesinde",
     "requiredField": "Lütfen bu alanı doldurun",
-    "invalidEmail": "Lütfen geçerli bir e-posta adresi girin"
+    "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
+    "loggedOut": "Çıkış yapıldı"
   },
   "home": {
     "hero": "Sözlü vaatlerin ötesinde",

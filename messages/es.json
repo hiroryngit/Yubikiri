@@ -13,7 +13,8 @@
     "or": "o",
     "tagline": "Más allá de las promesas verbales",
     "requiredField": "Por favor, complete este campo",
-    "invalidEmail": "Por favor, ingrese una dirección de correo válida"
+    "invalidEmail": "Por favor, ingrese una dirección de correo válida",
+    "loggedOut": "Has cerrado sesión"
   },
   "home": {
     "hero": "Más allá de las promesas verbales",

@@ -13,7 +13,8 @@
     "or": "nebo",
     "tagline": "Více než ústní sliby",
     "requiredField": "Vyplňte toto pole",
-    "invalidEmail": "Zadejte platnou e-mailovou adresu"
+    "invalidEmail": "Zadejte platnou e-mailovou adresu",
+    "loggedOut": "Byli jste odhlášeni"
   },
   "home": {
     "hero": "Více než ústní sliby",

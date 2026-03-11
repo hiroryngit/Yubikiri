@@ -13,7 +13,8 @@
     "or": "eller",
     "tagline": "Bortom muntliga löften",
     "requiredField": "Fyll i detta fält",
-    "invalidEmail": "Ange en giltig e-postadress"
+    "invalidEmail": "Ange en giltig e-postadress",
+    "loggedOut": "Du har loggats ut"
   },
   "home": {
     "hero": "Bortom muntliga löften",

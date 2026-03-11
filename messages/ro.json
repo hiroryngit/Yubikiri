@@ -13,7 +13,8 @@
     "or": "sau",
     "tagline": "Dincolo de promisiunile verbale",
     "requiredField": "Vă rugăm completați acest câmp",
-    "invalidEmail": "Vă rugăm introduceți o adresă de e-mail validă"
+    "invalidEmail": "Vă rugăm introduceți o adresă de e-mail validă",
+    "loggedOut": "Ați fost deconectat"
   },
   "home": {
     "hero": "Dincolo de promisiunile verbale",

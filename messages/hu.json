@@ -13,7 +13,8 @@
     "or": "vagy",
     "tagline": "Több mint szóbeli ígéretek",
     "requiredField": "Kérjük, töltse ki ezt a mezőt",
-    "invalidEmail": "Kérjük, adjon meg érvényes e-mail címet"
+    "invalidEmail": "Kérjük, adjon meg érvényes e-mail címet",
+    "loggedOut": "Kijelentkeztél"
   },
   "home": {
     "hero": "Több mint szóbeli ígéretek",

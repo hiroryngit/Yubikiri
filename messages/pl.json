@@ -13,7 +13,8 @@
     "or": "lub",
     "tagline": "Więcej niż ustne obietnice",
     "requiredField": "Proszę wypełnić to pole",
-    "invalidEmail": "Proszę podać prawidłowy adres e-mail"
+    "invalidEmail": "Proszę podać prawidłowy adres e-mail",
+    "loggedOut": "Wylogowano"
   },
   "home": {
     "hero": "Więcej niż ustne obietnice",

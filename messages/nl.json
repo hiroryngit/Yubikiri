@@ -13,7 +13,8 @@
     "or": "of",
     "tagline": "Verder dan mondelinge beloftes",
     "requiredField": "Vul dit veld in",
-    "invalidEmail": "Voer een geldig e-mailadres in"
+    "invalidEmail": "Voer een geldig e-mailadres in",
+    "loggedOut": "U bent uitgelogd"
   },
   "home": {
     "hero": "Verder dan mondelinge beloftes",

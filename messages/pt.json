@@ -13,7 +13,8 @@
     "or": "ou",
     "tagline": "Além das promessas verbais",
     "requiredField": "Preencha este campo",
-    "invalidEmail": "Insira um endereço de e-mail válido"
+    "invalidEmail": "Insira um endereço de e-mail válido",
+    "loggedOut": "Você saiu da conta"
   },
   "home": {
     "hero": "Além das promessas verbais",

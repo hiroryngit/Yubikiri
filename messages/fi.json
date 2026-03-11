@@ -13,7 +13,8 @@
     "or": "tai",
     "tagline": "Enemmän kuin suulliset lupaukset",
     "requiredField": "Täytä tämä kenttä",
-    "invalidEmail": "Anna kelvollinen sähköpostiosoite"
+    "invalidEmail": "Anna kelvollinen sähköpostiosoite",
+    "loggedOut": "Olet kirjautunut ulos"
   },
   "home": {
     "hero": "Enemmän kuin suulliset lupaukset",

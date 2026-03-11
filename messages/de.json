@@ -13,7 +13,8 @@
     "or": "oder",
     "tagline": "Über mündliche Versprechen hinaus",
     "requiredField": "Bitte füllen Sie dieses Feld aus",
-    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "loggedOut": "Sie wurden abgemeldet"
   },
   "home": {
     "hero": "Über mündliche Versprechen hinaus",

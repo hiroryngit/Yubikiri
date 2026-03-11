@@ -13,7 +13,8 @@
     "or": "hoặc",
     "tagline": "Vượt xa lời hứa miệng",
     "requiredField": "Vui lòng điền vào trường này",
-    "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ"
+    "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ",
+    "loggedOut": "Bạn đã đăng xuất"
   },
   "home": {
     "hero": "Vượt xa lời hứa miệng",

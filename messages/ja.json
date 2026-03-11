@@ -13,7 +13,8 @@
     "or": "または",
     "tagline": "口約束からの脱却",
     "requiredField": "この項目を入力してください",
-    "invalidEmail": "有効なメールアドレスを入力してください"
+    "invalidEmail": "有効なメールアドレスを入力してください",
+    "loggedOut": "ログアウトしました"
   },
   "home": {
     "hero": "口約束からの脱却",

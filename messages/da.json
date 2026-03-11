@@ -13,7 +13,8 @@
     "or": "eller",
     "tagline": "Mere end mundtlige løfter",
     "requiredField": "Udfyld venligst dette felt",
-    "invalidEmail": "Indtast venligst en gyldig e-mailadresse"
+    "invalidEmail": "Indtast venligst en gyldig e-mailadresse",
+    "loggedOut": "Du er logget ud"
   },
   "home": {
     "hero": "Mere end mundtlige løfter",
