@@ -15,7 +15,7 @@ export default function ProtectedLayout({
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-14 sm:h-16">
           <div className="w-full max-w-5xl flex justify-between items-center px-4 sm:px-5 text-sm">
             <YubikiriLogo />
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink-0">
               <LocaleSwitcher />
               <Suspense>
                 <AuthButton />

@@ -6,7 +6,7 @@ export function YubikiriLogo({ size = "default" }: { size?: "default" | "small" 
   const textClass = size === "small" ? "text-sm" : "text-base";
 
   return (
-    <Link href="/" className="flex items-center gap-1.5 font-semibold shrink-0 py-1">
+    <Link href="/" className="flex items-center gap-1.5 font-semibold shrink-0 py-1 mr-3 sm:mr-4">
       <Image
         src="/yubikiri-logo.svg"
         alt="Yubikiri"
