@@ -13,11 +13,9 @@ export default function Home() {
       <LogoutToast />
       <div className="flex-1 w-full flex flex-col items-center">
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-14 sm:h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-4 sm:px-5 text-sm">
-            <div className="flex gap-3 sm:gap-5 items-center text-sm">
-              <YubikiriLogo />
-            </div>
-            <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-full max-w-5xl flex justify-between items-center px-4 sm:px-5 text-sm">
+            <YubikiriLogo />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <LocaleSwitcher />
               {hasEnvVars && (
                 <Suspense>
