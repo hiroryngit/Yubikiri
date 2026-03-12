@@ -59,7 +59,11 @@
     "loginNotComplete": "O login não foi concluído. Recarregue a página e tente novamente.",
     "history": "Registro de atividade",
     "waitingWithdrawApproval": "Aguardando a aprovação da retirada pela outra parte...",
-    "waitingRevokeApproval": "Aguardando a aprovação da revogação pelo criador..."
+    "waitingRevokeApproval": "Aguardando a aprovação da revogação pelo criador...",
+    "translate": "Traduzir",
+    "showOriginal": "Mostrar original",
+    "translating": "Traduzindo...",
+    "translationFailed": "Falha na tradução"
   },
   "status": {
     "pending": "Pendente",
@@ -101,7 +105,7 @@
     "revoke_reject": "Revogação rejeitada"
   },
   "auth": {
-    "loginTitle": "Login",
+    "loginTitle": "Entrar",
     "loginDescription": "Insira seu e-mail abaixo para entrar na sua conta",
     "email": "E-mail",
     "password": "Senha",
@@ -109,7 +113,28 @@
     "loggingIn": "Entrando...",
     "googleLogin": "Entrar com Google",
     "noAccount": "Não tem uma conta?",
-    "greeting": "Olá, {email}!"
+    "greeting": "Olá, {email}!",
+    "signUpTitle": "Cadastro",
+    "signUpDescription": "Crie uma nova conta com seu email e senha",
+    "repeatPassword": "Confirmar senha",
+    "signingUp": "Criando conta...",
+    "passwordMismatch": "As senhas não coincidem",
+    "hasAccount": "Já tem uma conta?",
+    "signUpSuccessTitle": "Obrigado pelo cadastro!",
+    "signUpSuccessDescription": "Verifique seu email",
+    "signUpSuccessMessage": "Cadastro realizado com sucesso. Verifique seu email para confirmar sua conta antes de entrar.",
+    "forgotPasswordTitle": "Redefinir senha",
+    "forgotPasswordDescription": "Digite seu email e enviaremos um link para redefinir sua senha.",
+    "forgotPasswordSending": "Enviando...",
+    "forgotPasswordSend": "Enviar email de redefinição",
+    "checkEmailTitle": "Verifique seu email",
+    "checkEmailDescription": "Instruções de redefinição de senha enviadas",
+    "checkEmailMessage": "Se você se cadastrou com email e senha, receberá um email para redefinir sua senha.",
+    "updatePasswordTitle": "Redefinir senha",
+    "updatePasswordDescription": "Digite sua nova senha.",
+    "newPassword": "Nova senha",
+    "updatePasswordSaving": "Salvando...",
+    "updatePasswordSave": "Salvar nova senha"
   },
   "errors": {
     "loginRequired": "Login necessário",

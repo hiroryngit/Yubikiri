@@ -59,7 +59,11 @@
     "loginNotComplete": "Kirjautuminen ei ole valmis. Lataa sivu uudelleen ja yritä uudelleen.",
     "history": "Toimintoloki",
     "waitingWithdrawApproval": "Odotetaan toisen osapuolen hyväksyntää peruutukselle...",
-    "waitingRevokeApproval": "Odotetaan luojan hyväksyntää mitätöinnille..."
+    "waitingRevokeApproval": "Odotetaan luojan hyväksyntää mitätöinnille...",
+    "translate": "Käännä",
+    "showOriginal": "Näytä alkuperäinen",
+    "translating": "Käännetään...",
+    "translationFailed": "Käännös epäonnistui"
   },
   "status": {
     "pending": "Odottaa",
@@ -109,7 +113,28 @@
     "loggingIn": "Kirjaudutaan...",
     "googleLogin": "Kirjaudu Googlella",
     "noAccount": "Eikö sinulla ole tiliä?",
-    "greeting": "Hei, {email}!"
+    "greeting": "Hei, {email}!",
+    "signUpTitle": "Rekisteröidy",
+    "signUpDescription": "Luo uusi tili sähköpostilla ja salasanalla",
+    "repeatPassword": "Vahvista salasana",
+    "signingUp": "Luodaan tiliä...",
+    "passwordMismatch": "Salasanat eivät täsmää",
+    "hasAccount": "Onko sinulla jo tili?",
+    "signUpSuccessTitle": "Kiitos rekisteröitymisestä!",
+    "signUpSuccessDescription": "Tarkista sähköpostisi",
+    "signUpSuccessMessage": "Rekisteröityminen onnistui. Tarkista sähköpostisi ja vahvista tilisi ennen kirjautumista.",
+    "forgotPasswordTitle": "Nollaa salasana",
+    "forgotPasswordDescription": "Syötä sähköpostiosoitteesi, niin lähetämme salasanan nollauslinkin.",
+    "forgotPasswordSending": "Lähetetään...",
+    "forgotPasswordSend": "Lähetä nollaussähköposti",
+    "checkEmailTitle": "Tarkista sähköpostisi",
+    "checkEmailDescription": "Salasanan nollausohjeet lähetetty",
+    "checkEmailMessage": "Jos rekisteröidyit sähköpostilla ja salasanalla, saat salasanan nollaussähköpostin.",
+    "updatePasswordTitle": "Nollaa salasana",
+    "updatePasswordDescription": "Syötä uusi salasanasi.",
+    "newPassword": "Uusi salasana",
+    "updatePasswordSaving": "Tallennetaan...",
+    "updatePasswordSave": "Tallenna uusi salasana"
   },
   "errors": {
     "loginRequired": "Kirjautuminen vaaditaan",

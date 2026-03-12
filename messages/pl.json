@@ -59,7 +59,11 @@
     "loginNotComplete": "Logowanie nie zostało zakończone. Odśwież stronę i spróbuj ponownie.",
     "history": "Dziennik aktywności",
     "waitingWithdrawApproval": "Oczekiwanie na zatwierdzenie wycofania przez drugą stronę...",
-    "waitingRevokeApproval": "Oczekiwanie na zatwierdzenie unieważnienia przez twórcę..."
+    "waitingRevokeApproval": "Oczekiwanie na zatwierdzenie unieważnienia przez twórcę...",
+    "translate": "Przetłumacz",
+    "showOriginal": "Pokaż oryginał",
+    "translating": "Tłumaczenie...",
+    "translationFailed": "Tłumaczenie nie powiodło się"
   },
   "status": {
     "pending": "Oczekujące",
@@ -109,7 +113,28 @@
     "loggingIn": "Logowanie...",
     "googleLogin": "Zaloguj się przez Google",
     "noAccount": "Nie masz konta?",
-    "greeting": "Cześć, {email}!"
+    "greeting": "Cześć, {email}!",
+    "signUpTitle": "Rejestracja",
+    "signUpDescription": "Utwórz nowe konto za pomocą e-maila i hasła",
+    "repeatPassword": "Potwierdź hasło",
+    "signingUp": "Tworzenie konta...",
+    "passwordMismatch": "Hasła nie pasują",
+    "hasAccount": "Masz już konto?",
+    "signUpSuccessTitle": "Dziękujemy za rejestrację!",
+    "signUpSuccessDescription": "Sprawdź swoją pocztę",
+    "signUpSuccessMessage": "Rejestracja zakończona sukcesem. Sprawdź pocztę, aby potwierdzić konto przed zalogowaniem.",
+    "forgotPasswordTitle": "Resetowanie hasła",
+    "forgotPasswordDescription": "Wpisz swój e-mail, a wyślemy Ci link do resetowania hasła.",
+    "forgotPasswordSending": "Wysyłanie...",
+    "forgotPasswordSend": "Wyślij e-mail resetujący",
+    "checkEmailTitle": "Sprawdź swoją pocztę",
+    "checkEmailDescription": "Instrukcje resetowania hasła zostały wysłane",
+    "checkEmailMessage": "Jeśli zarejestrowałeś się za pomocą e-maila i hasła, otrzymasz e-mail z resetem hasła.",
+    "updatePasswordTitle": "Resetowanie hasła",
+    "updatePasswordDescription": "Wprowadź nowe hasło.",
+    "newPassword": "Nowe hasło",
+    "updatePasswordSaving": "Zapisywanie...",
+    "updatePasswordSave": "Zapisz nowe hasło"
   },
   "errors": {
     "loginRequired": "Wymagane logowanie",

@@ -59,7 +59,11 @@
     "loginNotComplete": "ההתחברות לא הושלמה. טען מחדש את הדף ונסה שוב.",
     "history": "יומן פעילות",
     "waitingWithdrawApproval": "ממתין לאישור המשיכה מהצד השני...",
-    "waitingRevokeApproval": "ממתין לאישור הביטול מהיוצר..."
+    "waitingRevokeApproval": "ממתין לאישור הביטול מהיוצר...",
+    "translate": "תרגם",
+    "showOriginal": "הצג מקור",
+    "translating": "מתרגם...",
+    "translationFailed": "התרגום נכשל"
   },
   "status": {
     "pending": "ממתין",
@@ -109,7 +113,28 @@
     "loggingIn": "מתחבר...",
     "googleLogin": "התחבר עם Google",
     "noAccount": "אין לך חשבון?",
-    "greeting": "שלום, {email}!"
+    "greeting": "שלום, {email}!",
+    "signUpTitle": "הרשמה",
+    "signUpDescription": "צור חשבון חדש עם דוא\"ל וסיסמה",
+    "repeatPassword": "אשר סיסמה",
+    "signingUp": "יוצר חשבון...",
+    "passwordMismatch": "הסיסמאות אינן תואמות",
+    "hasAccount": "כבר יש לך חשבון?",
+    "signUpSuccessTitle": "תודה על ההרשמה!",
+    "signUpSuccessDescription": "בדוק את הדוא\"ל שלך",
+    "signUpSuccessMessage": "ההרשמה הצליחה. אנא בדוק את הדוא\"ל שלך כדי לאשר את החשבון לפני ההתחברות.",
+    "forgotPasswordTitle": "איפוס סיסמה",
+    "forgotPasswordDescription": "הזן את הדוא\"ל שלך ונשלח לך קישור לאיפוס הסיסמה.",
+    "forgotPasswordSending": "שולח...",
+    "forgotPasswordSend": "שלח דוא\"ל לאיפוס",
+    "checkEmailTitle": "בדוק את הדוא\"ל שלך",
+    "checkEmailDescription": "הוראות לאיפוס הסיסמה נשלחו",
+    "checkEmailMessage": "אם נרשמת עם דוא\"ל וסיסמה, תקבל דוא\"ל לאיפוס הסיסמה.",
+    "updatePasswordTitle": "איפוס סיסמה",
+    "updatePasswordDescription": "אנא הזן את הסיסמה החדשה שלך.",
+    "newPassword": "סיסמה חדשה",
+    "updatePasswordSaving": "שומר...",
+    "updatePasswordSave": "שמור סיסמה חדשה"
   },
   "errors": {
     "loginRequired": "נדרשת התחברות",

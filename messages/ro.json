@@ -59,7 +59,11 @@
     "loginNotComplete": "Autentificarea nu este completă. Reîncarcă pagina și încearcă din nou.",
     "history": "Jurnal de activitate",
     "waitingWithdrawApproval": "Se așteaptă aprobarea retragerii de către cealaltă parte...",
-    "waitingRevokeApproval": "Se așteaptă aprobarea revocării de către creator..."
+    "waitingRevokeApproval": "Se așteaptă aprobarea revocării de către creator...",
+    "translate": "Traduce",
+    "showOriginal": "Arată originalul",
+    "translating": "Se traduce...",
+    "translationFailed": "Traducerea a eșuat"
   },
   "status": {
     "pending": "În așteptare",
@@ -109,7 +113,28 @@
     "loggingIn": "Se autentifică...",
     "googleLogin": "Autentificare cu Google",
     "noAccount": "Nu ai un cont?",
-    "greeting": "Bună, {email}!"
+    "greeting": "Bună, {email}!",
+    "signUpTitle": "Înregistrare",
+    "signUpDescription": "Creați un cont nou cu email și parolă",
+    "repeatPassword": "Confirmă parola",
+    "signingUp": "Se creează contul...",
+    "passwordMismatch": "Parolele nu se potrivesc",
+    "hasAccount": "Aveți deja un cont?",
+    "signUpSuccessTitle": "Mulțumim pentru înregistrare!",
+    "signUpSuccessDescription": "Verificați emailul",
+    "signUpSuccessMessage": "V-ați înregistrat cu succes. Verificați emailul pentru a confirma contul înainte de autentificare.",
+    "forgotPasswordTitle": "Resetare parolă",
+    "forgotPasswordDescription": "Introduceți emailul și vă vom trimite un link de resetare.",
+    "forgotPasswordSending": "Se trimite...",
+    "forgotPasswordSend": "Trimite email de resetare",
+    "checkEmailTitle": "Verificați emailul",
+    "checkEmailDescription": "Instrucțiunile de resetare a parolei au fost trimise",
+    "checkEmailMessage": "Dacă v-ați înregistrat cu email și parolă, veți primi un email de resetare a parolei.",
+    "updatePasswordTitle": "Resetare parolă",
+    "updatePasswordDescription": "Introduceți noua parolă.",
+    "newPassword": "Parolă nouă",
+    "updatePasswordSaving": "Se salvează...",
+    "updatePasswordSave": "Salvează parola nouă"
   },
   "errors": {
     "loginRequired": "Autentificare necesară",

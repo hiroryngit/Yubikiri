@@ -59,7 +59,11 @@
     "loginNotComplete": "Đăng nhập chưa hoàn tất. Vui lòng tải lại trang và thử lại.",
     "history": "Nhật ký hoạt động",
     "waitingWithdrawApproval": "Đang chờ bên kia phê duyệt việc rút lại...",
-    "waitingRevokeApproval": "Đang chờ người tạo phê duyệt việc hủy bỏ..."
+    "waitingRevokeApproval": "Đang chờ người tạo phê duyệt việc hủy bỏ...",
+    "translate": "Dịch",
+    "showOriginal": "Hiển thị bản gốc",
+    "translating": "Đang dịch...",
+    "translationFailed": "Dịch thất bại"
   },
   "status": {
     "pending": "Đang chờ",
@@ -109,7 +113,28 @@
     "loggingIn": "Đang đăng nhập...",
     "googleLogin": "Đăng nhập bằng Google",
     "noAccount": "Chưa có tài khoản?",
-    "greeting": "Xin chào, {email}!"
+    "greeting": "Xin chào, {email}!",
+    "signUpTitle": "Đăng ký",
+    "signUpDescription": "Tạo tài khoản mới bằng email và mật khẩu",
+    "repeatPassword": "Xác nhận mật khẩu",
+    "signingUp": "Đang tạo tài khoản...",
+    "passwordMismatch": "Mật khẩu không khớp",
+    "hasAccount": "Đã có tài khoản?",
+    "signUpSuccessTitle": "Cảm ơn bạn đã đăng ký!",
+    "signUpSuccessDescription": "Kiểm tra email của bạn",
+    "signUpSuccessMessage": "Đăng ký thành công. Vui lòng kiểm tra email để xác nhận tài khoản trước khi đăng nhập.",
+    "forgotPasswordTitle": "Đặt lại mật khẩu",
+    "forgotPasswordDescription": "Nhập email của bạn, chúng tôi sẽ gửi liên kết đặt lại mật khẩu.",
+    "forgotPasswordSending": "Đang gửi...",
+    "forgotPasswordSend": "Gửi email đặt lại",
+    "checkEmailTitle": "Kiểm tra email của bạn",
+    "checkEmailDescription": "Hướng dẫn đặt lại mật khẩu đã được gửi",
+    "checkEmailMessage": "Nếu bạn đăng ký bằng email và mật khẩu, bạn sẽ nhận được email đặt lại mật khẩu.",
+    "updatePasswordTitle": "Đặt lại mật khẩu",
+    "updatePasswordDescription": "Vui lòng nhập mật khẩu mới.",
+    "newPassword": "Mật khẩu mới",
+    "updatePasswordSaving": "Đang lưu...",
+    "updatePasswordSave": "Lưu mật khẩu mới"
   },
   "errors": {
     "loginRequired": "Cần đăng nhập",

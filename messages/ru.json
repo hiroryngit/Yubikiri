@@ -59,7 +59,11 @@
     "loginNotComplete": "Вход не завершён. Перезагрузите страницу и попробуйте снова.",
     "history": "Журнал действий",
     "waitingWithdrawApproval": "Ожидание одобрения отзыва другой стороной...",
-    "waitingRevokeApproval": "Ожидание одобрения аннулирования создателем..."
+    "waitingRevokeApproval": "Ожидание одобрения аннулирования создателем...",
+    "translate": "Перевести",
+    "showOriginal": "Показать оригинал",
+    "translating": "Перевод...",
+    "translationFailed": "Ошибка перевода"
   },
   "status": {
     "pending": "Ожидает",
@@ -109,7 +113,28 @@
     "loggingIn": "Вход...",
     "googleLogin": "Войти через Google",
     "noAccount": "Нет аккаунта?",
-    "greeting": "Привет, {email}!"
+    "greeting": "Привет, {email}!",
+    "signUpTitle": "Регистрация",
+    "signUpDescription": "Создайте новый аккаунт с помощью email и пароля",
+    "repeatPassword": "Подтвердите пароль",
+    "signingUp": "Создание аккаунта...",
+    "passwordMismatch": "Пароли не совпадают",
+    "hasAccount": "Уже есть аккаунт?",
+    "signUpSuccessTitle": "Спасибо за регистрацию!",
+    "signUpSuccessDescription": "Проверьте вашу почту",
+    "signUpSuccessMessage": "Вы успешно зарегистрировались. Пожалуйста, проверьте почту и подтвердите аккаунт перед входом.",
+    "forgotPasswordTitle": "Сброс пароля",
+    "forgotPasswordDescription": "Введите email, и мы отправим ссылку для сброса пароля.",
+    "forgotPasswordSending": "Отправка...",
+    "forgotPasswordSend": "Отправить письмо для сброса",
+    "checkEmailTitle": "Проверьте вашу почту",
+    "checkEmailDescription": "Инструкции по сбросу пароля отправлены",
+    "checkEmailMessage": "Если вы регистрировались с помощью email и пароля, вы получите письмо для сброса пароля.",
+    "updatePasswordTitle": "Сброс пароля",
+    "updatePasswordDescription": "Введите новый пароль.",
+    "newPassword": "Новый пароль",
+    "updatePasswordSaving": "Сохранение...",
+    "updatePasswordSave": "Сохранить новый пароль"
   },
   "errors": {
     "loginRequired": "Требуется вход",

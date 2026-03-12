@@ -59,7 +59,11 @@
     "loginNotComplete": "Login er ikke fuldført. Genindlæs siden og prøv igen.",
     "history": "Aktivitetslog",
     "waitingWithdrawApproval": "Venter på den anden parts godkendelse af tilbagetrækning...",
-    "waitingRevokeApproval": "Venter på opretterens godkendelse af ophævelse..."
+    "waitingRevokeApproval": "Venter på opretterens godkendelse af ophævelse...",
+    "translate": "Oversæt",
+    "showOriginal": "Vis original",
+    "translating": "Oversætter...",
+    "translationFailed": "Oversættelse mislykkedes"
   },
   "status": {
     "pending": "Afventer",
@@ -109,7 +113,28 @@
     "loggingIn": "Logger ind...",
     "googleLogin": "Log ind med Google",
     "noAccount": "Har du ikke en konto?",
-    "greeting": "Hej, {email}!"
+    "greeting": "Hej, {email}!",
+    "signUpTitle": "Opret konto",
+    "signUpDescription": "Opret en ny konto med e-mail og adgangskode",
+    "repeatPassword": "Bekræft adgangskode",
+    "signingUp": "Opretter konto...",
+    "passwordMismatch": "Adgangskoderne matcher ikke",
+    "hasAccount": "Har du allerede en konto?",
+    "signUpSuccessTitle": "Tak for din tilmelding!",
+    "signUpSuccessDescription": "Tjek din e-mail",
+    "signUpSuccessMessage": "Du er blevet registreret. Tjek venligst din e-mail for at bekræfte din konto, før du logger ind.",
+    "forgotPasswordTitle": "Nulstil adgangskode",
+    "forgotPasswordDescription": "Indtast din e-mail, så sender vi dig et link til nulstilling.",
+    "forgotPasswordSending": "Sender...",
+    "forgotPasswordSend": "Send nulstillingsmail",
+    "checkEmailTitle": "Tjek din e-mail",
+    "checkEmailDescription": "Instruktioner til nulstilling af adgangskode er sendt",
+    "checkEmailMessage": "Hvis du har registreret dig med e-mail og adgangskode, vil du modtage en mail til nulstilling af adgangskoden.",
+    "updatePasswordTitle": "Nulstil adgangskode",
+    "updatePasswordDescription": "Indtast venligst din nye adgangskode.",
+    "newPassword": "Ny adgangskode",
+    "updatePasswordSaving": "Gemmer...",
+    "updatePasswordSave": "Gem ny adgangskode"
   },
   "errors": {
     "loginRequired": "Login påkrævet",

@@ -59,7 +59,11 @@
     "loginNotComplete": "Inloggen is niet voltooid. Herlaad de pagina en probeer het opnieuw.",
     "history": "Activiteitenlog",
     "waitingWithdrawApproval": "Wachten op goedkeuring van intrekking door de andere partij...",
-    "waitingRevokeApproval": "Wachten op goedkeuring van herroeping door de maker..."
+    "waitingRevokeApproval": "Wachten op goedkeuring van herroeping door de maker...",
+    "translate": "Vertalen",
+    "showOriginal": "Origineel tonen",
+    "translating": "Vertalen...",
+    "translationFailed": "Vertaling mislukt"
   },
   "status": {
     "pending": "In afwachting",
@@ -109,7 +113,28 @@
     "loggingIn": "Inloggen...",
     "googleLogin": "Inloggen met Google",
     "noAccount": "Heb je geen account?",
-    "greeting": "Hallo, {email}!"
+    "greeting": "Hallo, {email}!",
+    "signUpTitle": "Registreren",
+    "signUpDescription": "Maak een nieuw account aan met e-mail en wachtwoord",
+    "repeatPassword": "Wachtwoord bevestigen",
+    "signingUp": "Account aanmaken...",
+    "passwordMismatch": "Wachtwoorden komen niet overeen",
+    "hasAccount": "Heeft u al een account?",
+    "signUpSuccessTitle": "Bedankt voor uw registratie!",
+    "signUpSuccessDescription": "Controleer uw e-mail",
+    "signUpSuccessMessage": "U bent succesvol geregistreerd. Controleer uw e-mail om uw account te bevestigen voordat u inlogt.",
+    "forgotPasswordTitle": "Wachtwoord herstellen",
+    "forgotPasswordDescription": "Voer uw e-mail in en we sturen u een link om uw wachtwoord te herstellen.",
+    "forgotPasswordSending": "Verzenden...",
+    "forgotPasswordSend": "Herstelmail verzenden",
+    "checkEmailTitle": "Controleer uw e-mail",
+    "checkEmailDescription": "Instructies voor wachtwoordherstel zijn verzonden",
+    "checkEmailMessage": "Als u zich met e-mail en wachtwoord heeft geregistreerd, ontvangt u een e-mail om uw wachtwoord te herstellen.",
+    "updatePasswordTitle": "Wachtwoord herstellen",
+    "updatePasswordDescription": "Voer uw nieuwe wachtwoord in.",
+    "newPassword": "Nieuw wachtwoord",
+    "updatePasswordSaving": "Opslaan...",
+    "updatePasswordSave": "Nieuw wachtwoord opslaan"
   },
   "errors": {
     "loginRequired": "Inloggen vereist",

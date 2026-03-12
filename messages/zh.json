@@ -59,7 +59,11 @@
     "loginNotComplete": "登录未完成。请刷新页面后重试。",
     "history": "操作记录",
     "waitingWithdrawApproval": "等待对方批准撤回...",
-    "waitingRevokeApproval": "等待创建者批准解除..."
+    "waitingRevokeApproval": "等待创建者批准解除...",
+    "translate": "翻译",
+    "showOriginal": "显示原文",
+    "translating": "翻译中...",
+    "translationFailed": "翻译失败"
   },
   "status": {
     "pending": "待审批",
@@ -109,7 +113,28 @@
     "loggingIn": "登录中...",
     "googleLogin": "使用Google登录",
     "noAccount": "还没有账号？",
-    "greeting": "你好，{email}！"
+    "greeting": "你好，{email}！",
+    "signUpTitle": "注册",
+    "signUpDescription": "输入邮箱和密码创建新账户",
+    "repeatPassword": "确认密码",
+    "signingUp": "注册中...",
+    "passwordMismatch": "密码不一致",
+    "hasAccount": "已有账户？",
+    "signUpSuccessTitle": "感谢注册！",
+    "signUpSuccessDescription": "请查收确认邮件",
+    "signUpSuccessMessage": "注册成功。请在登录前查收邮件并确认您的账户。",
+    "forgotPasswordTitle": "重置密码",
+    "forgotPasswordDescription": "请输入您的邮箱，我们将发送密码重置链接。",
+    "forgotPasswordSending": "发送中...",
+    "forgotPasswordSend": "发送重置邮件",
+    "checkEmailTitle": "请查收邮件",
+    "checkEmailDescription": "密码重置说明已发送",
+    "checkEmailMessage": "如果您使用邮箱和密码注册，您将收到一封密码重置邮件。",
+    "updatePasswordTitle": "重置密码",
+    "updatePasswordDescription": "请输入新密码。",
+    "newPassword": "新密码",
+    "updatePasswordSaving": "保存中...",
+    "updatePasswordSave": "保存新密码"
   },
   "errors": {
     "loginRequired": "需要登录",

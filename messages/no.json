@@ -59,7 +59,11 @@
     "loginNotComplete": "Innloggingen er ikke fullført. Last inn siden på nytt og prøv igjen.",
     "history": "Aktivitetslogg",
     "waitingWithdrawApproval": "Venter på den andre partens godkjenning av tilbaketrekning...",
-    "waitingRevokeApproval": "Venter på oppretterens godkjenning av opphevelse..."
+    "waitingRevokeApproval": "Venter på oppretterens godkjenning av opphevelse...",
+    "translate": "Oversett",
+    "showOriginal": "Vis original",
+    "translating": "Oversetter...",
+    "translationFailed": "Oversettelse mislyktes"
   },
   "status": {
     "pending": "Venter",
@@ -109,7 +113,28 @@
     "loggingIn": "Logger inn...",
     "googleLogin": "Logg inn med Google",
     "noAccount": "Har du ikke en konto?",
-    "greeting": "Hei, {email}!"
+    "greeting": "Hei, {email}!",
+    "signUpTitle": "Registrer deg",
+    "signUpDescription": "Opprett en ny konto med e-post og passord",
+    "repeatPassword": "Bekreft passord",
+    "signingUp": "Oppretter konto...",
+    "passwordMismatch": "Passordene stemmer ikke",
+    "hasAccount": "Har du allerede en konto?",
+    "signUpSuccessTitle": "Takk for registreringen!",
+    "signUpSuccessDescription": "Sjekk e-posten din",
+    "signUpSuccessMessage": "Du er registrert. Sjekk e-posten din for å bekrefte kontoen din før du logger inn.",
+    "forgotPasswordTitle": "Tilbakestill passord",
+    "forgotPasswordDescription": "Skriv inn e-posten din, så sender vi deg en tilbakestillingslenke.",
+    "forgotPasswordSending": "Sender...",
+    "forgotPasswordSend": "Send tilbakestillingsmail",
+    "checkEmailTitle": "Sjekk e-posten din",
+    "checkEmailDescription": "Instruksjoner for tilbakestilling av passord er sendt",
+    "checkEmailMessage": "Hvis du registrerte deg med e-post og passord, vil du motta en e-post for tilbakestilling av passord.",
+    "updatePasswordTitle": "Tilbakestill passord",
+    "updatePasswordDescription": "Skriv inn det nye passordet ditt.",
+    "newPassword": "Nytt passord",
+    "updatePasswordSaving": "Lagrer...",
+    "updatePasswordSave": "Lagre nytt passord"
   },
   "errors": {
     "loginRequired": "Innlogging kreves",

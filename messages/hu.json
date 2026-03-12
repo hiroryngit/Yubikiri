@@ -59,7 +59,11 @@
     "loginNotComplete": "A bejelentkezés nem fejeződött be. Töltsd újra az oldalt és próbáld újra.",
     "history": "Tevékenységnapló",
     "waitingWithdrawApproval": "Várakozás a másik fél visszavonási jóváhagyására...",
-    "waitingRevokeApproval": "Várakozás a létrehozó érvénytelenítési jóváhagyására..."
+    "waitingRevokeApproval": "Várakozás a létrehozó érvénytelenítési jóváhagyására...",
+    "translate": "Fordítás",
+    "showOriginal": "Eredeti megjelenítése",
+    "translating": "Fordítás...",
+    "translationFailed": "A fordítás sikertelen"
   },
   "status": {
     "pending": "Függőben",
@@ -109,7 +113,28 @@
     "loggingIn": "Bejelentkezés...",
     "googleLogin": "Bejelentkezés Google-lel",
     "noAccount": "Nincs fiókod?",
-    "greeting": "Szia, {email}!"
+    "greeting": "Szia, {email}!",
+    "signUpTitle": "Regisztráció",
+    "signUpDescription": "Hozz létre új fiókot e-maillel és jelszóval",
+    "repeatPassword": "Jelszó megerősítése",
+    "signingUp": "Fiók létrehozása...",
+    "passwordMismatch": "A jelszavak nem egyeznek",
+    "hasAccount": "Már van fiókod?",
+    "signUpSuccessTitle": "Köszönjük a regisztrációt!",
+    "signUpSuccessDescription": "Ellenőrizd az e-mailed",
+    "signUpSuccessMessage": "Sikeres regisztráció. Kérjük, ellenőrizd az e-mailed és erősítsd meg a fiókodat bejelentkezés előtt.",
+    "forgotPasswordTitle": "Jelszó visszaállítása",
+    "forgotPasswordDescription": "Add meg az e-mail címed, és küldünk egy visszaállító linket.",
+    "forgotPasswordSending": "Küldés...",
+    "forgotPasswordSend": "Visszaállító e-mail küldése",
+    "checkEmailTitle": "Ellenőrizd az e-mailed",
+    "checkEmailDescription": "A jelszó-visszaállítási utasítások elküldve",
+    "checkEmailMessage": "Ha e-maillel és jelszóval regisztráltál, kapsz egy jelszó-visszaállító e-mailt.",
+    "updatePasswordTitle": "Jelszó visszaállítása",
+    "updatePasswordDescription": "Add meg az új jelszavad.",
+    "newPassword": "Új jelszó",
+    "updatePasswordSaving": "Mentés...",
+    "updatePasswordSave": "Új jelszó mentése"
   },
   "errors": {
     "loginRequired": "Bejelentkezés szükséges",

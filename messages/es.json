@@ -59,7 +59,11 @@
     "loginNotComplete": "El inicio de sesión no se ha completado. Recarga la página e inténtalo de nuevo.",
     "history": "Registro de actividad",
     "waitingWithdrawApproval": "Esperando que la otra parte apruebe el retiro...",
-    "waitingRevokeApproval": "Esperando que el creador apruebe la revocación..."
+    "waitingRevokeApproval": "Esperando que el creador apruebe la revocación...",
+    "translate": "Traducir",
+    "showOriginal": "Mostrar original",
+    "translating": "Traduciendo...",
+    "translationFailed": "Error en la traducción"
   },
   "status": {
     "pending": "Pendiente",
@@ -109,7 +113,28 @@
     "loggingIn": "Iniciando sesión...",
     "googleLogin": "Iniciar sesión con Google",
     "noAccount": "¿No tienes una cuenta?",
-    "greeting": "¡Hola, {email}!"
+    "greeting": "¡Hola, {email}!",
+    "signUpTitle": "Registrarse",
+    "signUpDescription": "Crea una nueva cuenta con tu email y contraseña",
+    "repeatPassword": "Confirmar contraseña",
+    "signingUp": "Creando cuenta...",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "hasAccount": "¿Ya tienes una cuenta?",
+    "signUpSuccessTitle": "¡Gracias por registrarte!",
+    "signUpSuccessDescription": "Revisa tu correo electrónico",
+    "signUpSuccessMessage": "Te has registrado correctamente. Revisa tu correo para confirmar tu cuenta antes de iniciar sesión.",
+    "forgotPasswordTitle": "Restablecer contraseña",
+    "forgotPasswordDescription": "Introduce tu correo y te enviaremos un enlace para restablecer tu contraseña.",
+    "forgotPasswordSending": "Enviando...",
+    "forgotPasswordSend": "Enviar correo de restablecimiento",
+    "checkEmailTitle": "Revisa tu correo",
+    "checkEmailDescription": "Se han enviado las instrucciones para restablecer la contraseña",
+    "checkEmailMessage": "Si te registraste con correo y contraseña, recibirás un email para restablecer tu contraseña.",
+    "updatePasswordTitle": "Restablecer contraseña",
+    "updatePasswordDescription": "Introduce tu nueva contraseña.",
+    "newPassword": "Nueva contraseña",
+    "updatePasswordSaving": "Guardando...",
+    "updatePasswordSave": "Guardar nueva contraseña"
   },
   "errors": {
     "loginRequired": "Se requiere iniciar sesión",

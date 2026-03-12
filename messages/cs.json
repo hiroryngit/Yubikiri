@@ -59,7 +59,11 @@
     "loginNotComplete": "Přihlášení nebylo dokončeno. Načtěte stránku znovu a zkuste to znovu.",
     "history": "Protokol aktivit",
     "waitingWithdrawApproval": "Čeká se na schválení stažení druhou stranou...",
-    "waitingRevokeApproval": "Čeká se na schválení zrušení tvůrcem..."
+    "waitingRevokeApproval": "Čeká se na schválení zrušení tvůrcem...",
+    "translate": "Přeložit",
+    "showOriginal": "Zobrazit originál",
+    "translating": "Překládání...",
+    "translationFailed": "Překlad selhal"
   },
   "status": {
     "pending": "Čeká",
@@ -109,7 +113,28 @@
     "loggingIn": "Přihlašování...",
     "googleLogin": "Přihlásit se přes Google",
     "noAccount": "Nemáte účet?",
-    "greeting": "Ahoj, {email}!"
+    "greeting": "Ahoj, {email}!",
+    "signUpTitle": "Registrace",
+    "signUpDescription": "Vytvořte si nový účet pomocí e-mailu a hesla",
+    "repeatPassword": "Potvrdit heslo",
+    "signingUp": "Vytváření účtu...",
+    "passwordMismatch": "Hesla se neshodují",
+    "hasAccount": "Již máte účet?",
+    "signUpSuccessTitle": "Děkujeme za registraci!",
+    "signUpSuccessDescription": "Zkontrolujte svůj e-mail",
+    "signUpSuccessMessage": "Registrace proběhla úspěšně. Zkontrolujte e-mail a potvrďte účet před přihlášením.",
+    "forgotPasswordTitle": "Obnovení hesla",
+    "forgotPasswordDescription": "Zadejte svůj e-mail a zašleme vám odkaz pro obnovení hesla.",
+    "forgotPasswordSending": "Odesílání...",
+    "forgotPasswordSend": "Odeslat e-mail pro obnovení",
+    "checkEmailTitle": "Zkontrolujte svůj e-mail",
+    "checkEmailDescription": "Pokyny pro obnovení hesla byly odeslány",
+    "checkEmailMessage": "Pokud jste se zaregistrovali pomocí e-mailu a hesla, obdržíte e-mail pro obnovení hesla.",
+    "updatePasswordTitle": "Obnovení hesla",
+    "updatePasswordDescription": "Zadejte prosím nové heslo.",
+    "newPassword": "Nové heslo",
+    "updatePasswordSaving": "Ukládání...",
+    "updatePasswordSave": "Uložit nové heslo"
   },
   "errors": {
     "loginRequired": "Vyžadováno přihlášení",

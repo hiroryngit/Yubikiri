@@ -59,7 +59,11 @@
     "loginNotComplete": "உள்நுழைவு முழுமையடையவில்லை. பக்கத்தை மீண்டும் ஏற்றி மீண்டும் முயற்சிக்கவும்.",
     "history": "செயல்பாட்டு பதிவு",
     "waitingWithdrawApproval": "மறு தரப்பின் திரும்பப் பெறுதல் ஒப்புதலுக்கு காத்திருக்கிறது...",
-    "waitingRevokeApproval": "உருவாக்கியவரின் ரத்து ஒப்புதலுக்கு காத்திருக்கிறது..."
+    "waitingRevokeApproval": "உருவாக்கியவரின் ரத்து ஒப்புதலுக்கு காத்திருக்கிறது...",
+    "translate": "மொழிபெயர்",
+    "showOriginal": "மூலத்தைக் காட்டு",
+    "translating": "மொழிபெயர்க்கிறது...",
+    "translationFailed": "மொழிபெயர்ப்பு தோல்வி"
   },
   "status": {
     "pending": "நிலுவையில்",
@@ -109,7 +113,28 @@
     "loggingIn": "உள்நுழைகிறது...",
     "googleLogin": "Google மூலம் உள்நுழை",
     "noAccount": "கணக்கு இல்லையா?",
-    "greeting": "வணக்கம், {email}!"
+    "greeting": "வணக்கம், {email}!",
+    "signUpTitle": "பதிவு செய்",
+    "signUpDescription": "மின்னஞ்சல் மற்றும் கடவுச்சொல்லுடன் புதிய கணக்கை உருவாக்கவும்",
+    "repeatPassword": "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+    "signingUp": "கணக்கு உருவாக்கப்படுகிறது...",
+    "passwordMismatch": "கடவுச்சொற்கள் பொருந்தவில்லை",
+    "hasAccount": "ஏற்கனவே கணக்கு உள்ளதா?",
+    "signUpSuccessTitle": "பதிவுக்கு நன்றி!",
+    "signUpSuccessDescription": "உங்கள் மின்னஞ்சலைச் சரிபார்க்கவும்",
+    "signUpSuccessMessage": "பதிவு வெற்றிகரமாக முடிந்தது. உள்நுழைவதற்கு முன் உங்கள் மின்னஞ்சலைச் சரிபார்த்து கணக்கை உறுதிப்படுத்தவும்.",
+    "forgotPasswordTitle": "கடவுச்சொல்லை மீட்டமை",
+    "forgotPasswordDescription": "உங்கள் மின்னஞ்சலை உள்ளிடவும், மீட்டமைப்பு இணைப்பை அனுப்புவோம்.",
+    "forgotPasswordSending": "அனுப்புகிறது...",
+    "forgotPasswordSend": "மீட்டமைப்பு மின்னஞ்சல் அனுப்பு",
+    "checkEmailTitle": "உங்கள் மின்னஞ்சலைச் சரிபார்க்கவும்",
+    "checkEmailDescription": "கடவுச்சொல் மீட்டமைப்பு வழிமுறைகள் அனுப்பப்பட்டன",
+    "checkEmailMessage": "மின்னஞ்சல் மற்றும் கடவுச்சொல்லுடன் பதிவு செய்திருந்தால், கடவுச்சொல் மீட்டமைப்பு மின்னஞ்சல் வரும்.",
+    "updatePasswordTitle": "கடவுச்சொல்லை மீட்டமை",
+    "updatePasswordDescription": "புதிய கடவுச்சொல்லை உள்ளிடவும்.",
+    "newPassword": "புதிய கடவுச்சொல்",
+    "updatePasswordSaving": "சேமிக்கிறது...",
+    "updatePasswordSave": "புதிய கடவுச்சொல்லைச் சேமி"
   },
   "errors": {
     "loginRequired": "உள்நுழைவு தேவை",

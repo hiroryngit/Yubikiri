@@ -59,7 +59,11 @@
     "loginNotComplete": "로그인이 완료되지 않았습니다. 페이지를 새로고침한 후 다시 시도해 주세요.",
     "history": "활동 기록",
     "waitingWithdrawApproval": "상대방의 철회 승인을 기다리는 중...",
-    "waitingRevokeApproval": "작성자의 해지 승인을 기다리는 중..."
+    "waitingRevokeApproval": "작성자의 해지 승인을 기다리는 중...",
+    "translate": "번역",
+    "showOriginal": "원문 보기",
+    "translating": "번역 중...",
+    "translationFailed": "번역 실패"
   },
   "status": {
     "pending": "대기 중",
@@ -109,7 +113,28 @@
     "loggingIn": "로그인 중...",
     "googleLogin": "Google로 로그인",
     "noAccount": "계정이 없으신가요?",
-    "greeting": "안녕하세요, {email}!"
+    "greeting": "안녕하세요, {email}!",
+    "signUpTitle": "회원가입",
+    "signUpDescription": "이메일과 비밀번호로 새 계정을 만드세요",
+    "repeatPassword": "비밀번호 확인",
+    "signingUp": "가입 중...",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다",
+    "hasAccount": "이미 계정이 있으신가요?",
+    "signUpSuccessTitle": "가입해 주셔서 감사합니다!",
+    "signUpSuccessDescription": "이메일을 확인해 주세요",
+    "signUpSuccessMessage": "가입이 완료되었습니다. 로그인하기 전에 이메일을 확인하여 계정을 인증해 주세요.",
+    "forgotPasswordTitle": "비밀번호 재설정",
+    "forgotPasswordDescription": "이메일을 입력하시면 비밀번호 재설정 링크를 보내드립니다.",
+    "forgotPasswordSending": "전송 중...",
+    "forgotPasswordSend": "재설정 메일 보내기",
+    "checkEmailTitle": "이메일을 확인해 주세요",
+    "checkEmailDescription": "비밀번호 재설정 안내가 전송되었습니다",
+    "checkEmailMessage": "이메일과 비밀번호로 등록하신 경우 비밀번호 재설정 이메일을 받으실 수 있습니다.",
+    "updatePasswordTitle": "비밀번호 재설정",
+    "updatePasswordDescription": "새 비밀번호를 입력해 주세요.",
+    "newPassword": "새 비밀번호",
+    "updatePasswordSaving": "저장 중...",
+    "updatePasswordSave": "새 비밀번호 저장"
   },
   "errors": {
     "loginRequired": "로그인이 필요합니다",

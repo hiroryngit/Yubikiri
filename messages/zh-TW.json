@@ -59,7 +59,11 @@
     "loginNotComplete": "登入尚未完成。請重新載入頁面後再試。",
     "history": "活動紀錄",
     "waitingWithdrawApproval": "等待對方批准撤回...",
-    "waitingRevokeApproval": "等待建立者批准撤銷..."
+    "waitingRevokeApproval": "等待建立者批准撤銷...",
+    "translate": "翻譯",
+    "showOriginal": "顯示原文",
+    "translating": "翻譯中...",
+    "translationFailed": "翻譯失敗"
   },
   "status": {
     "pending": "待處理",
@@ -109,7 +113,28 @@
     "loggingIn": "登入中...",
     "googleLogin": "使用 Google 登入",
     "noAccount": "還沒有帳戶？",
-    "greeting": "您好，{email}！"
+    "greeting": "您好，{email}！",
+    "signUpTitle": "註冊",
+    "signUpDescription": "輸入電子郵件和密碼建立新帳戶",
+    "repeatPassword": "確認密碼",
+    "signingUp": "註冊中...",
+    "passwordMismatch": "密碼不一致",
+    "hasAccount": "已有帳戶？",
+    "signUpSuccessTitle": "感謝註冊！",
+    "signUpSuccessDescription": "請查收確認信件",
+    "signUpSuccessMessage": "註冊成功。請在登入前查收信件並確認您的帳戶。",
+    "forgotPasswordTitle": "重設密碼",
+    "forgotPasswordDescription": "請輸入您的電子郵件，我們將寄送密碼重設連結。",
+    "forgotPasswordSending": "傳送中...",
+    "forgotPasswordSend": "寄送重設信件",
+    "checkEmailTitle": "請查收信件",
+    "checkEmailDescription": "密碼重設說明已寄出",
+    "checkEmailMessage": "如果您使用電子郵件和密碼註冊，您將收到一封密碼重設信件。",
+    "updatePasswordTitle": "重設密碼",
+    "updatePasswordDescription": "請輸入新密碼。",
+    "newPassword": "新密碼",
+    "updatePasswordSaving": "儲存中...",
+    "updatePasswordSave": "儲存新密碼"
   },
   "errors": {
     "loginRequired": "需要登入",

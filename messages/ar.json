@@ -59,7 +59,11 @@
     "loginNotComplete": "لم يكتمل تسجيل الدخول. يرجى إعادة تحميل الصفحة والمحاولة مرة أخرى.",
     "history": "سجل النشاط",
     "waitingWithdrawApproval": "في انتظار موافقة الطرف الآخر على السحب...",
-    "waitingRevokeApproval": "في انتظار موافقة المنشئ على الإلغاء..."
+    "waitingRevokeApproval": "في انتظار موافقة المنشئ على الإلغاء...",
+    "translate": "ترجمة",
+    "showOriginal": "عرض الأصل",
+    "translating": "جارٍ الترجمة...",
+    "translationFailed": "فشلت الترجمة"
   },
   "status": {
     "pending": "قيد الانتظار",
@@ -109,7 +113,28 @@
     "loggingIn": "جارٍ تسجيل الدخول...",
     "googleLogin": "تسجيل الدخول بحساب Google",
     "noAccount": "ليس لديك حساب؟",
-    "greeting": "مرحباً، {email}!"
+    "greeting": "مرحباً، {email}!",
+    "signUpTitle": "إنشاء حساب",
+    "signUpDescription": "أنشئ حساباً جديداً بالبريد الإلكتروني وكلمة المرور",
+    "repeatPassword": "تأكيد كلمة المرور",
+    "signingUp": "جارٍ إنشاء الحساب...",
+    "passwordMismatch": "كلمتا المرور غير متطابقتين",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "signUpSuccessTitle": "شكراً لتسجيلك!",
+    "signUpSuccessDescription": "تحقق من بريدك الإلكتروني",
+    "signUpSuccessMessage": "تم التسجيل بنجاح. يرجى التحقق من بريدك الإلكتروني لتأكيد حسابك قبل تسجيل الدخول.",
+    "forgotPasswordTitle": "إعادة تعيين كلمة المرور",
+    "forgotPasswordDescription": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.",
+    "forgotPasswordSending": "جارٍ الإرسال...",
+    "forgotPasswordSend": "إرسال بريد إعادة التعيين",
+    "checkEmailTitle": "تحقق من بريدك الإلكتروني",
+    "checkEmailDescription": "تم إرسال تعليمات إعادة تعيين كلمة المرور",
+    "checkEmailMessage": "إذا سجلت باستخدام البريد الإلكتروني وكلمة المرور، ستتلقى بريداً لإعادة تعيين كلمة المرور.",
+    "updatePasswordTitle": "إعادة تعيين كلمة المرور",
+    "updatePasswordDescription": "يرجى إدخال كلمة المرور الجديدة.",
+    "newPassword": "كلمة المرور الجديدة",
+    "updatePasswordSaving": "جارٍ الحفظ...",
+    "updatePasswordSave": "حفظ كلمة المرور الجديدة"
   },
   "errors": {
     "loginRequired": "تسجيل الدخول مطلوب",

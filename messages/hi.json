@@ -59,7 +59,11 @@
     "loginNotComplete": "लॉगिन पूरा नहीं हुआ। कृपया पृष्ठ पुनः लोड करें और पुनः प्रयास करें।",
     "history": "गतिविधि लॉग",
     "waitingWithdrawApproval": "दूसरे पक्ष द्वारा वापसी की स्वीकृति की प्रतीक्षा...",
-    "waitingRevokeApproval": "निर्माता द्वारा रद्दीकरण की स्वीकृति की प्रतीक्षा..."
+    "waitingRevokeApproval": "निर्माता द्वारा रद्दीकरण की स्वीकृति की प्रतीक्षा...",
+    "translate": "अनुवाद करें",
+    "showOriginal": "मूल दिखाएं",
+    "translating": "अनुवाद हो रहा है...",
+    "translationFailed": "अनुवाद विफल"
   },
   "status": {
     "pending": "लंबित",
@@ -109,7 +113,28 @@
     "loggingIn": "लॉग इन हो रहा है...",
     "googleLogin": "Google से लॉगिन करें",
     "noAccount": "खाता नहीं है?",
-    "greeting": "नमस्ते, {email}!"
+    "greeting": "नमस्ते, {email}!",
+    "signUpTitle": "साइन अप",
+    "signUpDescription": "ईमेल और पासवर्ड से नया खाता बनाएं",
+    "repeatPassword": "पासवर्ड की पुष्टि करें",
+    "signingUp": "खाता बना रहे हैं...",
+    "passwordMismatch": "पासवर्ड मेल नहीं खाते",
+    "hasAccount": "पहले से खाता है?",
+    "signUpSuccessTitle": "साइन अप के लिए धन्यवाद!",
+    "signUpSuccessDescription": "अपना ईमेल जांचें",
+    "signUpSuccessMessage": "साइन अप सफल। कृपया साइन इन करने से पहले अपना ईमेल जांचकर खाता सत्यापित करें।",
+    "forgotPasswordTitle": "पासवर्ड रीसेट करें",
+    "forgotPasswordDescription": "अपना ईमेल दर्ज करें, हम आपको पासवर्ड रीसेट लिंक भेजेंगे।",
+    "forgotPasswordSending": "भेज रहे हैं...",
+    "forgotPasswordSend": "रीसेट ईमेल भेजें",
+    "checkEmailTitle": "अपना ईमेल जांचें",
+    "checkEmailDescription": "पासवर्ड रीसेट निर्देश भेजे गए",
+    "checkEmailMessage": "यदि आपने ईमेल और पासवर्ड से रजिस्टर किया है, तो आपको पासवर्ड रीसेट ईमेल प्राप्त होगा।",
+    "updatePasswordTitle": "पासवर्ड रीसेट करें",
+    "updatePasswordDescription": "कृपया अपना नया पासवर्ड दर्ज करें।",
+    "newPassword": "नया पासवर्ड",
+    "updatePasswordSaving": "सहेज रहे हैं...",
+    "updatePasswordSave": "नया पासवर्ड सहेजें"
   },
   "errors": {
     "loginRequired": "लॉगिन आवश्यक है",

@@ -59,7 +59,11 @@
     "loginNotComplete": "Η σύνδεση δεν ολοκληρώθηκε. Φορτώστε ξανά τη σελίδα και δοκιμάστε ξανά.",
     "history": "Αρχείο δραστηριότητας",
     "waitingWithdrawApproval": "Αναμονή έγκρισης απόσυρσης από το άλλο μέρος...",
-    "waitingRevokeApproval": "Αναμονή έγκρισης ανάκλησης από τον δημιουργό..."
+    "waitingRevokeApproval": "Αναμονή έγκρισης ανάκλησης από τον δημιουργό...",
+    "translate": "Μετάφραση",
+    "showOriginal": "Εμφάνιση πρωτοτύπου",
+    "translating": "Μεταφράζεται...",
+    "translationFailed": "Η μετάφραση απέτυχε"
   },
   "status": {
     "pending": "Σε αναμονή",
@@ -109,7 +113,28 @@
     "loggingIn": "Σύνδεση...",
     "googleLogin": "Σύνδεση με Google",
     "noAccount": "Δεν έχετε λογαριασμό;",
-    "greeting": "Γεια, {email}!"
+    "greeting": "Γεια, {email}!",
+    "signUpTitle": "Εγγραφή",
+    "signUpDescription": "Δημιουργήστε νέο λογαριασμό με email και κωδικό",
+    "repeatPassword": "Επιβεβαίωση κωδικού",
+    "signingUp": "Δημιουργία λογαριασμού...",
+    "passwordMismatch": "Οι κωδικοί δεν ταιριάζουν",
+    "hasAccount": "Έχετε ήδη λογαριασμό;",
+    "signUpSuccessTitle": "Ευχαριστούμε για την εγγραφή!",
+    "signUpSuccessDescription": "Ελέγξτε το email σας",
+    "signUpSuccessMessage": "Η εγγραφή ολοκληρώθηκε. Ελέγξτε το email σας για να επιβεβαιώσετε τον λογαριασμό πριν συνδεθείτε.",
+    "forgotPasswordTitle": "Επαναφορά κωδικού",
+    "forgotPasswordDescription": "Εισάγετε το email σας και θα σας στείλουμε σύνδεσμο επαναφοράς.",
+    "forgotPasswordSending": "Αποστολή...",
+    "forgotPasswordSend": "Αποστολή email επαναφοράς",
+    "checkEmailTitle": "Ελέγξτε το email σας",
+    "checkEmailDescription": "Οι οδηγίες επαναφοράς κωδικού εστάλησαν",
+    "checkEmailMessage": "Αν εγγραφήκατε με email και κωδικό, θα λάβετε email επαναφοράς κωδικού.",
+    "updatePasswordTitle": "Επαναφορά κωδικού",
+    "updatePasswordDescription": "Εισάγετε τον νέο κωδικό σας.",
+    "newPassword": "Νέος κωδικός",
+    "updatePasswordSaving": "Αποθήκευση...",
+    "updatePasswordSave": "Αποθήκευση νέου κωδικού"
   },
   "errors": {
     "loginRequired": "Απαιτείται σύνδεση",

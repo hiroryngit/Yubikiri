@@ -21,10 +21,10 @@
     "hero": "Über mündliche Versprechen hinaus",
     "description": "Yubikiri zeichnet persönliche Vereinbarungen in einer Datenbank auf und bewahrt sie als Nachweis. Es schützt Vereinbarungsverläufe mit Zeitstempeln und Metadaten.",
     "createButton": "Versprechen erstellen",
-    "dashboardButton": "Dashboard"
+    "dashboardButton": "Übersicht"
   },
   "dashboard": {
-    "title": "Dashboard",
+    "title": "Übersicht",
     "createButton": "Versprechen erstellen",
     "empty": "Du hast noch keine Versprechen.",
     "emptyAction": "Erstelle dein erstes Versprechen",
@@ -59,7 +59,11 @@
     "loginNotComplete": "Die Anmeldung ist nicht abgeschlossen. Bitte lade die Seite neu und versuche es erneut.",
     "history": "Aktivitätsprotokoll",
     "waitingWithdrawApproval": "Warte auf die Genehmigung des Rückzugs durch die andere Partei...",
-    "waitingRevokeApproval": "Warte auf die Genehmigung des Widerrufs durch den Ersteller..."
+    "waitingRevokeApproval": "Warte auf die Genehmigung des Widerrufs durch den Ersteller...",
+    "translate": "Übersetzen",
+    "showOriginal": "Original anzeigen",
+    "translating": "Übersetzung läuft...",
+    "translationFailed": "Übersetzung fehlgeschlagen"
   },
   "status": {
     "pending": "Ausstehend",
@@ -109,7 +113,28 @@
     "loggingIn": "Anmeldung...",
     "googleLogin": "Mit Google anmelden",
     "noAccount": "Noch kein Konto?",
-    "greeting": "Hallo, {email}!"
+    "greeting": "Hallo, {email}!",
+    "signUpTitle": "Registrieren",
+    "signUpDescription": "Erstellen Sie ein neues Konto mit E-Mail und Passwort",
+    "repeatPassword": "Passwort bestätigen",
+    "signingUp": "Konto wird erstellt...",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "hasAccount": "Haben Sie bereits ein Konto?",
+    "signUpSuccessTitle": "Vielen Dank für Ihre Registrierung!",
+    "signUpSuccessDescription": "Überprüfen Sie Ihre E-Mail",
+    "signUpSuccessMessage": "Sie haben sich erfolgreich registriert. Bitte bestätigen Sie Ihr Konto über den Link in der E-Mail.",
+    "forgotPasswordTitle": "Passwort zurücksetzen",
+    "forgotPasswordDescription": "Geben Sie Ihre E-Mail-Adresse ein, und wir senden Ihnen einen Link zum Zurücksetzen.",
+    "forgotPasswordSending": "Wird gesendet...",
+    "forgotPasswordSend": "Zurücksetzungsmail senden",
+    "checkEmailTitle": "Überprüfen Sie Ihre E-Mail",
+    "checkEmailDescription": "Anweisungen zum Zurücksetzen des Passworts wurden gesendet",
+    "checkEmailMessage": "Wenn Sie sich mit E-Mail und Passwort registriert haben, erhalten Sie eine E-Mail zum Zurücksetzen des Passworts.",
+    "updatePasswordTitle": "Passwort zurücksetzen",
+    "updatePasswordDescription": "Bitte geben Sie Ihr neues Passwort ein.",
+    "newPassword": "Neues Passwort",
+    "updatePasswordSaving": "Wird gespeichert...",
+    "updatePasswordSave": "Neues Passwort speichern"
   },
   "errors": {
     "loginRequired": "Anmeldung erforderlich",

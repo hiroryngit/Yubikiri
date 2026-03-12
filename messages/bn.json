@@ -59,7 +59,11 @@
     "loginNotComplete": "লগইন সম্পন্ন হয়নি। পৃষ্ঠা পুনরায় লোড করুন এবং আবার চেষ্টা করুন।",
     "history": "কার্যকলাপ লগ",
     "waitingWithdrawApproval": "অন্য পক্ষের প্রত্যাহার অনুমোদনের জন্য অপেক্ষা করা হচ্ছে...",
-    "waitingRevokeApproval": "স্রষ্টার বাতিলকরণ অনুমোদনের জন্য অপেক্ষা করা হচ্ছে..."
+    "waitingRevokeApproval": "স্রষ্টার বাতিলকরণ অনুমোদনের জন্য অপেক্ষা করা হচ্ছে...",
+    "translate": "অনুবাদ করুন",
+    "showOriginal": "মূল দেখুন",
+    "translating": "অনুবাদ হচ্ছে...",
+    "translationFailed": "অনুবাদ ব্যর্থ"
   },
   "status": {
     "pending": "মুলতুবি",
@@ -109,7 +113,28 @@
     "loggingIn": "লগ ইন হচ্ছে...",
     "googleLogin": "Google দিয়ে লগইন করুন",
     "noAccount": "অ্যাকাউন্ট নেই?",
-    "greeting": "হ্যালো, {email}!"
+    "greeting": "হ্যালো, {email}!",
+    "signUpTitle": "সাইন আপ",
+    "signUpDescription": "ইমেইল এবং পাসওয়ার্ড দিয়ে নতুন অ্যাকাউন্ট তৈরি করুন",
+    "repeatPassword": "পাসওয়ার্ড নিশ্চিত করুন",
+    "signingUp": "অ্যাকাউন্ট তৈরি হচ্ছে...",
+    "passwordMismatch": "পাসওয়ার্ড মিলছে না",
+    "hasAccount": "ইতিমধ্যে অ্যাকাউন্ট আছে?",
+    "signUpSuccessTitle": "সাইন আপ করার জন্য ধন্যবাদ!",
+    "signUpSuccessDescription": "আপনার ইমেইল চেক করুন",
+    "signUpSuccessMessage": "সাইন আপ সফল হয়েছে। সাইন ইন করার আগে আপনার ইমেইল চেক করে অ্যাকাউন্ট যাচাই করুন।",
+    "forgotPasswordTitle": "পাসওয়ার্ড রিসেট করুন",
+    "forgotPasswordDescription": "আপনার ইমেইল দিন, আমরা পাসওয়ার্ড রিসেট লিংক পাঠাব।",
+    "forgotPasswordSending": "পাঠানো হচ্ছে...",
+    "forgotPasswordSend": "রিসেট ইমেইল পাঠান",
+    "checkEmailTitle": "আপনার ইমেইল চেক করুন",
+    "checkEmailDescription": "পাসওয়ার্ড রিসেট নির্দেশনা পাঠানো হয়েছে",
+    "checkEmailMessage": "যদি আপনি ইমেইল এবং পাসওয়ার্ড দিয়ে নিবন্ধন করে থাকেন, আপনি পাসওয়ার্ড রিসেট ইমেইল পাবেন।",
+    "updatePasswordTitle": "পাসওয়ার্ড রিসেট করুন",
+    "updatePasswordDescription": "আপনার নতুন পাসওয়ার্ড দিন।",
+    "newPassword": "নতুন পাসওয়ার্ড",
+    "updatePasswordSaving": "সংরক্ষণ হচ্ছে...",
+    "updatePasswordSave": "নতুন পাসওয়ার্ড সংরক্ষণ করুন"
   },
   "errors": {
     "loginRequired": "লগইন প্রয়োজন",

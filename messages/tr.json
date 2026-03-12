@@ -59,7 +59,11 @@
     "loginNotComplete": "Giriş tamamlanmadı. Lütfen sayfayı yenileyin ve tekrar deneyin.",
     "history": "Etkinlik günlüğü",
     "waitingWithdrawApproval": "Karşı tarafın geri çekme onayı bekleniyor...",
-    "waitingRevokeApproval": "Oluşturanın iptal onayı bekleniyor..."
+    "waitingRevokeApproval": "Oluşturanın iptal onayı bekleniyor...",
+    "translate": "Çevir",
+    "showOriginal": "Orijinali göster",
+    "translating": "Çevriliyor...",
+    "translationFailed": "Çeviri başarısız"
   },
   "status": {
     "pending": "Beklemede",
@@ -109,7 +113,28 @@
     "loggingIn": "Giriş yapılıyor...",
     "googleLogin": "Google ile giriş yap",
     "noAccount": "Hesabınız yok mu?",
-    "greeting": "Merhaba, {email}!"
+    "greeting": "Merhaba, {email}!",
+    "signUpTitle": "Kayıt ol",
+    "signUpDescription": "E-posta ve şifre ile yeni hesap oluşturun",
+    "repeatPassword": "Şifreyi onayla",
+    "signingUp": "Hesap oluşturuluyor...",
+    "passwordMismatch": "Şifreler eşleşmiyor",
+    "hasAccount": "Zaten hesabınız var mı?",
+    "signUpSuccessTitle": "Kayıt olduğunuz için teşekkürler!",
+    "signUpSuccessDescription": "E-postanızı kontrol edin",
+    "signUpSuccessMessage": "Başarıyla kayıt oldunuz. Giriş yapmadan önce e-postanızı kontrol ederek hesabınızı doğrulayın.",
+    "forgotPasswordTitle": "Şifre sıfırlama",
+    "forgotPasswordDescription": "E-postanızı girin, şifre sıfırlama bağlantısı göndereceğiz.",
+    "forgotPasswordSending": "Gönderiliyor...",
+    "forgotPasswordSend": "Sıfırlama e-postası gönder",
+    "checkEmailTitle": "E-postanızı kontrol edin",
+    "checkEmailDescription": "Şifre sıfırlama talimatları gönderildi",
+    "checkEmailMessage": "E-posta ve şifre ile kayıt olduysanız, şifre sıfırlama e-postası alacaksınız.",
+    "updatePasswordTitle": "Şifre sıfırlama",
+    "updatePasswordDescription": "Lütfen yeni şifrenizi girin.",
+    "newPassword": "Yeni şifre",
+    "updatePasswordSaving": "Kaydediliyor...",
+    "updatePasswordSave": "Yeni şifreyi kaydet"
   },
   "errors": {
     "loginRequired": "Giriş yapmanız gerekiyor",

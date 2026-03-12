@@ -59,7 +59,11 @@
     "loginNotComplete": "การเข้าสู่ระบบยังไม่เสร็จสมบูรณ์ กรุณาโหลดหน้าใหม่แล้วลองอีกครั้ง",
     "history": "บันทึกกิจกรรม",
     "waitingWithdrawApproval": "รอการอนุมัติการถอนจากอีกฝ่าย...",
-    "waitingRevokeApproval": "รอการอนุมัติการยกเลิกจากผู้สร้าง..."
+    "waitingRevokeApproval": "รอการอนุมัติการยกเลิกจากผู้สร้าง...",
+    "translate": "แปล",
+    "showOriginal": "แสดงต้นฉบับ",
+    "translating": "กำลังแปล...",
+    "translationFailed": "การแปลล้มเหลว"
   },
   "status": {
     "pending": "รอดำเนินการ",
@@ -109,7 +113,28 @@
     "loggingIn": "กำลังเข้าสู่ระบบ...",
     "googleLogin": "เข้าสู่ระบบด้วย Google",
     "noAccount": "ยังไม่มีบัญชี?",
-    "greeting": "สวัสดี, {email}!"
+    "greeting": "สวัสดี, {email}!",
+    "signUpTitle": "สมัครสมาชิก",
+    "signUpDescription": "สร้างบัญชีใหม่ด้วยอีเมลและรหัสผ่าน",
+    "repeatPassword": "ยืนยันรหัสผ่าน",
+    "signingUp": "กำลังสร้างบัญชี...",
+    "passwordMismatch": "รหัสผ่านไม่ตรงกัน",
+    "hasAccount": "มีบัญชีอยู่แล้ว?",
+    "signUpSuccessTitle": "ขอบคุณที่สมัครสมาชิก!",
+    "signUpSuccessDescription": "ตรวจสอบอีเมลของคุณ",
+    "signUpSuccessMessage": "สมัครสมาชิกสำเร็จ กรุณาตรวจสอบอีเมลเพื่อยืนยันบัญชีก่อนเข้าสู่ระบบ",
+    "forgotPasswordTitle": "รีเซ็ตรหัสผ่าน",
+    "forgotPasswordDescription": "กรอกอีเมลของคุณ เราจะส่งลิงก์รีเซ็ตรหัสผ่านให้",
+    "forgotPasswordSending": "กำลังส่ง...",
+    "forgotPasswordSend": "ส่งอีเมลรีเซ็ต",
+    "checkEmailTitle": "ตรวจสอบอีเมลของคุณ",
+    "checkEmailDescription": "ส่งคำแนะนำการรีเซ็ตรหัสผ่านแล้ว",
+    "checkEmailMessage": "หากคุณลงทะเบียนด้วยอีเมลและรหัสผ่าน คุณจะได้รับอีเมลรีเซ็ตรหัสผ่าน",
+    "updatePasswordTitle": "รีเซ็ตรหัสผ่าน",
+    "updatePasswordDescription": "กรุณากรอกรหัสผ่านใหม่",
+    "newPassword": "รหัสผ่านใหม่",
+    "updatePasswordSaving": "กำลังบันทึก...",
+    "updatePasswordSave": "บันทึกรหัสผ่านใหม่"
   },
   "errors": {
     "loginRequired": "ต้องเข้าสู่ระบบก่อน",

@@ -59,7 +59,11 @@
     "loginNotComplete": "Вхід не завершено. Перезавантажте сторінку та спробуйте знову.",
     "history": "Журнал дій",
     "waitingWithdrawApproval": "Очікування схвалення відкликання іншою стороною...",
-    "waitingRevokeApproval": "Очікування схвалення скасування автором..."
+    "waitingRevokeApproval": "Очікування схвалення скасування автором...",
+    "translate": "Перекласти",
+    "showOriginal": "Показати оригінал",
+    "translating": "Переклад...",
+    "translationFailed": "Помилка перекладу"
   },
   "status": {
     "pending": "Очікує",
@@ -109,7 +113,28 @@
     "loggingIn": "Вхід...",
     "googleLogin": "Увійти через Google",
     "noAccount": "Немає облікового запису?",
-    "greeting": "Привіт, {email}!"
+    "greeting": "Привіт, {email}!",
+    "signUpTitle": "Реєстрація",
+    "signUpDescription": "Створіть новий обліковий запис за допомогою email та пароля",
+    "repeatPassword": "Підтвердіть пароль",
+    "signingUp": "Створення облікового запису...",
+    "passwordMismatch": "Паролі не збігаються",
+    "hasAccount": "Вже маєте обліковий запис?",
+    "signUpSuccessTitle": "Дякуємо за реєстрацію!",
+    "signUpSuccessDescription": "Перевірте вашу пошту",
+    "signUpSuccessMessage": "Ви успішно зареєструвалися. Будь ласка, перевірте пошту та підтвердіть обліковий запис перед входом.",
+    "forgotPasswordTitle": "Скидання пароля",
+    "forgotPasswordDescription": "Введіть email, і ми надішлемо посилання для скидання пароля.",
+    "forgotPasswordSending": "Надсилання...",
+    "forgotPasswordSend": "Надіслати лист для скидання",
+    "checkEmailTitle": "Перевірте вашу пошту",
+    "checkEmailDescription": "Інструкції зі скидання пароля надіслано",
+    "checkEmailMessage": "Якщо ви реєструвалися за допомогою email та пароля, ви отримаєте лист для скидання пароля.",
+    "updatePasswordTitle": "Скидання пароля",
+    "updatePasswordDescription": "Введіть новий пароль.",
+    "newPassword": "Новий пароль",
+    "updatePasswordSaving": "Збереження...",
+    "updatePasswordSave": "Зберегти новий пароль"
   },
   "errors": {
     "loginRequired": "Потрібен вхід",
