@@ -14,7 +14,8 @@
     "tagline": "Beyond verbal promises",
     "requiredField": "Please fill in this field",
     "invalidEmail": "Please enter a valid email address",
-    "loggedOut": "You have been logged out"
+    "loggedOut": "You have been logged out",
+    "loggedIn": "You have been logged in"
   },
   "home": {
     "hero": "Beyond verbal promises",

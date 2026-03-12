@@ -14,7 +14,8 @@
     "tagline": "Mer enn muntlige løfter",
     "requiredField": "Vennligst fyll ut dette feltet",
     "invalidEmail": "Vennligst oppgi en gyldig e-postadresse",
-    "loggedOut": "Du er logget ut"
+    "loggedOut": "Du er logget ut",
+    "loggedIn": "Du er logget inn"
   },
   "home": {
     "hero": "Mer enn muntlige løfter",

@@ -14,7 +14,8 @@
     "tagline": "Além das promessas verbais",
     "requiredField": "Preencha este campo",
     "invalidEmail": "Insira um endereço de e-mail válido",
-    "loggedOut": "Você saiu da conta"
+    "loggedOut": "Você saiu da conta",
+    "loggedIn": "Você entrou na conta"
   },
   "home": {
     "hero": "Além das promessas verbais",

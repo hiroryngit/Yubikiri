@@ -14,7 +14,8 @@
     "tagline": "Oltre le promesse verbali",
     "requiredField": "Compila questo campo",
     "invalidEmail": "Inserisci un indirizzo email valido",
-    "loggedOut": "Sei stato disconnesso"
+    "loggedOut": "Sei stato disconnesso",
+    "loggedIn": "Accesso effettuato"
   },
   "home": {
     "hero": "Oltre le promesse verbali",

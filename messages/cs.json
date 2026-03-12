@@ -14,7 +14,8 @@
     "tagline": "Více než ústní sliby",
     "requiredField": "Vyplňte toto pole",
     "invalidEmail": "Zadejte platnou e-mailovou adresu",
-    "loggedOut": "Byli jste odhlášeni"
+    "loggedOut": "Byli jste odhlášeni",
+    "loggedIn": "Byli jste přihlášeni"
   },
   "home": {
     "hero": "Více než ústní sliby",

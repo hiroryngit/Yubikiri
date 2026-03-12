@@ -14,7 +14,8 @@
     "tagline": "Lebih dari sekadar janji lisan",
     "requiredField": "Harap isi kolom ini",
     "invalidEmail": "Harap masukkan alamat email yang valid",
-    "loggedOut": "Anda telah keluar"
+    "loggedOut": "Anda telah keluar",
+    "loggedIn": "Anda telah masuk"
   },
   "home": {
     "hero": "Lebih dari sekadar janji lisan",

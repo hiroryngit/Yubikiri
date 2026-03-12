@@ -11,7 +11,8 @@ export async function GET(request: NextRequest) {
     const returnCookie = request.cookies.get("yubikiri_return")?.value;
     const returnUrl = returnCookie ? decodeURIComponent(returnCookie) : "/";
 
-    const response = NextResponse.redirect(`${origin}${returnUrl}`);
+    const separator = returnUrl.includes("?") ? "&" : "?";
+    const response = NextResponse.redirect(`${origin}${returnUrl}${separator}logged_in=true`);
 
     // 戻り先 cookie を削除
     response.cookies.set("yubikiri_return", "", { path: "/", maxAge: 0 });

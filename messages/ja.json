@@ -14,7 +14,8 @@
     "tagline": "口約束からの脱却",
     "requiredField": "この項目を入力してください",
     "invalidEmail": "有効なメールアドレスを入力してください",
-    "loggedOut": "ログアウトしました"
+    "loggedOut": "ログアウトしました",
+    "loggedIn": "ログインしました"
   },
   "home": {
     "hero": "口約束からの脱却",

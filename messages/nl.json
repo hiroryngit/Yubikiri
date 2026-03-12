@@ -14,7 +14,8 @@
     "tagline": "Verder dan mondelinge beloftes",
     "requiredField": "Vul dit veld in",
     "invalidEmail": "Voer een geldig e-mailadres in",
-    "loggedOut": "U bent uitgelogd"
+    "loggedOut": "U bent uitgelogd",
+    "loggedIn": "U bent ingelogd"
   },
   "home": {
     "hero": "Verder dan mondelinge beloftes",

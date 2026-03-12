@@ -14,7 +14,8 @@
     "tagline": "구두 약속 그 이상",
     "requiredField": "이 항목을 입력해주세요",
     "invalidEmail": "유효한 이메일 주소를 입력해주세요",
-    "loggedOut": "로그아웃되었습니다"
+    "loggedOut": "로그아웃되었습니다",
+    "loggedIn": "로그인되었습니다"
   },
   "home": {
     "hero": "구두 약속 그 이상",

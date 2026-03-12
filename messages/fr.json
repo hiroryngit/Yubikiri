@@ -14,7 +14,8 @@
     "tagline": "Au-delà des promesses verbales",
     "requiredField": "Veuillez remplir ce champ",
     "invalidEmail": "Veuillez entrer une adresse e-mail valide",
-    "loggedOut": "Vous avez été déconnecté"
+    "loggedOut": "Vous avez été déconnecté",
+    "loggedIn": "Vous êtes connecté"
   },
   "home": {
     "hero": "Au-delà des promesses verbales",

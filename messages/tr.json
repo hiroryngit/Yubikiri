@@ -14,7 +14,8 @@
     "tagline": "Sözlü vaatlerin ötesinde",
     "requiredField": "Lütfen bu alanı doldurun",
     "invalidEmail": "Lütfen geçerli bir e-posta adresi girin",
-    "loggedOut": "Çıkış yapıldı"
+    "loggedOut": "Çıkış yapıldı",
+    "loggedIn": "Giriş yapıldı"
   },
   "home": {
     "hero": "Sözlü vaatlerin ötesinde",

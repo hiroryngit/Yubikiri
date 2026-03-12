@@ -2,6 +2,7 @@ import { AuthButton } from "@/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { LogoutToast } from "@/components/logout-toast";
+import { LoginToast } from "@/components/login-toast";
 import { YubikiriLogo, YubikiriLogoText } from "@/components/yubikiri-logo";
 import { hasEnvVars } from "@/lib/utils";
 import { Suspense } from "react";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center">
       <LogoutToast />
+      <LoginToast />
       <div className="flex-1 w-full flex flex-col items-center">
         <nav className="w-full flex justify-center border-b border-b-foreground/10 h-14 sm:h-16">
           <div className="w-full max-w-5xl flex justify-between items-center px-4 sm:px-5 text-sm">

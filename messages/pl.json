@@ -14,7 +14,8 @@
     "tagline": "Więcej niż ustne obietnice",
     "requiredField": "Proszę wypełnić to pole",
     "invalidEmail": "Proszę podać prawidłowy adres e-mail",
-    "loggedOut": "Wylogowano"
+    "loggedOut": "Wylogowano",
+    "loggedIn": "Zalogowano"
   },
   "home": {
     "hero": "Więcej niż ustne obietnice",

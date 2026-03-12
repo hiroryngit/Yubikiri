@@ -14,7 +14,8 @@
     "tagline": "Vượt xa lời hứa miệng",
     "requiredField": "Vui lòng điền vào trường này",
     "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ",
-    "loggedOut": "Bạn đã đăng xuất"
+    "loggedOut": "Bạn đã đăng xuất",
+    "loggedIn": "Bạn đã đăng nhập"
   },
   "home": {
     "hero": "Vượt xa lời hứa miệng",
