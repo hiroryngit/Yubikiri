@@ -28,7 +28,6 @@ import {
   Redo,
   Palette,
   Highlighter,
-  Type,
 } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -64,48 +63,80 @@ function ToolbarButton({
 }
 
 function Separator() {
-  return <div className="w-px h-5 bg-border mx-0.5" />;
+  return <div className="w-px h-5 bg-border mx-0.5 shrink-0" />;
 }
 
+// --- カラーパレット ---
 const TEXT_COLORS = [
-  { label: "Default", value: "" },
+  // Row 1: Darks
+  { label: "Black", value: "#000000" },
+  { label: "Dark Gray", value: "#374151" },
+  { label: "Gray", value: "#6b7280" },
+  { label: "Light Gray", value: "#9ca3af" },
+  { label: "Silver", value: "#d1d5db" },
+  { label: "White", value: "#ffffff" },
+  // Row 2: Vivid
   { label: "Red", value: "#dc2626" },
   { label: "Orange", value: "#ea580c" },
+  { label: "Amber", value: "#d97706" },
   { label: "Yellow", value: "#ca8a04" },
+  { label: "Lime", value: "#65a30d" },
   { label: "Green", value: "#16a34a" },
+  // Row 3: Cool + Warm
+  { label: "Teal", value: "#0d9488" },
+  { label: "Cyan", value: "#0891b2" },
   { label: "Blue", value: "#2563eb" },
+  { label: "Indigo", value: "#4f46e5" },
   { label: "Purple", value: "#9333ea" },
   { label: "Pink", value: "#db2777" },
-  { label: "Gray", value: "#6b7280" },
+  // Row 4: Dark variants
+  { label: "Dark Red", value: "#991b1b" },
+  { label: "Dark Orange", value: "#9a3412" },
+  { label: "Dark Green", value: "#166534" },
+  { label: "Dark Blue", value: "#1e3a8a" },
+  { label: "Dark Purple", value: "#581c87" },
+  { label: "Rose", value: "#be185d" },
 ];
 
 const HIGHLIGHT_COLORS = [
-  { label: "None", value: "" },
   { label: "Yellow", value: "#fef08a" },
+  { label: "Lime", value: "#d9f99d" },
   { label: "Green", value: "#bbf7d0" },
+  { label: "Cyan", value: "#a5f3fc" },
   { label: "Blue", value: "#bfdbfe" },
-  { label: "Pink", value: "#fbcfe8" },
-  { label: "Orange", value: "#fed7aa" },
   { label: "Purple", value: "#e9d5ff" },
+  { label: "Pink", value: "#fbcfe8" },
+  { label: "Rose", value: "#fecdd3" },
+  { label: "Orange", value: "#fed7aa" },
+  { label: "Warm Gray", value: "#e7e5e4" },
 ];
 
 const FONTS = [
-  { label: "Default", value: "" },
-  { label: "Sans-serif", value: "Arial, Helvetica, sans-serif" },
-  { label: "Serif", value: "Georgia, Times New Roman, serif" },
-  { label: "Monospace", value: "Courier New, monospace" },
+  { label: "Default", value: "", family: "" },
+  { label: "Arial", value: "Arial, Helvetica, sans-serif", family: "Arial, sans-serif" },
+  { label: "Verdana", value: "Verdana, Geneva, sans-serif", family: "Verdana, sans-serif" },
+  { label: "Trebuchet MS", value: "Trebuchet MS, sans-serif", family: "'Trebuchet MS', sans-serif" },
+  { label: "Georgia", value: "Georgia, serif", family: "Georgia, serif" },
+  { label: "Times New Roman", value: "Times New Roman, serif", family: "'Times New Roman', serif" },
+  { label: "Palatino", value: "Palatino Linotype, Palatino, serif", family: "'Palatino Linotype', serif" },
+  { label: "Courier New", value: "Courier New, monospace", family: "'Courier New', monospace" },
+  { label: "Lucida Console", value: "Lucida Console, monospace", family: "'Lucida Console', monospace" },
+  { label: "Comic Sans MS", value: "Comic Sans MS, cursive", family: "'Comic Sans MS', cursive" },
+  { label: "Impact", value: "Impact, sans-serif", family: "Impact, sans-serif" },
 ];
 
 function ColorPicker({
   colors,
   currentColor,
   onSelect,
+  onClear,
   icon,
   title,
 }: {
   colors: { label: string; value: string }[];
   currentColor: string;
   onSelect: (color: string) => void;
+  onClear: () => void;
   icon: React.ReactNode;
   title: string;
 }) {
@@ -124,25 +155,34 @@ function ColorPicker({
       {open && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute top-full left-0 mt-1 z-50 bg-popover border border-border rounded-md shadow-md p-1.5 flex gap-1 flex-wrap w-[140px]">
-            {colors.map((c) => (
-              <button
-                key={c.value || "default"}
-                type="button"
-                title={c.label}
-                className={`w-6 h-6 rounded border transition-all ${
-                  currentColor === c.value ? "ring-2 ring-ring" : "border-border"
-                }`}
-                style={{
-                  backgroundColor: c.value || "transparent",
-                  ...(c.value === "" ? { backgroundImage: "linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%)", backgroundSize: "6px 6px" } : {}),
-                }}
-                onClick={() => {
-                  onSelect(c.value);
-                  setOpen(false);
-                }}
-              />
-            ))}
+          <div className="absolute top-full left-0 mt-1 z-50 bg-popover border border-border rounded-lg shadow-lg p-2">
+            <div className="grid grid-cols-6 gap-1 mb-1.5">
+              {colors.map((c) => (
+                <button
+                  key={c.value}
+                  type="button"
+                  title={c.label}
+                  className={`w-6 h-6 rounded-sm border transition-all hover:scale-110 ${
+                    currentColor === c.value ? "ring-2 ring-ring ring-offset-1" : "border-border/50"
+                  }`}
+                  style={{ backgroundColor: c.value }}
+                  onClick={() => {
+                    onSelect(c.value);
+                    setOpen(false);
+                  }}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              className="w-full text-xs text-muted-foreground hover:text-foreground py-1 border-t border-border"
+              onClick={() => {
+                onClear();
+                setOpen(false);
+              }}
+            >
+              Reset
+            </button>
           </div>
         </>
       )}
@@ -202,6 +242,7 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
   return (
     <div className="rounded-md border border-input shadow-sm overflow-hidden">
       <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 border-b border-input bg-muted/30">
+        {/* Text style */}
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}
           active={editor.isActive("bold")}
@@ -233,22 +274,18 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
 
         <Separator />
 
+        {/* Color & Highlight */}
         <ColorPicker
           colors={TEXT_COLORS}
           currentColor={currentTextColor}
-          onSelect={(color) => {
-            if (color) {
-              editor.chain().focus().setColor(color).run();
-            } else {
-              editor.chain().focus().unsetColor().run();
-            }
-          }}
+          onSelect={(color) => editor.chain().focus().setColor(color).run()}
+          onClear={() => editor.chain().focus().unsetColor().run()}
           icon={
             <div className="relative">
               <Palette className={iconSize} />
               {currentTextColor && (
                 <div
-                  className="absolute -bottom-0.5 left-0 right-0 h-0.5 rounded"
+                  className="absolute -bottom-0.5 left-0 right-0 h-1 rounded"
                   style={{ backgroundColor: currentTextColor }}
                 />
               )}
@@ -259,19 +296,15 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
         <ColorPicker
           colors={HIGHLIGHT_COLORS}
           currentColor={currentHighlight}
-          onSelect={(color) => {
-            if (color) {
-              editor.chain().focus().toggleHighlight({ color }).run();
-            } else {
-              editor.chain().focus().unsetHighlight().run();
-            }
-          }}
+          onSelect={(color) => editor.chain().focus().toggleHighlight({ color }).run()}
+          onClear={() => editor.chain().focus().unsetHighlight().run()}
           icon={<Highlighter className={iconSize} />}
           title="Highlight"
         />
 
         <Separator />
 
+        {/* Font */}
         <select
           value={editor.getAttributes("textStyle").fontFamily || ""}
           onChange={(e) => {
@@ -282,11 +315,11 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
               editor.chain().focus().unsetFontFamily().run();
             }
           }}
-          className="h-7 text-xs bg-transparent border border-input rounded px-1 text-muted-foreground hover:text-foreground cursor-pointer"
+          className="h-7 text-xs bg-background border border-input rounded px-1.5 text-foreground cursor-pointer max-w-[120px]"
           title="Font"
         >
           {FONTS.map((f) => (
-            <option key={f.value} value={f.value} style={{ fontFamily: f.value || undefined }}>
+            <option key={f.value} value={f.value} style={{ fontFamily: f.family || undefined }}>
               {f.label}
             </option>
           ))}
@@ -294,6 +327,7 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
 
         <Separator />
 
+        {/* Headings */}
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
           active={editor.isActive("heading", { level: 1 })}
@@ -318,6 +352,7 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
 
         <Separator />
 
+        {/* Lists */}
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           active={editor.isActive("bulletList")}
@@ -342,6 +377,7 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
 
         <Separator />
 
+        {/* Alignment */}
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           active={editor.isActive({ textAlign: "left" })}
@@ -366,12 +402,14 @@ export function RichTextEditor({ content, onChange, placeholder }: Props) {
 
         <Separator />
 
+        {/* Link */}
         <ToolbarButton onClick={setLink} active={editor.isActive("link")} title="Link">
           <LinkIcon className={iconSize} />
         </ToolbarButton>
 
         <Separator />
 
+        {/* Undo/Redo */}
         <ToolbarButton
           onClick={() => editor.chain().focus().undo().run()}
           title="Undo"

@@ -65,7 +65,11 @@ async function callProvider(
       messages: [
         {
           role: "system",
-          content: `You are a professional ${langName} language expert with deep understanding of cultural nuances and idiomatic expressions. You can grasp the subtle nuances behind any given text. Translate the following title and content into natural, fluent ${langName} (${targetLocale}), preserving the original tone, intent, and nuance as faithfully as possible. The translation should read as if it were originally written in ${langName} by a native speaker. Output ONLY valid JSON with "title" and "content" keys. Do not add any explanation, commentary, or markdown formatting.`,
+          content: `You are a professional ${langName} language expert with deep understanding of cultural nuances and idiomatic expressions. You can grasp the subtle nuances behind any given text. Translate the following title and content into natural, fluent ${langName} (${targetLocale}), preserving the original tone, intent, and nuance as faithfully as possible. The translation should read as if it were originally written in ${langName} by a native speaker.
+
+IMPORTANT: The content field may contain HTML markup (e.g. <p>, <strong>, <em>, <h1>, <ul>, <li>, <span style="...">, <mark>, <a href="...">, etc.). You MUST preserve ALL HTML tags, attributes, and structure exactly as they are. Only translate the visible text content between the tags. Do NOT modify, remove, or add any HTML tags or attributes. Do NOT translate attribute values like href URLs, style properties, or class names.
+
+Output ONLY valid JSON with "title" and "content" keys. Do not add any explanation, commentary, or markdown formatting.`,
         },
         {
           role: "user",
