@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { editAgreement } from "@/app/actions/agreements";
 import { useTranslations } from "next-intl";
 import { useCustomValidity } from "@/lib/use-custom-validity";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 type Props = {
   agreementId: string;
@@ -67,16 +68,8 @@ export function AgreementEditForm({
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="edit-content">{t("agreement.contentLabel")}</Label>
-        <textarea
-          id="edit-content"
-          className="flex min-h-[140px] w-full rounded-md border border-input bg-transparent px-3 py-2.5 text-base sm:text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-          onInvalid={validity.onInvalid}
-          onInput={validity.onInput}
-        />
+        <Label>{t("agreement.contentLabel")}</Label>
+        <RichTextEditor content={content} onChange={setContent} />
       </div>
 
       {error && <p className="text-sm text-destructive">{error}</p>}

@@ -27,6 +27,7 @@ import { parseUserAgent } from "@/lib/parse-user-agent";
 import { formatGeoLocation } from "@/lib/geo";
 import { useTranslations, useLocale } from "next-intl";
 import { Pencil, History, Languages } from "lucide-react";
+import { RichTextContent } from "@/components/rich-text-content";
 
 type Props = {
   agreement: Agreement;
@@ -151,9 +152,9 @@ export function AgreementDetail({
                 {translateError && (
                   <p className="text-xs text-destructive mb-2">{translateError}</p>
                 )}
-                <p className="whitespace-pre-wrap">
-                  {showTranslation && translated ? translated.content : agreement.content}
-                </p>
+                <RichTextContent
+                  html={showTranslation && translated ? translated.content : agreement.content}
+                />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-sm">
                 <div>

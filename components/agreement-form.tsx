@@ -12,6 +12,7 @@ import Link from "next/link";
 import { CopyButton } from "@/components/copy-button";
 import { useTranslations, useLocale } from "next-intl";
 import { useCustomValidity } from "@/lib/use-custom-validity";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 const DRAFT_KEY = "yubikiri_draft";
 
@@ -93,6 +94,12 @@ export function AgreementForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    const strippedContent = content.replace(/<[^>]*>/g, "").trim();
+    if (!title.trim() || !strippedContent) {
+      setError(t("errors.titleContentRequired"));
+      return;
+    }
+
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -145,17 +152,11 @@ export function AgreementForm() {
       </div>
 
       <div className="space-y-2.5">
-        <Label htmlFor="content">{t("agreement.contentLabel")}</Label>
-        <textarea
-          id="content"
-          name="content"
-          className="flex min-h-[140px] w-full rounded-md border border-input bg-transparent px-3 py-2.5 text-base sm:text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+        <Label>{t("agreement.contentLabel")}</Label>
+        <RichTextEditor
+          content={content}
+          onChange={setContent}
           placeholder={t("agreement.contentPlaceholder")}
-          required
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          onInvalid={validity.onInvalid}
-          onInput={validity.onInput}
         />
       </div>
 
