@@ -5,9 +5,10 @@ const ALLOWED_TAGS = [
   "h1", "h2", "h3",
   "ul", "ol", "li",
   "blockquote", "a",
+  "span", "mark",
 ];
 
-const ALLOWED_ATTR = ["href", "target", "rel", "style", "class"];
+const ALLOWED_ATTR = ["href", "target", "rel", "style", "class", "data-color"];
 
 export function sanitizeHtml(html: string): string {
   return DOMPurify.sanitize(html, {

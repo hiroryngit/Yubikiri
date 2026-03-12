@@ -9,9 +9,10 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { AgreementStatusBadge } from "@/components/agreement-status-badge";
+import { RichTextContent } from "@/components/rich-text-content";
 import type { Agreement } from "@/types/database";
 import { useTranslations, useLocale } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Languages } from "lucide-react";
 
 export function AgreementCard({ agreement }: { agreement: Agreement }) {
@@ -20,34 +21,44 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
   const [translated, setTranslated] = useState<{ title: string; content: string } | null>(null);
   const [showTranslation, setShowTranslation] = useState(false);
   const [translating, setTranslating] = useState(false);
+  const autoTranslated = useRef(false);
 
-  async function handleTranslate(e: React.MouseEvent) {
+  const needsTranslation = agreement.originalLocale !== locale;
+
+  // 言語が異なる場合はマウント時に自動翻訳
+  useEffect(() => {
+    if (!needsTranslation || autoTranslated.current) return;
+    autoTranslated.current = true;
+
+    setTranslating(true);
+    fetch("/api/translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: agreement.title,
+        content: agreement.content,
+        targetLocale: locale,
+      }),
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setTranslated(data);
+        setShowTranslation(true);
+      })
+      .catch(() => {
+        // 翻訳失敗時は原文のまま表示
+      })
+      .finally(() => setTranslating(false));
+  }, [needsTranslation, agreement.title, agreement.content, locale]);
+
+  function handleToggleTranslation(e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    if (translated) {
-      setShowTranslation((v) => !v);
-      return;
-    }
-    setTranslating(true);
-    try {
-      const res = await fetch("/api/translate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: agreement.title, content: agreement.content, targetLocale: locale }),
-      });
-      const text = await res.text();
-      if (!res.ok || !text) throw new Error("failed");
-      const data = JSON.parse(text);
-      setTranslated(data);
-      setShowTranslation(true);
-    } catch {
-      // silently fail on card
-    } finally {
-      setTranslating(false);
-    }
+    if (!translated) return;
+    setShowTranslation((v) => !v);
   }
 
-  const canTranslate = agreement.originalLocale !== locale;
   const displayTitle = showTranslation && translated ? translated.title : agreement.title;
   const displayContent = showTranslation && translated ? translated.content : agreement.content;
 
@@ -58,14 +69,17 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-lg leading-tight">{displayTitle}</CardTitle>
             <div className="flex items-center gap-1.5 shrink-0">
-              {canTranslate && (
+              {needsTranslation && translated && (
                 <button
-                  onClick={handleTranslate}
+                  onClick={handleToggleTranslation}
                   className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded"
                   title={showTranslation ? t("agreement.showOriginal") : t("agreement.translate")}
                 >
-                  <Languages className={`h-4 w-4 ${translating ? "animate-pulse" : ""} ${showTranslation ? "text-primary" : ""}`} />
+                  <Languages className={`h-4 w-4 ${showTranslation ? "text-primary" : ""}`} />
                 </button>
+              )}
+              {translating && (
+                <Languages className="h-4 w-4 text-muted-foreground animate-pulse" />
               )}
               <AgreementStatusBadge status={agreement.status} />
             </div>
@@ -75,9 +89,9 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-muted-foreground line-clamp-2">
-            {displayContent}
-          </p>
+          <div className="text-sm text-muted-foreground line-clamp-2">
+            <RichTextContent html={displayContent} />
+          </div>
           <p className="text-xs text-muted-foreground mt-2">
             {t("dashboard.createdAt")}: {new Date(agreement.createdAt).toLocaleDateString(locale)}
           </p>
