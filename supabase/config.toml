@@ -179,7 +179,7 @@ password_requirements = ""
 
 [auth.rate_limit]
 # Number of emails that can be sent per hour.
-email_sent = 30
+email_sent = 100
 # Number of SMS messages that can be sent per hour. Requires auth.sms to be enabled.
 sms_sent = 30
 # Number of anonymous sign-ins that can be made per hour per IP address. Requires enable_anonymous_sign_ins = true.
@@ -217,14 +217,16 @@ otp_length = 6
 otp_expiry = 3600
 
 # Use a production-ready SMTP server
-[auth.email.smtp]
-enabled = true
-host = "smtp.resend.com"
-port = 465
-user = "resend"
-pass = "env(RESEND_API_KEY)"
-admin_email = "onboarding@resend.dev"
-sender_name = "Yubikiri"
+# NOTE: Supabase's built-in SMTP client fails to connect to Resend.
+# Using Supabase's built-in email service instead.
+# [auth.email.smtp]
+# enabled = true
+# host = "smtp.resend.com"
+# port = 587
+# user = "resend"
+# pass = "env(RESEND_API_KEY)"
+# admin_email = "onboarding@resend.dev"
+# sender_name = "Yubikiri"
 
 [auth.email.template.confirmation]
 subject = "Confirm your email - Yubikiri"
