@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createAgreement } from "@/app/actions/agreements";
 import { createClient } from "@/lib/supabase/client";
-import { pushReturnUrl, popReturnUrl, hasReturnUrl } from "@/lib/return-stack";
+import { pushReturnUrl } from "@/lib/return-stack";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -37,8 +37,6 @@ export function AgreementForm() {
       sessionStorage.removeItem(DRAFT_KEY);
       setTitle(draftTitle);
       setContent(draftContent);
-      // 下書き復元時は return stack を消費しておく（AuthReturnHandler の重複リダイレクト防止）
-      if (hasReturnUrl()) popReturnUrl();
       waitForAuthAndSubmit(draftTitle, draftContent);
     }
   }, []);

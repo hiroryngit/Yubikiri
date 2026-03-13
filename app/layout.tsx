@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { IntlProvider } from "@/components/intl-provider";
-import { AuthReturnHandler } from "@/components/auth-return-handler";
 import { AuthStateListener } from "@/components/auth-state-listener";
-import { Suspense } from "react";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -38,9 +36,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <IntlProvider>
-            <Suspense>
-              <AuthReturnHandler />
-            </Suspense>
             <AuthStateListener />
             {children}
           </IntlProvider>
