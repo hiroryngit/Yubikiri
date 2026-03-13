@@ -119,6 +119,7 @@
     "repeatPassword": "Bekræft adgangskode",
     "signingUp": "Opretter konto...",
     "passwordMismatch": "Adgangskoderne matcher ikke",
+    "passwordTooShort": "Adgangskoden skal være mindst 8 tegn",
     "hasAccount": "Har du allerede en konto?",
     "signUpSuccessTitle": "Tak for din tilmelding!",
     "signUpSuccessDescription": "Tjek din e-mail",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Indtast venligst din nye adgangskode.",
     "newPassword": "Ny adgangskode",
     "updatePasswordSaving": "Gemmer...",
-    "updatePasswordSave": "Gem ny adgangskode"
+    "updatePasswordSave": "Gem ny adgangskode",
+    "errorTitle": "Noget gik galt",
+    "errorMessage": "Der opstod en uspecificeret fejl."
   },
   "errors": {
     "loginRequired": "Login påkrævet",

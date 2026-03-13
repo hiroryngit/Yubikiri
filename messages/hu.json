@@ -119,6 +119,7 @@
     "repeatPassword": "Jelszó megerősítése",
     "signingUp": "Fiók létrehozása...",
     "passwordMismatch": "A jelszavak nem egyeznek",
+    "passwordTooShort": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
     "hasAccount": "Már van fiókod?",
     "signUpSuccessTitle": "Köszönjük a regisztrációt!",
     "signUpSuccessDescription": "Ellenőrizd az e-mailed",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Add meg az új jelszavad.",
     "newPassword": "Új jelszó",
     "updatePasswordSaving": "Mentés...",
-    "updatePasswordSave": "Új jelszó mentése"
+    "updatePasswordSave": "Új jelszó mentése",
+    "errorTitle": "Valami hiba történt",
+    "errorMessage": "Ismeretlen hiba történt."
   },
   "errors": {
     "loginRequired": "Bejelentkezés szükséges",

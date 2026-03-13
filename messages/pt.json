@@ -119,6 +119,7 @@
     "repeatPassword": "Confirmar senha",
     "signingUp": "Criando conta...",
     "passwordMismatch": "As senhas não coincidem",
+    "passwordTooShort": "A senha deve ter pelo menos 8 caracteres",
     "hasAccount": "Já tem uma conta?",
     "signUpSuccessTitle": "Obrigado pelo cadastro!",
     "signUpSuccessDescription": "Verifique seu email",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Digite sua nova senha.",
     "newPassword": "Nova senha",
     "updatePasswordSaving": "Salvando...",
-    "updatePasswordSave": "Salvar nova senha"
+    "updatePasswordSave": "Salvar nova senha",
+    "errorTitle": "Algo deu errado",
+    "errorMessage": "Ocorreu um erro não especificado."
   },
   "errors": {
     "loginRequired": "Login necessário",

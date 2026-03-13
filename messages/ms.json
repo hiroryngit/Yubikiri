@@ -119,6 +119,7 @@
     "repeatPassword": "Sahkan kata laluan",
     "signingUp": "Mendaftar...",
     "passwordMismatch": "Kata laluan tidak sepadan",
+    "passwordTooShort": "Kata laluan mestilah sekurang-kurangnya 8 aksara",
     "hasAccount": "Sudah ada akaun?",
     "signUpSuccessTitle": "Terima kasih kerana mendaftar!",
     "signUpSuccessDescription": "Semak e-mel anda",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Sila masukkan kata laluan baharu anda.",
     "newPassword": "Kata laluan baharu",
     "updatePasswordSaving": "Menyimpan...",
-    "updatePasswordSave": "Simpan kata laluan baharu"
+    "updatePasswordSave": "Simpan kata laluan baharu",
+    "errorTitle": "Sesuatu telah berlaku",
+    "errorMessage": "Ralat tidak ditentukan berlaku."
   },
   "errors": {
     "loginRequired": "Log masuk diperlukan",

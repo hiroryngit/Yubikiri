@@ -119,6 +119,7 @@
     "repeatPassword": "Conferma password",
     "signingUp": "Creazione account...",
     "passwordMismatch": "Le password non corrispondono",
+    "passwordTooShort": "La password deve essere di almeno 8 caratteri",
     "hasAccount": "Hai già un account?",
     "signUpSuccessTitle": "Grazie per la registrazione!",
     "signUpSuccessDescription": "Controlla la tua email",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Inserisci la tua nuova password.",
     "newPassword": "Nuova password",
     "updatePasswordSaving": "Salvataggio...",
-    "updatePasswordSave": "Salva nuova password"
+    "updatePasswordSave": "Salva nuova password",
+    "errorTitle": "Qualcosa è andato storto",
+    "errorMessage": "Si è verificato un errore non specificato."
   },
   "errors": {
     "loginRequired": "Accesso richiesto",

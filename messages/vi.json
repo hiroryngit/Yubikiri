@@ -119,6 +119,7 @@
     "repeatPassword": "Xác nhận mật khẩu",
     "signingUp": "Đang tạo tài khoản...",
     "passwordMismatch": "Mật khẩu không khớp",
+    "passwordTooShort": "Mật khẩu phải có ít nhất 8 ký tự",
     "hasAccount": "Đã có tài khoản?",
     "signUpSuccessTitle": "Cảm ơn bạn đã đăng ký!",
     "signUpSuccessDescription": "Kiểm tra email của bạn",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Vui lòng nhập mật khẩu mới.",
     "newPassword": "Mật khẩu mới",
     "updatePasswordSaving": "Đang lưu...",
-    "updatePasswordSave": "Lưu mật khẩu mới"
+    "updatePasswordSave": "Lưu mật khẩu mới",
+    "errorTitle": "Đã xảy ra lỗi",
+    "errorMessage": "Đã xảy ra lỗi không xác định."
   },
   "errors": {
     "loginRequired": "Cần đăng nhập",

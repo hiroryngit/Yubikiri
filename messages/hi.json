@@ -119,6 +119,7 @@
     "repeatPassword": "पासवर्ड की पुष्टि करें",
     "signingUp": "खाता बना रहे हैं...",
     "passwordMismatch": "पासवर्ड मेल नहीं खाते",
+    "passwordTooShort": "पासवर्ड कम से कम 8 अक्षर का होना चाहिए",
     "hasAccount": "पहले से खाता है?",
     "signUpSuccessTitle": "साइन अप के लिए धन्यवाद!",
     "signUpSuccessDescription": "अपना ईमेल जांचें",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "कृपया अपना नया पासवर्ड दर्ज करें।",
     "newPassword": "नया पासवर्ड",
     "updatePasswordSaving": "सहेज रहे हैं...",
-    "updatePasswordSave": "नया पासवर्ड सहेजें"
+    "updatePasswordSave": "नया पासवर्ड सहेजें",
+    "errorTitle": "कुछ गलत हो गया",
+    "errorMessage": "एक अनिर्दिष्ट त्रुटि हुई।"
   },
   "errors": {
     "loginRequired": "लॉगिन आवश्यक है",

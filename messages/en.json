@@ -119,6 +119,7 @@
     "repeatPassword": "Confirm password",
     "signingUp": "Creating account...",
     "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 8 characters",
     "hasAccount": "Already have an account?",
     "signUpSuccessTitle": "Thank you for signing up!",
     "signUpSuccessDescription": "Check your email to confirm",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Please enter your new password below.",
     "newPassword": "New password",
     "updatePasswordSaving": "Saving...",
-    "updatePasswordSave": "Save new password"
+    "updatePasswordSave": "Save new password",
+    "errorTitle": "Something went wrong",
+    "errorMessage": "An unspecified error occurred."
   },
   "errors": {
     "loginRequired": "Login required",

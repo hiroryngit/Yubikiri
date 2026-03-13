@@ -119,6 +119,7 @@
     "repeatPassword": "Confirmă parola",
     "signingUp": "Se creează contul...",
     "passwordMismatch": "Parolele nu se potrivesc",
+    "passwordTooShort": "Parola trebuie să aibă cel puțin 8 caractere",
     "hasAccount": "Aveți deja un cont?",
     "signUpSuccessTitle": "Mulțumim pentru înregistrare!",
     "signUpSuccessDescription": "Verificați emailul",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Introduceți noua parolă.",
     "newPassword": "Parolă nouă",
     "updatePasswordSaving": "Se salvează...",
-    "updatePasswordSave": "Salvează parola nouă"
+    "updatePasswordSave": "Salvează parola nouă",
+    "errorTitle": "Ceva nu a funcționat",
+    "errorMessage": "A apărut o eroare nespecificată."
   },
   "errors": {
     "loginRequired": "Autentificare necesară",

@@ -119,6 +119,7 @@
     "repeatPassword": "Şifreyi onayla",
     "signingUp": "Hesap oluşturuluyor...",
     "passwordMismatch": "Şifreler eşleşmiyor",
+    "passwordTooShort": "Şifre en az 8 karakter olmalıdır",
     "hasAccount": "Zaten hesabınız var mı?",
     "signUpSuccessTitle": "Kayıt olduğunuz için teşekkürler!",
     "signUpSuccessDescription": "E-postanızı kontrol edin",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Lütfen yeni şifrenizi girin.",
     "newPassword": "Yeni şifre",
     "updatePasswordSaving": "Kaydediliyor...",
-    "updatePasswordSave": "Yeni şifreyi kaydet"
+    "updatePasswordSave": "Yeni şifreyi kaydet",
+    "errorTitle": "Bir hata oluştu",
+    "errorMessage": "Belirtilmemiş bir hata oluştu."
   },
   "errors": {
     "loginRequired": "Giriş yapmanız gerekiyor",

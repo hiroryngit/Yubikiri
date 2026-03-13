@@ -119,6 +119,7 @@
     "repeatPassword": "Wachtwoord bevestigen",
     "signingUp": "Account aanmaken...",
     "passwordMismatch": "Wachtwoorden komen niet overeen",
+    "passwordTooShort": "Wachtwoord moet minimaal 8 tekens bevatten",
     "hasAccount": "Heeft u al een account?",
     "signUpSuccessTitle": "Bedankt voor uw registratie!",
     "signUpSuccessDescription": "Controleer uw e-mail",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Voer uw nieuwe wachtwoord in.",
     "newPassword": "Nieuw wachtwoord",
     "updatePasswordSaving": "Opslaan...",
-    "updatePasswordSave": "Nieuw wachtwoord opslaan"
+    "updatePasswordSave": "Nieuw wachtwoord opslaan",
+    "errorTitle": "Er is iets misgegaan",
+    "errorMessage": "Er is een niet-gespecificeerde fout opgetreden."
   },
   "errors": {
     "loginRequired": "Inloggen vereist",

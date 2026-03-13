@@ -119,6 +119,7 @@
     "repeatPassword": "Επιβεβαίωση κωδικού",
     "signingUp": "Δημιουργία λογαριασμού...",
     "passwordMismatch": "Οι κωδικοί δεν ταιριάζουν",
+    "passwordTooShort": "Ο κωδικός πρέπει να έχει τουλάχιστον 8 χαρακτήρες",
     "hasAccount": "Έχετε ήδη λογαριασμό;",
     "signUpSuccessTitle": "Ευχαριστούμε για την εγγραφή!",
     "signUpSuccessDescription": "Ελέγξτε το email σας",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Εισάγετε τον νέο κωδικό σας.",
     "newPassword": "Νέος κωδικός",
     "updatePasswordSaving": "Αποθήκευση...",
-    "updatePasswordSave": "Αποθήκευση νέου κωδικού"
+    "updatePasswordSave": "Αποθήκευση νέου κωδικού",
+    "errorTitle": "Κάτι πήγε στραβά",
+    "errorMessage": "Παρουσιάστηκε απροσδιόριστο σφάλμα."
   },
   "errors": {
     "loginRequired": "Απαιτείται σύνδεση",

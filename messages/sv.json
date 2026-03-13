@@ -119,6 +119,7 @@
     "repeatPassword": "Bekräfta lösenord",
     "signingUp": "Skapar konto...",
     "passwordMismatch": "Lösenorden matchar inte",
+    "passwordTooShort": "Lösenordet måste vara minst 8 tecken",
     "hasAccount": "Har du redan ett konto?",
     "signUpSuccessTitle": "Tack för din registrering!",
     "signUpSuccessDescription": "Kontrollera din e-post",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Ange ditt nya lösenord.",
     "newPassword": "Nytt lösenord",
     "updatePasswordSaving": "Sparar...",
-    "updatePasswordSave": "Spara nytt lösenord"
+    "updatePasswordSave": "Spara nytt lösenord",
+    "errorTitle": "Något gick fel",
+    "errorMessage": "Ett ospecificerat fel inträffade."
   },
   "errors": {
     "loginRequired": "Inloggning krävs",

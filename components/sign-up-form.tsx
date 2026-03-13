@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, getBaseUrl } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +38,12 @@ export function SignUpForm({
     setIsLoading(true);
     setError(null);
 
+    if (password.length < 8) {
+      setError(t("auth.passwordTooShort"));
+      setIsLoading(false);
+      return;
+    }
+
     if (password !== repeatPassword) {
       setError(t("auth.passwordMismatch"));
       setIsLoading(false);
@@ -49,7 +55,7 @@ export function SignUpForm({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/protected`,
+          emailRedirectTo: `${getBaseUrl()}/auth/callback`,
         },
       });
       if (error) throw error;

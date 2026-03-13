@@ -119,6 +119,7 @@
     "repeatPassword": "পাসওয়ার্ড নিশ্চিত করুন",
     "signingUp": "অ্যাকাউন্ট তৈরি হচ্ছে...",
     "passwordMismatch": "পাসওয়ার্ড মিলছে না",
+    "passwordTooShort": "পাসওয়ার্ড কমপক্ষে ৮ অক্ষর হতে হবে",
     "hasAccount": "ইতিমধ্যে অ্যাকাউন্ট আছে?",
     "signUpSuccessTitle": "সাইন আপ করার জন্য ধন্যবাদ!",
     "signUpSuccessDescription": "আপনার ইমেইল চেক করুন",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "আপনার নতুন পাসওয়ার্ড দিন।",
     "newPassword": "নতুন পাসওয়ার্ড",
     "updatePasswordSaving": "সংরক্ষণ হচ্ছে...",
-    "updatePasswordSave": "নতুন পাসওয়ার্ড সংরক্ষণ করুন"
+    "updatePasswordSave": "নতুন পাসওয়ার্ড সংরক্ষণ করুন",
+    "errorTitle": "কিছু ভুল হয়েছে",
+    "errorMessage": "একটি অনির্দিষ্ট ত্রুটি ঘটেছে।"
   },
   "errors": {
     "loginRequired": "লগইন প্রয়োজন",

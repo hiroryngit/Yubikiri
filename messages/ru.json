@@ -119,6 +119,7 @@
     "repeatPassword": "Подтвердите пароль",
     "signingUp": "Создание аккаунта...",
     "passwordMismatch": "Пароли не совпадают",
+    "passwordTooShort": "Пароль должен содержать не менее 8 символов",
     "hasAccount": "Уже есть аккаунт?",
     "signUpSuccessTitle": "Спасибо за регистрацию!",
     "signUpSuccessDescription": "Проверьте вашу почту",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Введите новый пароль.",
     "newPassword": "Новый пароль",
     "updatePasswordSaving": "Сохранение...",
-    "updatePasswordSave": "Сохранить новый пароль"
+    "updatePasswordSave": "Сохранить новый пароль",
+    "errorTitle": "Что-то пошло не так",
+    "errorMessage": "Произошла неизвестная ошибка."
   },
   "errors": {
     "loginRequired": "Требуется вход",

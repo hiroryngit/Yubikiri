@@ -119,6 +119,7 @@
     "repeatPassword": "Konfirmasi kata sandi",
     "signingUp": "Membuat akun...",
     "passwordMismatch": "Kata sandi tidak cocok",
+    "passwordTooShort": "Kata sandi harus minimal 8 karakter",
     "hasAccount": "Sudah punya akun?",
     "signUpSuccessTitle": "Terima kasih telah mendaftar!",
     "signUpSuccessDescription": "Periksa email Anda",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Silakan masukkan kata sandi baru Anda.",
     "newPassword": "Kata sandi baru",
     "updatePasswordSaving": "Menyimpan...",
-    "updatePasswordSave": "Simpan kata sandi baru"
+    "updatePasswordSave": "Simpan kata sandi baru",
+    "errorTitle": "Terjadi kesalahan",
+    "errorMessage": "Terjadi kesalahan yang tidak ditentukan."
   },
   "errors": {
     "loginRequired": "Login diperlukan",

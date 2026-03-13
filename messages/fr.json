@@ -119,6 +119,7 @@
     "repeatPassword": "Confirmer le mot de passe",
     "signingUp": "Création du compte...",
     "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
     "hasAccount": "Vous avez déjà un compte ?",
     "signUpSuccessTitle": "Merci pour votre inscription !",
     "signUpSuccessDescription": "Vérifiez votre email",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Veuillez entrer votre nouveau mot de passe.",
     "newPassword": "Nouveau mot de passe",
     "updatePasswordSaving": "Enregistrement...",
-    "updatePasswordSave": "Enregistrer le nouveau mot de passe"
+    "updatePasswordSave": "Enregistrer le nouveau mot de passe",
+    "errorTitle": "Une erreur est survenue",
+    "errorMessage": "Une erreur non spécifiée est survenue."
   },
   "errors": {
     "loginRequired": "Connexion requise",

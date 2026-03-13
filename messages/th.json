@@ -119,6 +119,7 @@
     "repeatPassword": "ยืนยันรหัสผ่าน",
     "signingUp": "กำลังสร้างบัญชี...",
     "passwordMismatch": "รหัสผ่านไม่ตรงกัน",
+    "passwordTooShort": "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร",
     "hasAccount": "มีบัญชีอยู่แล้ว?",
     "signUpSuccessTitle": "ขอบคุณที่สมัครสมาชิก!",
     "signUpSuccessDescription": "ตรวจสอบอีเมลของคุณ",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "กรุณากรอกรหัสผ่านใหม่",
     "newPassword": "รหัสผ่านใหม่",
     "updatePasswordSaving": "กำลังบันทึก...",
-    "updatePasswordSave": "บันทึกรหัสผ่านใหม่"
+    "updatePasswordSave": "บันทึกรหัสผ่านใหม่",
+    "errorTitle": "เกิดข้อผิดพลาด",
+    "errorMessage": "เกิดข้อผิดพลาดที่ไม่ระบุ"
   },
   "errors": {
     "loginRequired": "ต้องเข้าสู่ระบบก่อน",

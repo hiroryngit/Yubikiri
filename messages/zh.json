@@ -119,6 +119,7 @@
     "repeatPassword": "确认密码",
     "signingUp": "注册中...",
     "passwordMismatch": "密码不一致",
+    "passwordTooShort": "密码至少需要8个字符",
     "hasAccount": "已有账户？",
     "signUpSuccessTitle": "感谢注册！",
     "signUpSuccessDescription": "请查收确认邮件",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "请输入新密码。",
     "newPassword": "新密码",
     "updatePasswordSaving": "保存中...",
-    "updatePasswordSave": "保存新密码"
+    "updatePasswordSave": "保存新密码",
+    "errorTitle": "出现了问题",
+    "errorMessage": "发生了未知错误。"
   },
   "errors": {
     "loginRequired": "需要登录",

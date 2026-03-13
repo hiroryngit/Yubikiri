@@ -119,6 +119,7 @@
     "repeatPassword": "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
     "signingUp": "கணக்கு உருவாக்கப்படுகிறது...",
     "passwordMismatch": "கடவுச்சொற்கள் பொருந்தவில்லை",
+    "passwordTooShort": "கடவுச்சொல் குறைந்தது 8 எழுத்துகள் இருக்க வேண்டும்",
     "hasAccount": "ஏற்கனவே கணக்கு உள்ளதா?",
     "signUpSuccessTitle": "பதிவுக்கு நன்றி!",
     "signUpSuccessDescription": "உங்கள் மின்னஞ்சலைச் சரிபார்க்கவும்",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "புதிய கடவுச்சொல்லை உள்ளிடவும்.",
     "newPassword": "புதிய கடவுச்சொல்",
     "updatePasswordSaving": "சேமிக்கிறது...",
-    "updatePasswordSave": "புதிய கடவுச்சொல்லைச் சேமி"
+    "updatePasswordSave": "புதிய கடவுச்சொல்லைச் சேமி",
+    "errorTitle": "ஏதோ தவறு நடந்தது",
+    "errorMessage": "குறிப்பிடப்படாத பிழை ஏற்பட்டது."
   },
   "errors": {
     "loginRequired": "உள்நுழைவு தேவை",

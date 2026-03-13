@@ -119,6 +119,7 @@
     "repeatPassword": "Potvrdit heslo",
     "signingUp": "Vytváření účtu...",
     "passwordMismatch": "Hesla se neshodují",
+    "passwordTooShort": "Heslo musí mít alespoň 8 znaků",
     "hasAccount": "Již máte účet?",
     "signUpSuccessTitle": "Děkujeme za registraci!",
     "signUpSuccessDescription": "Zkontrolujte svůj e-mail",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Zadejte prosím nové heslo.",
     "newPassword": "Nové heslo",
     "updatePasswordSaving": "Ukládání...",
-    "updatePasswordSave": "Uložit nové heslo"
+    "updatePasswordSave": "Uložit nové heslo",
+    "errorTitle": "Něco se pokazilo",
+    "errorMessage": "Došlo k nespecifikované chybě."
   },
   "errors": {
     "loginRequired": "Vyžadováno přihlášení",

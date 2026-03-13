@@ -119,6 +119,7 @@
     "repeatPassword": "確認密碼",
     "signingUp": "註冊中...",
     "passwordMismatch": "密碼不一致",
+    "passwordTooShort": "密碼至少需要8個字元",
     "hasAccount": "已有帳戶？",
     "signUpSuccessTitle": "感謝註冊！",
     "signUpSuccessDescription": "請查收確認信件",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "請輸入新密碼。",
     "newPassword": "新密碼",
     "updatePasswordSaving": "儲存中...",
-    "updatePasswordSave": "儲存新密碼"
+    "updatePasswordSave": "儲存新密碼",
+    "errorTitle": "發生了錯誤",
+    "errorMessage": "發生了未知錯誤。"
   },
   "errors": {
     "loginRequired": "需要登入",

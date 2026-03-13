@@ -119,6 +119,7 @@
     "repeatPassword": "Vahvista salasana",
     "signingUp": "Luodaan tiliä...",
     "passwordMismatch": "Salasanat eivät täsmää",
+    "passwordTooShort": "Salasanan tulee olla vähintään 8 merkkiä",
     "hasAccount": "Onko sinulla jo tili?",
     "signUpSuccessTitle": "Kiitos rekisteröitymisestä!",
     "signUpSuccessDescription": "Tarkista sähköpostisi",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Syötä uusi salasanasi.",
     "newPassword": "Uusi salasana",
     "updatePasswordSaving": "Tallennetaan...",
-    "updatePasswordSave": "Tallenna uusi salasana"
+    "updatePasswordSave": "Tallenna uusi salasana",
+    "errorTitle": "Jokin meni pieleen",
+    "errorMessage": "Tapahtui määrittelemätön virhe."
   },
   "errors": {
     "loginRequired": "Kirjautuminen vaaditaan",

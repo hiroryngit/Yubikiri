@@ -7,9 +7,10 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
 
   if (code) {
-    // cookie から戻り先を取得（pushReturnUrl で設定される）
+    // next パラメータ（パスワードリセット等）または cookie から戻り先を取得
+    const next = searchParams.get("next");
     const returnCookie = request.cookies.get("yubikiri_return")?.value;
-    const returnUrl = returnCookie ? decodeURIComponent(returnCookie) : "/";
+    const returnUrl = next || (returnCookie ? decodeURIComponent(returnCookie) : "/");
 
     const separator = returnUrl.includes("?") ? "&" : "?";
     const response = NextResponse.redirect(`${origin}${returnUrl}${separator}logged_in=true`);

@@ -119,6 +119,7 @@
     "repeatPassword": "パスワード（確認）",
     "signingUp": "登録中...",
     "passwordMismatch": "パスワードが一致しません",
+    "passwordTooShort": "パスワードは8文字以上で入力してください",
     "hasAccount": "すでにアカウントをお持ちですか？",
     "signUpSuccessTitle": "登録ありがとうございます！",
     "signUpSuccessDescription": "メールを確認してください",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "新しいパスワードを入力してください。",
     "newPassword": "新しいパスワード",
     "updatePasswordSaving": "保存中...",
-    "updatePasswordSave": "新しいパスワードを保存"
+    "updatePasswordSave": "新しいパスワードを保存",
+    "errorTitle": "エラーが発生しました",
+    "errorMessage": "不明なエラーが発生しました。"
   },
   "errors": {
     "loginRequired": "ログインが必要です",

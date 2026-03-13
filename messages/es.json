@@ -119,6 +119,7 @@
     "repeatPassword": "Confirmar contraseña",
     "signingUp": "Creando cuenta...",
     "passwordMismatch": "Las contraseñas no coinciden",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
     "hasAccount": "¿Ya tienes una cuenta?",
     "signUpSuccessTitle": "¡Gracias por registrarte!",
     "signUpSuccessDescription": "Revisa tu correo electrónico",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "Introduce tu nueva contraseña.",
     "newPassword": "Nueva contraseña",
     "updatePasswordSaving": "Guardando...",
-    "updatePasswordSave": "Guardar nueva contraseña"
+    "updatePasswordSave": "Guardar nueva contraseña",
+    "errorTitle": "Algo salió mal",
+    "errorMessage": "Se produjo un error no especificado."
   },
   "errors": {
     "loginRequired": "Se requiere iniciar sesión",

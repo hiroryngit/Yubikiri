@@ -119,6 +119,7 @@
     "repeatPassword": "אשר סיסמה",
     "signingUp": "יוצר חשבון...",
     "passwordMismatch": "הסיסמאות אינן תואמות",
+    "passwordTooShort": "הסיסמה חייבת להכיל לפחות 8 תווים",
     "hasAccount": "כבר יש לך חשבון?",
     "signUpSuccessTitle": "תודה על ההרשמה!",
     "signUpSuccessDescription": "בדוק את הדוא\"ל שלך",
@@ -134,7 +135,9 @@
     "updatePasswordDescription": "אנא הזן את הסיסמה החדשה שלך.",
     "newPassword": "סיסמה חדשה",
     "updatePasswordSaving": "שומר...",
-    "updatePasswordSave": "שמור סיסמה חדשה"
+    "updatePasswordSave": "שמור סיסמה חדשה",
+    "errorTitle": "משהו השתבש",
+    "errorMessage": "אירעה שגיאה לא מזוהה."
   },
   "errors": {
     "loginRequired": "נדרשת התחברות",
