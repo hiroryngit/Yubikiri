@@ -68,7 +68,8 @@
     "waitingWithdrawApproval": "Waiting for the other party to approve withdrawal...",
     "waitingRevokeApproval": "Waiting for the creator to approve revocation...",
     "loginRequiredTitle": "Login required",
-    "loginRequiredDescription": "This agreement has been accepted and can only be viewed by the parties involved. Please log in."
+    "loginRequiredDescription": "This agreement has been accepted and can only be viewed by the parties involved. Please log in.",
+    "partiesOnlyDescription": "This agreement has been accepted and can only be viewed by the parties involved."
   },
   "status": {
     "pending": "Pending",

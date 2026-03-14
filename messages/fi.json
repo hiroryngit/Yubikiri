@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Odotetaan luojan hyväksyntää mitätöinnille...",
     "loginRequiredTitle": "Kirjautuminen vaaditaan",
     "loginRequiredDescription": "Tämä sopimus on hyväksytty ja vain osapuolet voivat tarkastella sitä. Kirjaudu sisään.",
+    "partiesOnlyDescription": "Tämä sopimus on hyväksytty ja vain osapuolet voivat tarkastella sitä.",
     "translate": "Käännä",
     "showOriginal": "Näytä alkuperäinen",
     "translating": "Käännetään...",

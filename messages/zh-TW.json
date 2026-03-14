@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "等待建立者批准撤銷...",
     "loginRequiredTitle": "需要登入",
     "loginRequiredDescription": "此協議已被批准，僅當事人可查看。請登入。",
+    "partiesOnlyDescription": "此協議已被批准，僅當事人可查看。",
     "translate": "翻譯",
     "showOriginal": "顯示原文",
     "translating": "翻譯中...",

@@ -52,7 +52,7 @@ async function AgreementContent({
     const hasActed = logs.some((l) => l.actor_id === user.id);
 
     if (!isCreator && !isTarget && !hasActed) {
-      return <AgreementNotFound />;
+      return <AgreementLoginRequired showLogin={false} />;
     }
   }
 

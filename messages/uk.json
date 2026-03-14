@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Очікування схвалення скасування автором...",
     "loginRequiredTitle": "Потрібен вхід",
     "loginRequiredDescription": "Цю угоду було прийнято, і переглядати її можуть лише сторони. Будь ласка, увійдіть.",
+    "partiesOnlyDescription": "Цю угоду було прийнято, і переглядати її можуть лише сторони.",
     "translate": "Перекласти",
     "showOriginal": "Показати оригінал",
     "translating": "Переклад...",

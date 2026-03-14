@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Venter på opretterens godkendelse af ophævelse...",
     "loginRequiredTitle": "Login påkrævet",
     "loginRequiredDescription": "Denne aftale er godkendt og kan kun ses af de involverede parter. Log venligst ind.",
+    "partiesOnlyDescription": "Denne aftale er godkendt og kan kun ses af de involverede parter.",
     "translate": "Oversæt",
     "showOriginal": "Vis original",
     "translating": "Oversætter...",

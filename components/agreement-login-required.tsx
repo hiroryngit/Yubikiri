@@ -11,7 +11,11 @@ import Link from "next/link";
 import { LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function AgreementLoginRequired() {
+export function AgreementLoginRequired({
+  showLogin = true,
+}: {
+  showLogin?: boolean;
+}) {
   const t = useTranslations();
 
   return (
@@ -21,14 +25,26 @@ export function AgreementLoginRequired() {
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-muted-foreground">
-          {t("agreement.loginRequiredDescription")}
+          {showLogin
+            ? t("agreement.loginRequiredDescription")
+            : t("agreement.partiesOnlyDescription")}
         </p>
-        <Button asChild>
-          <Link href="/auth/login">
-            <LogIn className="h-4 w-4 mr-1.5" />
-            {t("common.login")}
+        {showLogin && (
+          <Button asChild>
+            <Link href="/auth/login">
+              <LogIn className="h-4 w-4 mr-1.5" />
+              {t("common.login")}
+            </Link>
+          </Button>
+        )}
+        <div>
+          <Link
+            href="/"
+            className="text-sm underline underline-offset-4"
+          >
+            {t("agreement.backToTop")}
           </Link>
-        </Button>
+        </div>
       </CardContent>
     </Card>
   );

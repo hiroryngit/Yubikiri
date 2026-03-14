@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "等待创建者批准解除...",
     "loginRequiredTitle": "需要登录",
     "loginRequiredDescription": "此协议已被批准，仅当事人可查看。请登录。",
+    "partiesOnlyDescription": "此协议已被批准，仅当事人可查看。",
     "translate": "翻译",
     "showOriginal": "显示原文",
     "translating": "翻译中...",

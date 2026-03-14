@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Menunggu persetujuan pencabutan dari pembuat...",
     "loginRequiredTitle": "Perlu masuk",
     "loginRequiredDescription": "Perjanjian ini telah disetujui dan hanya dapat dilihat oleh pihak terkait. Silakan masuk.",
+    "partiesOnlyDescription": "Perjanjian ini telah disetujui dan hanya dapat dilihat oleh pihak terkait.",
     "translate": "Terjemahkan",
     "showOriginal": "Tampilkan asli",
     "translating": "Menerjemahkan...",

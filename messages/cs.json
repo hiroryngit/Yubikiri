@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Čeká se na schválení zrušení tvůrcem...",
     "loginRequiredTitle": "Vyžadováno přihlášení",
     "loginRequiredDescription": "Tato dohoda byla přijata a mohou ji zobrazit pouze zúčastněné strany. Přihlaste se.",
+    "partiesOnlyDescription": "Tato dohoda byla přijata a mohou ji zobrazit pouze zúčastněné strany.",
     "translate": "Přeložit",
     "showOriginal": "Zobrazit originál",
     "translating": "Překládání...",

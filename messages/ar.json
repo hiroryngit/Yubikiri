@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "في انتظار موافقة المنشئ على الإلغاء...",
     "loginRequiredTitle": "تسجيل الدخول مطلوب",
     "loginRequiredDescription": "تمت الموافقة على هذه الاتفاقية ولا يمكن عرضها إلا من قبل الأطراف المعنية. يرجى تسجيل الدخول.",
+    "partiesOnlyDescription": "تمت الموافقة على هذه الاتفاقية ولا يمكن عرضها إلا من قبل الأطراف المعنية.",
     "translate": "ترجمة",
     "showOriginal": "عرض الأصل",
     "translating": "جارٍ الترجمة...",

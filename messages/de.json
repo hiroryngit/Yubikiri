@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Warte auf die Genehmigung des Widerrufs durch den Ersteller...",
     "loginRequiredTitle": "Anmeldung erforderlich",
     "loginRequiredDescription": "Diese Vereinbarung wurde angenommen und kann nur von den beteiligten Parteien eingesehen werden. Bitte melden Sie sich an.",
+    "partiesOnlyDescription": "Diese Vereinbarung wurde angenommen und kann nur von den beteiligten Parteien eingesehen werden.",
     "translate": "Übersetzen",
     "showOriginal": "Original anzeigen",
     "translating": "Übersetzung läuft...",

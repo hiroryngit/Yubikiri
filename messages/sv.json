@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Väntar på att skaparen godkänner upphävandet...",
     "loginRequiredTitle": "Inloggning krävs",
     "loginRequiredDescription": "Detta avtal har godkänts och kan bara ses av parterna. Logga in.",
+    "partiesOnlyDescription": "Detta avtal har godkänts och kan bara ses av parterna.",
     "translate": "Översätt",
     "showOriginal": "Visa original",
     "translating": "Översätter...",

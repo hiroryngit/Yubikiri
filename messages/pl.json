@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Oczekiwanie na zatwierdzenie unieważnienia przez twórcę...",
     "loginRequiredTitle": "Wymagane logowanie",
     "loginRequiredDescription": "Ta umowa została zaakceptowana i może być przeglądana tylko przez strony. Zaloguj się.",
+    "partiesOnlyDescription": "Ta umowa została zaakceptowana i może być przeglądana tylko przez strony.",
     "translate": "Przetłumacz",
     "showOriginal": "Pokaż oryginał",
     "translating": "Tłumaczenie...",

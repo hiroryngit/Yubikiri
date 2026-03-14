@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Se așteaptă aprobarea revocării de către creator...",
     "loginRequiredTitle": "Autentificare necesară",
     "loginRequiredDescription": "Acest acord a fost acceptat și poate fi vizualizat doar de părțile implicate. Conectați-vă.",
+    "partiesOnlyDescription": "Acest acord a fost acceptat și poate fi vizualizat doar de părțile implicate.",
     "translate": "Traduce",
     "showOriginal": "Arată originalul",
     "translating": "Se traduce...",

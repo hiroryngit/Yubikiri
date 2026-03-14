@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Várakozás a létrehozó érvénytelenítési jóváhagyására...",
     "loginRequiredTitle": "Bejelentkezés szükséges",
     "loginRequiredDescription": "Ez a megállapodás elfogadásra került, és csak az érintett felek tekinthetik meg. Kérjük, jelentkezzen be.",
+    "partiesOnlyDescription": "Ez a megállapodás elfogadásra került, és csak az érintett felek tekinthetik meg.",
     "translate": "Fordítás",
     "showOriginal": "Eredeti megjelenítése",
     "translating": "Fordítás...",

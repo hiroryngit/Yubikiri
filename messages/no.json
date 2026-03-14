@@ -65,6 +65,7 @@
     "waitingRevokeApproval": "Venter på oppretterens godkjenning av opphevelse...",
     "loginRequiredTitle": "Innlogging påkrevd",
     "loginRequiredDescription": "Denne avtalen er godkjent og kan bare ses av partene. Logg inn.",
+    "partiesOnlyDescription": "Denne avtalen er godkjent og kan bare ses av partene.",
     "translate": "Oversett",
     "showOriginal": "Vis original",
     "translating": "Oversetter...",
