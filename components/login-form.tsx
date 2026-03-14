@@ -72,27 +72,33 @@ export function LoginForm({
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button
               variant="outline"
-              className="w-full justify-start"
+              className="w-full"
               onClick={() => handleOAuthLogin("google")}
             >
-              <span className="w-5 flex-shrink-0 flex justify-center"><GoogleIcon /></span>
-              <span className="ml-3">{t("auth.googleLogin")}</span>
+              <span className="inline-flex items-center">
+                <span className="w-5 flex-shrink-0 flex justify-center"><GoogleIcon /></span>
+                <span className="ml-3 text-left w-40">{t("auth.googleLogin")}</span>
+              </span>
             </Button>
             <Button
               variant="outline"
-              className="w-full justify-start"
+              className="w-full"
               onClick={handleLineLogin}
             >
-              <span className="w-5 flex-shrink-0 flex justify-center"><Image src="/icons8-line.svg" alt="LINE" width={16} height={16} /></span>
-              <span className="ml-3">{t("auth.lineLogin")}</span>
+              <span className="inline-flex items-center">
+                <span className="w-5 flex-shrink-0 flex justify-center"><Image src="/icons8-line.svg" alt="LINE" width={16} height={16} /></span>
+                <span className="ml-3 text-left w-40">{t("auth.lineLogin")}</span>
+              </span>
             </Button>
             <Button
               variant="outline"
-              className="w-full justify-start"
+              className="w-full"
               onClick={() => handleOAuthLogin("discord")}
             >
-              <span className="w-5 flex-shrink-0 flex justify-center"><DiscordIcon /></span>
-              <span className="ml-3">{t("auth.discordLogin")}</span>
+              <span className="inline-flex items-center">
+                <span className="w-5 flex-shrink-0 flex justify-center"><DiscordIcon /></span>
+                <span className="ml-3 text-left w-40">{t("auth.discordLogin")}</span>
+              </span>
             </Button>
           </div>
         </CardContent>
