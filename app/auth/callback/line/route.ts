@@ -6,11 +6,11 @@ import type { CookieOptions } from "@supabase/ssr";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const error = searchParams.get("error");
+  const errorParam = searchParams.get("error");
 
-  if (error || !code) {
+  if (errorParam || !code) {
     return NextResponse.redirect(
-      `${origin}/auth/error?error=${encodeURIComponent(error || "LINE login failed")}`,
+      `${origin}/auth/error?error=${encodeURIComponent(errorParam || "LINE login failed")}`,
     );
   }
 
@@ -29,61 +29,79 @@ export async function GET(request: NextRequest) {
     });
 
     if (!tokenRes.ok) {
-      console.error("LINE token exchange failed:", await tokenRes.text());
+      const errText = await tokenRes.text();
+      console.error("LINE token exchange failed:", errText);
       return NextResponse.redirect(
-        `${origin}/auth/error?error=LINE+token+exchange+failed`,
+        `${origin}/auth/error?error=${encodeURIComponent("LINE token exchange failed: " + errText)}`,
       );
     }
 
     const tokenData = await tokenRes.json();
     const idToken = tokenData.id_token;
+    const accessToken = tokenData.access_token;
 
-    if (!idToken) {
-      return NextResponse.redirect(
-        `${origin}/auth/error?error=LINE+did+not+return+id_token`,
-      );
+    // 2. Get user profile - use access token for profile API (more reliable than id_token verify for email)
+    let email: string | undefined;
+    let name: string | undefined;
+    let picture: string | undefined;
+    let lineUserId: string | undefined;
+
+    if (idToken) {
+      // Verify ID token to get email (if available)
+      const verifyRes = await fetch("https://api.line.me/oauth2/v2.1/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          id_token: idToken,
+          client_id: process.env.NEXT_PUBLIC_LINE_CHANNEL_ID!,
+        }),
+      });
+
+      if (verifyRes.ok) {
+        const idTokenData = await verifyRes.json();
+        email = idTokenData.email;
+        name = idTokenData.name;
+        picture = idTokenData.picture;
+        lineUserId = idTokenData.sub;
+      }
     }
 
-    // 2. Verify ID token and get profile
-    const verifyRes = await fetch("https://api.line.me/oauth2/v2.1/verify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        id_token: idToken,
-        client_id: process.env.NEXT_PUBLIC_LINE_CHANNEL_ID!,
-      }),
-    });
-
-    if (!verifyRes.ok) {
-      console.error("LINE token verify failed:", await verifyRes.text());
-      return NextResponse.redirect(
-        `${origin}/auth/error?error=LINE+token+verification+failed`,
-      );
+    // Fallback: get profile from access token
+    if (!lineUserId && accessToken) {
+      const profileRes = await fetch("https://api.line.me/v2/profile", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (profileRes.ok) {
+        const profileData = await profileRes.json();
+        lineUserId = profileData.userId;
+        name = name || profileData.displayName;
+        picture = picture || profileData.pictureUrl;
+      }
     }
 
-    const profile = await verifyRes.json();
-    const email = profile.email;
-    const name = profile.name;
-    const picture = profile.picture;
-    const lineUserId = profile.sub;
-
-    if (!email) {
+    if (!lineUserId) {
       return NextResponse.redirect(
-        `${origin}/auth/error?error=LINE+account+has+no+email.+Please+allow+email+access.`,
+        `${origin}/auth/error?error=Failed+to+get+LINE+profile`,
       );
     }
 
     // 3. Create or find user via admin API
     const admin = createAdminClient();
 
-    // Check if user exists by email
-    const { data: existingUsers } = await admin.auth.admin.listUsers();
-    const existingUser = existingUsers?.users?.find((u) => u.email === email);
+    // First try to find by LINE user ID in user_metadata
+    const { data: allUsers } = await admin.auth.admin.listUsers();
+    let existingUser = allUsers?.users?.find(
+      (u) =>
+        u.user_metadata?.line_user_id === lineUserId ||
+        (email && u.email === email),
+    );
 
     let userId: string;
+    let userEmail: string;
 
     if (existingUser) {
       userId = existingUser.id;
+      userEmail = existingUser.email!;
       // Update user metadata with LINE info
       await admin.auth.admin.updateUserById(userId, {
         user_metadata: {
@@ -94,6 +112,13 @@ export async function GET(request: NextRequest) {
         },
       });
     } else {
+      // Need email to create user
+      if (!email) {
+        return NextResponse.redirect(
+          `${origin}/auth/error?error=${encodeURIComponent("LINE account has no email. Please allow email access in LINE settings.")}`,
+        );
+      }
+
       // Create new user
       const { data: newUser, error: createError } =
         await admin.auth.admin.createUser({
@@ -110,29 +135,29 @@ export async function GET(request: NextRequest) {
       if (createError || !newUser.user) {
         console.error("Failed to create user:", createError);
         return NextResponse.redirect(
-          `${origin}/auth/error?error=Failed+to+create+account`,
+          `${origin}/auth/error?error=${encodeURIComponent("Failed to create account: " + (createError?.message || "unknown error"))}`,
         );
       }
       userId = newUser.user.id;
+      userEmail = email;
     }
 
-    // 4. Generate a session link for the user
+    // 4. Generate a magic link to create session
     const { data: linkData, error: linkError } =
       await admin.auth.admin.generateLink({
         type: "magiclink",
-        email,
+        email: userEmail!,
       });
 
     if (linkError || !linkData) {
       console.error("Failed to generate link:", linkError);
       return NextResponse.redirect(
-        `${origin}/auth/error?error=Failed+to+create+session`,
+        `${origin}/auth/error?error=${encodeURIComponent("Failed to create session: " + (linkError?.message || "unknown error"))}`,
       );
     }
 
     // Extract token hash from the generated link
-    const linkUrl = new URL(linkData.properties.action_link);
-    const tokenHash = linkUrl.searchParams.get("token") || linkData.properties.hashed_token;
+    const tokenHash = linkData.properties.hashed_token;
 
     // 5. Exchange token for session using OTP verify
     const returnCookie = request.cookies.get("yubikiri_return")?.value;
@@ -176,7 +201,7 @@ export async function GET(request: NextRequest) {
     if (verifyError) {
       console.error("Failed to verify OTP:", verifyError);
       return NextResponse.redirect(
-        `${origin}/auth/error?error=Failed+to+create+session`,
+        `${origin}/auth/error?error=${encodeURIComponent("Failed to create session: " + verifyError.message)}`,
       );
     }
 
@@ -184,7 +209,7 @@ export async function GET(request: NextRequest) {
   } catch (err) {
     console.error("LINE callback error:", err);
     return NextResponse.redirect(
-      `${origin}/auth/error?error=LINE+callback+error`,
+      `${origin}/auth/error?error=${encodeURIComponent("LINE callback error: " + (err instanceof Error ? err.message : String(err)))}`,
     );
   }
 }
