@@ -63,6 +63,8 @@
     "history": "Jurnal de activitate",
     "waitingWithdrawApproval": "Se așteaptă aprobarea retragerii de către cealaltă parte...",
     "waitingRevokeApproval": "Se așteaptă aprobarea revocării de către creator...",
+    "loginRequiredTitle": "Autentificare necesară",
+    "loginRequiredDescription": "Acest acord a fost acceptat și poate fi vizualizat doar de părțile implicate. Conectați-vă.",
     "translate": "Traduce",
     "showOriginal": "Arată originalul",
     "translating": "Se traduce...",

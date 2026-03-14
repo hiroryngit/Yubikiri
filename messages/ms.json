@@ -63,6 +63,8 @@
     "history": "Log aktiviti",
     "waitingWithdrawApproval": "Menunggu kelulusan penarikan daripada pihak lain...",
     "waitingRevokeApproval": "Menunggu kelulusan pembatalan daripada pencipta...",
+    "loginRequiredTitle": "Perlu log masuk",
+    "loginRequiredDescription": "Perjanjian ini telah diluluskan dan hanya boleh dilihat oleh pihak yang terlibat. Sila log masuk.",
     "translate": "Terjemah",
     "showOriginal": "Tunjuk asal",
     "translating": "Menterjemah...",

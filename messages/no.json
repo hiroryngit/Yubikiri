@@ -63,6 +63,8 @@
     "history": "Aktivitetslogg",
     "waitingWithdrawApproval": "Venter på den andre partens godkjenning av tilbaketrekning...",
     "waitingRevokeApproval": "Venter på oppretterens godkjenning av opphevelse...",
+    "loginRequiredTitle": "Innlogging påkrevd",
+    "loginRequiredDescription": "Denne avtalen er godkjent og kan bare ses av partene. Logg inn.",
     "translate": "Oversett",
     "showOriginal": "Vis original",
     "translating": "Oversetter...",

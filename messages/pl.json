@@ -63,6 +63,8 @@
     "history": "Dziennik aktywności",
     "waitingWithdrawApproval": "Oczekiwanie na zatwierdzenie wycofania przez drugą stronę...",
     "waitingRevokeApproval": "Oczekiwanie na zatwierdzenie unieważnienia przez twórcę...",
+    "loginRequiredTitle": "Wymagane logowanie",
+    "loginRequiredDescription": "Ta umowa została zaakceptowana i może być przeglądana tylko przez strony. Zaloguj się.",
     "translate": "Przetłumacz",
     "showOriginal": "Pokaż oryginał",
     "translating": "Tłumaczenie...",

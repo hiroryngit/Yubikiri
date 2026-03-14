@@ -63,6 +63,8 @@
     "history": "Toimintoloki",
     "waitingWithdrawApproval": "Odotetaan toisen osapuolen hyväksyntää peruutukselle...",
     "waitingRevokeApproval": "Odotetaan luojan hyväksyntää mitätöinnille...",
+    "loginRequiredTitle": "Kirjautuminen vaaditaan",
+    "loginRequiredDescription": "Tämä sopimus on hyväksytty ja vain osapuolet voivat tarkastella sitä. Kirjaudu sisään.",
     "translate": "Käännä",
     "showOriginal": "Näytä alkuperäinen",
     "translating": "Käännetään...",

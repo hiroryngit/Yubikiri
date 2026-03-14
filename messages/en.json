@@ -66,7 +66,9 @@
     "translating": "Translating...",
     "translationFailed": "Translation failed",
     "waitingWithdrawApproval": "Waiting for the other party to approve withdrawal...",
-    "waitingRevokeApproval": "Waiting for the creator to approve revocation..."
+    "waitingRevokeApproval": "Waiting for the creator to approve revocation...",
+    "loginRequiredTitle": "Login required",
+    "loginRequiredDescription": "This agreement has been accepted and can only be viewed by the parties involved. Please log in."
   },
   "status": {
     "pending": "Pending",

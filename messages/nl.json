@@ -63,6 +63,8 @@
     "history": "Activiteitenlog",
     "waitingWithdrawApproval": "Wachten op goedkeuring van intrekking door de andere partij...",
     "waitingRevokeApproval": "Wachten op goedkeuring van herroeping door de maker...",
+    "loginRequiredTitle": "Inloggen vereist",
+    "loginRequiredDescription": "Deze overeenkomst is geaccepteerd en kan alleen door de betrokken partijen worden bekeken. Log in.",
     "translate": "Vertalen",
     "showOriginal": "Origineel tonen",
     "translating": "Vertalen...",

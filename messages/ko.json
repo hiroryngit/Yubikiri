@@ -63,6 +63,8 @@
     "history": "활동 기록",
     "waitingWithdrawApproval": "상대방의 철회 승인을 기다리는 중...",
     "waitingRevokeApproval": "작성자의 해지 승인을 기다리는 중...",
+    "loginRequiredTitle": "로그인 필요",
+    "loginRequiredDescription": "이 약속은 승인되어 당사자만 열람할 수 있습니다. 로그인해 주세요.",
     "translate": "번역",
     "showOriginal": "원문 보기",
     "translating": "번역 중...",

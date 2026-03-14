@@ -63,6 +63,8 @@
     "history": "Aktivitetslog",
     "waitingWithdrawApproval": "Venter på den anden parts godkendelse af tilbagetrækning...",
     "waitingRevokeApproval": "Venter på opretterens godkendelse af ophævelse...",
+    "loginRequiredTitle": "Login påkrævet",
+    "loginRequiredDescription": "Denne aftale er godkendt og kan kun ses af de involverede parter. Log venligst ind.",
     "translate": "Oversæt",
     "showOriginal": "Vis original",
     "translating": "Oversætter...",

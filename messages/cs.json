@@ -63,6 +63,8 @@
     "history": "Protokol aktivit",
     "waitingWithdrawApproval": "Čeká se na schválení stažení druhou stranou...",
     "waitingRevokeApproval": "Čeká se na schválení zrušení tvůrcem...",
+    "loginRequiredTitle": "Vyžadováno přihlášení",
+    "loginRequiredDescription": "Tato dohoda byla přijata a mohou ji zobrazit pouze zúčastněné strany. Přihlaste se.",
     "translate": "Přeložit",
     "showOriginal": "Zobrazit originál",
     "translating": "Překládání...",

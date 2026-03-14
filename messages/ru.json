@@ -63,6 +63,8 @@
     "history": "Журнал действий",
     "waitingWithdrawApproval": "Ожидание одобрения отзыва другой стороной...",
     "waitingRevokeApproval": "Ожидание одобрения аннулирования создателем...",
+    "loginRequiredTitle": "Требуется вход",
+    "loginRequiredDescription": "Это соглашение было принято и доступно только для участников. Пожалуйста, войдите.",
     "translate": "Перевести",
     "showOriginal": "Показать оригинал",
     "translating": "Перевод...",

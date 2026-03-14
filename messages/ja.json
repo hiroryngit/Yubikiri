@@ -66,7 +66,9 @@
     "translating": "翻訳中...",
     "translationFailed": "翻訳に失敗しました",
     "waitingWithdrawApproval": "相手の取り下げ承認を待っています...",
-    "waitingRevokeApproval": "作成者の解除承認を待っています..."
+    "waitingRevokeApproval": "作成者の解除承認を待っています...",
+    "loginRequiredTitle": "ログインが必要です",
+    "loginRequiredDescription": "この同意書は承認済みのため、当事者のみ閲覧できます。ログインしてください。"
   },
   "status": {
     "pending": "承認待ち",

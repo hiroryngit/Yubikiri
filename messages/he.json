@@ -63,6 +63,8 @@
     "history": "יומן פעילות",
     "waitingWithdrawApproval": "ממתין לאישור המשיכה מהצד השני...",
     "waitingRevokeApproval": "ממתין לאישור הביטול מהיוצר...",
+    "loginRequiredTitle": "נדרשת התחברות",
+    "loginRequiredDescription": "הסכם זה אושר וניתן לצפייה רק על ידי הצדדים המעורבים. אנא התחבר.",
     "translate": "תרגם",
     "showOriginal": "הצג מקור",
     "translating": "מתרגם...",

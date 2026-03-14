@@ -63,6 +63,8 @@
     "history": "บันทึกกิจกรรม",
     "waitingWithdrawApproval": "รอการอนุมัติการถอนจากอีกฝ่าย...",
     "waitingRevokeApproval": "รอการอนุมัติการยกเลิกจากผู้สร้าง...",
+    "loginRequiredTitle": "ต้องเข้าสู่ระบบ",
+    "loginRequiredDescription": "ข้อตกลงนี้ได้รับการยอมรับแล้ว เฉพาะผู้ที่เกี่ยวข้องเท่านั้นที่สามารถดูได้ กรุณาเข้าสู่ระบบ",
     "translate": "แปล",
     "showOriginal": "แสดงต้นฉบับ",
     "translating": "กำลังแปล...",

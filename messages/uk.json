@@ -63,6 +63,8 @@
     "history": "Журнал дій",
     "waitingWithdrawApproval": "Очікування схвалення відкликання іншою стороною...",
     "waitingRevokeApproval": "Очікування схвалення скасування автором...",
+    "loginRequiredTitle": "Потрібен вхід",
+    "loginRequiredDescription": "Цю угоду було прийнято, і переглядати її можуть лише сторони. Будь ласка, увійдіть.",
     "translate": "Перекласти",
     "showOriginal": "Показати оригінал",
     "translating": "Переклад...",

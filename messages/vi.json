@@ -63,6 +63,8 @@
     "history": "Nhật ký hoạt động",
     "waitingWithdrawApproval": "Đang chờ bên kia phê duyệt việc rút lại...",
     "waitingRevokeApproval": "Đang chờ người tạo phê duyệt việc hủy bỏ...",
+    "loginRequiredTitle": "Cần đăng nhập",
+    "loginRequiredDescription": "Thỏa thuận này đã được chấp nhận và chỉ các bên liên quan mới có thể xem. Vui lòng đăng nhập.",
     "translate": "Dịch",
     "showOriginal": "Hiển thị bản gốc",
     "translating": "Đang dịch...",

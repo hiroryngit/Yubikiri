@@ -63,6 +63,8 @@
     "history": "Aktivitetslogg",
     "waitingWithdrawApproval": "Väntar på att den andra parten godkänner tillbakadragandet...",
     "waitingRevokeApproval": "Väntar på att skaparen godkänner upphävandet...",
+    "loginRequiredTitle": "Inloggning krävs",
+    "loginRequiredDescription": "Detta avtal har godkänts och kan bara ses av parterna. Logga in.",
     "translate": "Översätt",
     "showOriginal": "Visa original",
     "translating": "Översätter...",

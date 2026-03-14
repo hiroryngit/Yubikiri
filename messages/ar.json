@@ -63,6 +63,8 @@
     "history": "سجل النشاط",
     "waitingWithdrawApproval": "في انتظار موافقة الطرف الآخر على السحب...",
     "waitingRevokeApproval": "في انتظار موافقة المنشئ على الإلغاء...",
+    "loginRequiredTitle": "تسجيل الدخول مطلوب",
+    "loginRequiredDescription": "تمت الموافقة على هذه الاتفاقية ولا يمكن عرضها إلا من قبل الأطراف المعنية. يرجى تسجيل الدخول.",
     "translate": "ترجمة",
     "showOriginal": "عرض الأصل",
     "translating": "جارٍ الترجمة...",

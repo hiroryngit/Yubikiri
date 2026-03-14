@@ -63,6 +63,8 @@
     "history": "Registro attività",
     "waitingWithdrawApproval": "In attesa dell'approvazione del ritiro dall'altra parte...",
     "waitingRevokeApproval": "In attesa dell'approvazione della revoca dal creatore...",
+    "loginRequiredTitle": "Accesso richiesto",
+    "loginRequiredDescription": "Questo accordo è stato accettato e può essere visualizzato solo dalle parti coinvolte. Effettua l'accesso.",
     "translate": "Traduci",
     "showOriginal": "Mostra originale",
     "translating": "Traduzione in corso...",

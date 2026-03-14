@@ -63,6 +63,8 @@
     "history": "Journal d'activité",
     "waitingWithdrawApproval": "En attente de l'approbation du retrait par l'autre partie...",
     "waitingRevokeApproval": "En attente de l'approbation de la révocation par le créateur...",
+    "loginRequiredTitle": "Connexion requise",
+    "loginRequiredDescription": "Cet accord a été accepté et seules les parties concernées peuvent le consulter. Veuillez vous connecter.",
     "translate": "Traduire",
     "showOriginal": "Afficher l'original",
     "translating": "Traduction en cours...",

@@ -63,6 +63,8 @@
     "history": "Etkinlik günlüğü",
     "waitingWithdrawApproval": "Karşı tarafın geri çekme onayı bekleniyor...",
     "waitingRevokeApproval": "Oluşturanın iptal onayı bekleniyor...",
+    "loginRequiredTitle": "Giriş gerekli",
+    "loginRequiredDescription": "Bu anlaşma onaylanmıştır ve yalnızca taraflar tarafından görüntülenebilir. Lütfen giriş yapın.",
     "translate": "Çevir",
     "showOriginal": "Orijinali göster",
     "translating": "Çevriliyor...",
