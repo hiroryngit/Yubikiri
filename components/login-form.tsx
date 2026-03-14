@@ -72,7 +72,7 @@ export function LoginForm({
             {error && <p className="text-sm text-red-500">{error}</p>}
             {([
               { key: "google", icon: <GoogleIcon />, label: t("auth.googleLogin"), onClick: () => handleOAuthLogin("google") },
-              { key: "line", icon: <Image src="/icons8-line.svg" alt="LINE" width={16} height={16} />, label: t("auth.lineLogin"), onClick: handleLineLogin },
+              { key: "line", icon: <Image src="/icons8-line.svg" alt="LINE" width={20} height={20} />, label: t("auth.lineLogin"), onClick: handleLineLogin },
               { key: "discord", icon: <DiscordIcon />, label: t("auth.discordLogin"), onClick: () => handleOAuthLogin("discord") },
             ] as const).map((item) => (
               <Button
