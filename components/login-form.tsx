@@ -81,7 +81,8 @@ export function LoginForm({
                 className="w-full"
                 onClick={item.onClick}
               >
-                <span className="grid grid-cols-[20px_1fr] items-center gap-3 w-48">
+                {/* pl-* でアイコン+テキスト全体の左オフセットを調整（pl-0〜pl-12） */}
+                <span className="grid grid-cols-[20px_1fr] items-center gap-3 w-48 pl-6">
                   <span className="flex justify-center">{item.icon}</span>
                   <span className="text-left">{item.label}</span>
                 </span>
