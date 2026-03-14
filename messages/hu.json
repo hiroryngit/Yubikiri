@@ -28,7 +28,11 @@
     "empty": "Még nincsenek ígéreteid.",
     "emptyAction": "Hozd létre az első ígéreted",
     "emptyActionSuffix": ".",
-    "createdAt": "Létrehozva"
+    "createdAt": "Létrehozva",
+    "searchPlaceholder": "Keresés...",
+    "sortNewest": "Legújabb",
+    "sortOldest": "Legrégebbi",
+    "noResults": "Nincs találat"
   },
   "agreement": {
     "newTitle": "Ígéret létrehozása",

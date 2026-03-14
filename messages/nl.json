@@ -28,7 +28,11 @@
     "empty": "Je hebt nog geen beloftes.",
     "emptyAction": "Maak je eerste belofte",
     "emptyActionSuffix": ".",
-    "createdAt": "Aangemaakt"
+    "createdAt": "Aangemaakt",
+    "searchPlaceholder": "Zoeken...",
+    "sortNewest": "Nieuwste eerst",
+    "sortOldest": "Oudste eerst",
+    "noResults": "Geen resultaten"
   },
   "agreement": {
     "newTitle": "Belofte maken",

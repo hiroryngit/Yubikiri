@@ -28,7 +28,11 @@
     "empty": "คุณยังไม่มีคำสัญญา",
     "emptyAction": "สร้างคำสัญญาแรกของคุณ",
     "emptyActionSuffix": "",
-    "createdAt": "สร้างเมื่อ"
+    "createdAt": "สร้างเมื่อ",
+    "searchPlaceholder": "ค้นหา...",
+    "sortNewest": "ใหม่สุดก่อน",
+    "sortOldest": "เก่าสุดก่อน",
+    "noResults": "ไม่พบผลลัพธ์"
   },
   "agreement": {
     "newTitle": "สร้างคำสัญญา",

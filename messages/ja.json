@@ -28,7 +28,11 @@
     "empty": "まだお約束事がありません。",
     "emptyAction": "最初のお約束事を作成",
     "emptyActionSuffix": "しましょう。",
-    "createdAt": "作成日"
+    "createdAt": "作成日",
+    "searchPlaceholder": "検索...",
+    "sortNewest": "新しい順",
+    "sortOldest": "古い順",
+    "noResults": "見つかりませんでした"
   },
   "agreement": {
     "newTitle": "お約束事を発行",

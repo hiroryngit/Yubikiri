@@ -28,7 +28,11 @@
     "empty": "У вас пока нет обещаний.",
     "emptyAction": "Создайте своё первое обещание",
     "emptyActionSuffix": ".",
-    "createdAt": "Создано"
+    "createdAt": "Создано",
+    "searchPlaceholder": "Поиск...",
+    "sortNewest": "Сначала новые",
+    "sortOldest": "Сначала старые",
+    "noResults": "Ничего не найдено"
   },
   "agreement": {
     "newTitle": "Создать обещание",

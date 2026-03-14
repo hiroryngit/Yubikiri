@@ -28,7 +28,11 @@
     "empty": "아직 약속이 없습니다.",
     "emptyAction": "첫 번째 약속을 만들어 보세요",
     "emptyActionSuffix": ".",
-    "createdAt": "생성일"
+    "createdAt": "생성일",
+    "searchPlaceholder": "검색...",
+    "sortNewest": "최신순",
+    "sortOldest": "오래된순",
+    "noResults": "결과 없음"
   },
   "agreement": {
     "newTitle": "약속 만들기",

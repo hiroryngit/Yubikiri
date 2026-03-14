@@ -28,7 +28,11 @@
     "empty": "Nu ai încă nicio promisiune.",
     "emptyAction": "Creează prima ta promisiune",
     "emptyActionSuffix": ".",
-    "createdAt": "Creat"
+    "createdAt": "Creat",
+    "searchPlaceholder": "Căutare...",
+    "sortNewest": "Cele mai noi",
+    "sortOldest": "Cele mai vechi",
+    "noResults": "Niciun rezultat"
   },
   "agreement": {
     "newTitle": "Creează o promisiune",

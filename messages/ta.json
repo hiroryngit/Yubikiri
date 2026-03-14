@@ -28,7 +28,11 @@
     "empty": "உங்களிடம் இன்னும் வாக்குறுதிகள் இல்லை.",
     "emptyAction": "உங்கள் முதல் வாக்குறுதியை உருவாக்குங்கள்",
     "emptyActionSuffix": ".",
-    "createdAt": "உருவாக்கப்பட்டது"
+    "createdAt": "உருவாக்கப்பட்டது",
+    "searchPlaceholder": "தேடு...",
+    "sortNewest": "புதியவை முதலில்",
+    "sortOldest": "பழையவை முதலில்",
+    "noResults": "முடிவுகள் இல்லை"
   },
   "agreement": {
     "newTitle": "வாக்குறுதி உருவாக்கு",

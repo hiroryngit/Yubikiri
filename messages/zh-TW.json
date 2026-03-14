@@ -28,7 +28,11 @@
     "empty": "您還沒有任何約定。",
     "emptyAction": "建立您的第一個約定",
     "emptyActionSuffix": "。",
-    "createdAt": "建立時間"
+    "createdAt": "建立時間",
+    "searchPlaceholder": "搜尋...",
+    "sortNewest": "最新優先",
+    "sortOldest": "最舊優先",
+    "noResults": "未找到結果"
   },
   "agreement": {
     "newTitle": "建立約定",

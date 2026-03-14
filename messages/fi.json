@@ -28,7 +28,11 @@
     "empty": "Sinulla ei ole vielä lupauksia.",
     "emptyAction": "Luo ensimmäinen lupauksesi",
     "emptyActionSuffix": ".",
-    "createdAt": "Luotu"
+    "createdAt": "Luotu",
+    "searchPlaceholder": "Hae...",
+    "sortNewest": "Uusimmat ensin",
+    "sortOldest": "Vanhimmat ensin",
+    "noResults": "Ei tuloksia"
   },
   "agreement": {
     "newTitle": "Luo lupaus",

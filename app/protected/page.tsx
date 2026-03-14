@@ -2,9 +2,8 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { toAgreement } from "@/lib/agreements";
 import { decryptAgreement } from "@/lib/encryption";
-import { AgreementCard } from "@/components/agreement-card";
 import { DashboardHeader } from "@/components/dashboard-header";
-import { DashboardEmpty } from "@/components/dashboard-empty";
+import { DashboardContent } from "@/components/dashboard-content";
 import { Suspense } from "react";
 import type { AgreementRow } from "@/types/database";
 
@@ -51,17 +50,7 @@ async function AgreementList() {
     }),
   );
 
-  if (agreements.length === 0) {
-    return <DashboardEmpty />;
-  }
-
-  return (
-    <div className="grid gap-4">
-      {agreements.map((agreement) => (
-        <AgreementCard key={agreement.id} agreement={agreement} />
-      ))}
-    </div>
-  );
+  return <DashboardContent agreements={agreements} />;
 }
 
 export default function DashboardPage() {

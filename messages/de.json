@@ -28,7 +28,11 @@
     "empty": "Du hast noch keine Versprechen.",
     "emptyAction": "Erstelle dein erstes Versprechen",
     "emptyActionSuffix": ".",
-    "createdAt": "Erstellt"
+    "createdAt": "Erstellt",
+    "searchPlaceholder": "Suchen...",
+    "sortNewest": "Neueste zuerst",
+    "sortOldest": "Älteste zuerst",
+    "noResults": "Keine Ergebnisse"
   },
   "agreement": {
     "newTitle": "Versprechen erstellen",

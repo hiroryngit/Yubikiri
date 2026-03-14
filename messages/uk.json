@@ -28,7 +28,11 @@
     "empty": "У вас поки немає обіцянок.",
     "emptyAction": "Створіть свою першу обіцянку",
     "emptyActionSuffix": ".",
-    "createdAt": "Створено"
+    "createdAt": "Створено",
+    "searchPlaceholder": "Пошук...",
+    "sortNewest": "Спочатку нові",
+    "sortOldest": "Спочатку старі",
+    "noResults": "Нічого не знайдено"
   },
   "agreement": {
     "newTitle": "Створити обіцянку",

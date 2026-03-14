@@ -28,7 +28,11 @@
     "empty": "You have no promises yet.",
     "emptyAction": "Create your first promise",
     "emptyActionSuffix": ".",
-    "createdAt": "Created"
+    "createdAt": "Created",
+    "searchPlaceholder": "Search...",
+    "sortNewest": "Newest first",
+    "sortOldest": "Oldest first",
+    "noResults": "No results found"
   },
   "agreement": {
     "newTitle": "Create a Promise",

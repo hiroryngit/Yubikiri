@@ -28,7 +28,11 @@
     "empty": "Nie masz jeszcze żadnych obietnic.",
     "emptyAction": "Utwórz swoją pierwszą obietnicę",
     "emptyActionSuffix": ".",
-    "createdAt": "Utworzono"
+    "createdAt": "Utworzono",
+    "searchPlaceholder": "Szukaj...",
+    "sortNewest": "Najnowsze",
+    "sortOldest": "Najstarsze",
+    "noResults": "Brak wyników"
   },
   "agreement": {
     "newTitle": "Utwórz obietnicę",

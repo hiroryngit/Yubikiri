@@ -28,7 +28,11 @@
     "empty": "אין לך הבטחות עדיין.",
     "emptyAction": "צור את ההבטחה הראשונה שלך",
     "emptyActionSuffix": ".",
-    "createdAt": "נוצר"
+    "createdAt": "נוצר",
+    "searchPlaceholder": "...חיפוש",
+    "sortNewest": "החדשים ביותר",
+    "sortOldest": "הישנים ביותר",
+    "noResults": "לא נמצאו תוצאות"
   },
   "agreement": {
     "newTitle": "צור הבטחה",

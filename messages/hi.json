@@ -28,7 +28,11 @@
     "empty": "आपके पास अभी कोई वादा नहीं है।",
     "emptyAction": "अपना पहला वादा बनाएं",
     "emptyActionSuffix": "।",
-    "createdAt": "बनाया गया"
+    "createdAt": "बनाया गया",
+    "searchPlaceholder": "खोजें...",
+    "sortNewest": "नवीनतम पहले",
+    "sortOldest": "पुराने पहले",
+    "noResults": "कोई परिणाम नहीं"
   },
   "agreement": {
     "newTitle": "वादा बनाएं",

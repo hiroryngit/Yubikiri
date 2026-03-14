@@ -28,7 +28,11 @@
     "empty": "Henüz sözünüz yok.",
     "emptyAction": "İlk sözünüzü oluşturun",
     "emptyActionSuffix": ".",
-    "createdAt": "Oluşturulma"
+    "createdAt": "Oluşturulma",
+    "searchPlaceholder": "Ara...",
+    "sortNewest": "En yeni",
+    "sortOldest": "En eski",
+    "noResults": "Sonuç bulunamadı"
   },
   "agreement": {
     "newTitle": "Söz Oluştur",

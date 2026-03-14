@@ -28,7 +28,11 @@
     "empty": "আপনার এখনো কোনো প্রতিশ্রুতি নেই।",
     "emptyAction": "আপনার প্রথম প্রতিশ্রুতি তৈরি করুন",
     "emptyActionSuffix": "।",
-    "createdAt": "তৈরির তারিখ"
+    "createdAt": "তৈরির তারিখ",
+    "searchPlaceholder": "অনুসন্ধান...",
+    "sortNewest": "নতুন প্রথমে",
+    "sortOldest": "পুরাতন প্রথমে",
+    "noResults": "কোনো ফলাফল নেই"
   },
   "agreement": {
     "newTitle": "প্রতিশ্রুতি তৈরি করুন",

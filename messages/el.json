@@ -28,7 +28,11 @@
     "empty": "Δεν έχετε ακόμα υποσχέσεις.",
     "emptyAction": "Δημιουργήστε την πρώτη σας υπόσχεση",
     "emptyActionSuffix": ".",
-    "createdAt": "Δημιουργήθηκε"
+    "createdAt": "Δημιουργήθηκε",
+    "searchPlaceholder": "Αναζήτηση...",
+    "sortNewest": "Νεότερα πρώτα",
+    "sortOldest": "Παλαιότερα πρώτα",
+    "noResults": "Δεν βρέθηκαν αποτελέσματα"
   },
   "agreement": {
     "newTitle": "Δημιουργία υπόσχεσης",

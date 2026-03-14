@@ -28,7 +28,11 @@
     "empty": "Bạn chưa có lời hứa nào.",
     "emptyAction": "Tạo lời hứa đầu tiên của bạn",
     "emptyActionSuffix": ".",
-    "createdAt": "Ngày tạo"
+    "createdAt": "Ngày tạo",
+    "searchPlaceholder": "Tìm kiếm...",
+    "sortNewest": "Mới nhất",
+    "sortOldest": "Cũ nhất",
+    "noResults": "Không tìm thấy"
   },
   "agreement": {
     "newTitle": "Tạo lời hứa",

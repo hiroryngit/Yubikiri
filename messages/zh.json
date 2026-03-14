@@ -28,7 +28,11 @@
     "empty": "还没有任何约定。",
     "emptyAction": "创建第一个约定",
     "emptyActionSuffix": "吧。",
-    "createdAt": "创建日期"
+    "createdAt": "创建日期",
+    "searchPlaceholder": "搜索...",
+    "sortNewest": "最新优先",
+    "sortOldest": "最旧优先",
+    "noResults": "未找到结果"
   },
   "agreement": {
     "newTitle": "创建约定",

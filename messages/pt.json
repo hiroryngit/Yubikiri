@@ -28,7 +28,11 @@
     "empty": "Você ainda não tem promessas.",
     "emptyAction": "Crie sua primeira promessa",
     "emptyActionSuffix": ".",
-    "createdAt": "Criado"
+    "createdAt": "Criado",
+    "searchPlaceholder": "Pesquisar...",
+    "sortNewest": "Mais recentes",
+    "sortOldest": "Mais antigos",
+    "noResults": "Sem resultados"
   },
   "agreement": {
     "newTitle": "Criar uma promessa",

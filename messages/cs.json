@@ -28,7 +28,11 @@
     "empty": "Zatím nemáte žádné sliby.",
     "emptyAction": "Vytvořte svůj první slib",
     "emptyActionSuffix": ".",
-    "createdAt": "Vytvořeno"
+    "createdAt": "Vytvořeno",
+    "searchPlaceholder": "Hledat...",
+    "sortNewest": "Nejnovější",
+    "sortOldest": "Nejstarší",
+    "noResults": "Žádné výsledky"
   },
   "agreement": {
     "newTitle": "Vytvořit slib",

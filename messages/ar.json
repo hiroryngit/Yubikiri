@@ -28,7 +28,11 @@
     "empty": "ليس لديك وعود بعد.",
     "emptyAction": "أنشئ وعدك الأول",
     "emptyActionSuffix": ".",
-    "createdAt": "تاريخ الإنشاء"
+    "createdAt": "تاريخ الإنشاء",
+    "searchPlaceholder": "بحث...",
+    "sortNewest": "الأحدث أولاً",
+    "sortOldest": "الأقدم أولاً",
+    "noResults": "لا توجد نتائج"
   },
   "agreement": {
     "newTitle": "إنشاء وعد",

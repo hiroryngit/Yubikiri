@@ -28,7 +28,11 @@
     "empty": "Anda belum memiliki janji.",
     "emptyAction": "Buat janji pertama Anda",
     "emptyActionSuffix": ".",
-    "createdAt": "Dibuat"
+    "createdAt": "Dibuat",
+    "searchPlaceholder": "Cari...",
+    "sortNewest": "Terbaru",
+    "sortOldest": "Terlama",
+    "noResults": "Tidak ada hasil"
   },
   "agreement": {
     "newTitle": "Buat Janji",

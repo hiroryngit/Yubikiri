@@ -28,7 +28,11 @@
     "empty": "Du har endnu ingen løfter.",
     "emptyAction": "Opret dit første løfte",
     "emptyActionSuffix": ".",
-    "createdAt": "Oprettet"
+    "createdAt": "Oprettet",
+    "searchPlaceholder": "Søg...",
+    "sortNewest": "Nyeste først",
+    "sortOldest": "Ældste først",
+    "noResults": "Ingen resultater"
   },
   "agreement": {
     "newTitle": "Opret et løfte",

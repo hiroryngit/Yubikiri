@@ -28,7 +28,11 @@
     "empty": "Du har inga löften ännu.",
     "emptyAction": "Skapa ditt första löfte",
     "emptyActionSuffix": ".",
-    "createdAt": "Skapad"
+    "createdAt": "Skapad",
+    "searchPlaceholder": "Sök...",
+    "sortNewest": "Nyast först",
+    "sortOldest": "Äldst först",
+    "noResults": "Inga resultat"
   },
   "agreement": {
     "newTitle": "Skapa ett löfte",

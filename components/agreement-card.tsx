@@ -14,8 +14,16 @@ import type { Agreement } from "@/types/database";
 import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useState, useRef } from "react";
 import { Languages } from "lucide-react";
+import { HighlightedText } from "@/components/highlighted-text";
+import { stripHtml } from "@/lib/search";
 
-export function AgreementCard({ agreement }: { agreement: Agreement }) {
+export function AgreementCard({
+  agreement,
+  highlightWords = [],
+}: {
+  agreement: Agreement;
+  highlightWords?: string[];
+}) {
   const t = useTranslations();
   const locale = useLocale();
   const [translated, setTranslated] = useState<{ title: string; content: string } | null>(null);
@@ -67,7 +75,13 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
       <Card className="hover:bg-accent/50 transition-colors">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-lg leading-tight">{displayTitle}</CardTitle>
+            <CardTitle className="text-lg leading-tight">
+              {highlightWords.length > 0 ? (
+                <HighlightedText text={displayTitle} words={highlightWords} />
+              ) : (
+                displayTitle
+              )}
+            </CardTitle>
             <div className="flex items-center gap-1.5 shrink-0">
               {needsTranslation && translated && (
                 <button
@@ -90,7 +104,14 @@ export function AgreementCard({ agreement }: { agreement: Agreement }) {
         </CardHeader>
         <CardContent>
           <div className="text-sm text-muted-foreground line-clamp-2">
-            <RichTextContent html={displayContent} />
+            {highlightWords.length > 0 ? (
+              <HighlightedText
+                text={stripHtml(displayContent)}
+                words={highlightWords}
+              />
+            ) : (
+              <RichTextContent html={displayContent} />
+            )}
           </div>
           <p className="text-xs text-muted-foreground mt-2">
             {t("dashboard.createdAt")}: {new Date(agreement.createdAt).toLocaleDateString(locale)}
