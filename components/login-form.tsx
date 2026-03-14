@@ -72,7 +72,7 @@ export function LoginForm({
             {error && <p className="text-sm text-red-500">{error}</p>}
             {([
               { key: "google", icon: <GoogleIcon />, label: t("auth.googleLogin"), onClick: () => handleOAuthLogin("google") },
-              { key: "line", icon: <Image src="/icons8-line.svg" alt="LINE" width={24} height={24} className="w-full h-full" />, label: t("auth.lineLogin"), onClick: handleLineLogin },
+              { key: "line", icon: <Image src="/icons8-line.svg" alt="LINE" width={24} height={24} />, label: t("auth.lineLogin"), onClick: handleLineLogin },
               { key: "discord", icon: <DiscordIcon />, label: t("auth.discordLogin"), onClick: () => handleOAuthLogin("discord") },
             ] as const).map((item) => (
               <Button
@@ -83,7 +83,7 @@ export function LoginForm({
               >
                 {/* pl-* でアイコン+テキスト全体の左オフセットを調整（pl-0〜pl-12） */}
                 <span className="grid grid-cols-[24px_1fr] items-center gap-3 w-48 pl-6">
-                  <span className="flex justify-center w-6 h-6">{item.icon}</span>
+                  <span className="flex items-center justify-center w-6 h-6">{item.icon}</span>
                   <span className="text-left">{item.label}</span>
                 </span>
               </Button>
