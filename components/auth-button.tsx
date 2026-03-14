@@ -29,11 +29,8 @@ export function AuthButton() {
     </div>
   ) : (
     <div className="flex gap-2">
-      <Button asChild size="sm" variant={"outline"}>
-        <Link href="/auth/login">{t("common.signIn")}</Link>
-      </Button>
       <Button asChild size="sm" variant={"default"}>
-        <Link href="/auth/sign-up">{t("common.signUp")}</Link>
+        <Link href="/auth/login">{t("common.signIn")}</Link>
       </Button>
     </div>
   );

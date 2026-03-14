@@ -200,49 +200,14 @@ web3 = 30
 # secret = ""
 
 [auth.email]
-# Allow/disallow new user signups via email to your project.
-enable_signup = true
-# If enabled, a user will be required to confirm any email change on both the old, and new email
-# addresses. If disabled, only the new email is required to confirm.
+# Email signup disabled - using OAuth only (Google, LINE, Discord)
+enable_signup = false
 double_confirm_changes = true
-# If enabled, users need to confirm their email address before signing in.
-enable_confirmations = true
-# If enabled, users will need to reauthenticate or have logged in recently to change their password.
+enable_confirmations = false
 secure_password_change = false
-# Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
 max_frequency = "1s"
-# Number of characters used in the email OTP.
 otp_length = 6
-# Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
-
-# Use a production-ready SMTP server
-# NOTE: Supabase's built-in SMTP client fails to connect to Resend.
-# Using Supabase's built-in email service instead.
-# [auth.email.smtp]
-# enabled = true
-# host = "smtp.resend.com"
-# port = 587
-# user = "resend"
-# pass = "env(RESEND_API_KEY)"
-# admin_email = "onboarding@resend.dev"
-# sender_name = "Yubikiri"
-
-[auth.email.template.confirmation]
-subject = "Confirm your email - Yubikiri"
-content_path = "./supabase/templates/confirmation.html"
-
-[auth.email.template.recovery]
-subject = "Reset your password - Yubikiri"
-content_path = "./supabase/templates/recovery.html"
-
-[auth.email.template.email_change]
-subject = "Confirm email change - Yubikiri"
-content_path = "./supabase/templates/email_change.html"
-
-[auth.email.template.magic_link]
-subject = "Sign in to Yubikiri"
-content_path = "./supabase/templates/magic_link.html"
 
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]
@@ -276,9 +241,10 @@ max_frequency = "5s"
 # enabled = true
 # uri = "pg-functions://postgres/auth/before-user-created-hook"
 
-[auth.hook.send_email]
-enabled = true
-uri = "pg-functions://postgres/public/send_email_hook"
+# Send Email Hook disabled - using OAuth only, no email sending needed
+# [auth.hook.send_email]
+# enabled = true
+# uri = "pg-functions://postgres/public/send_email_hook"
 
 # This hook runs before a token is issued and allows you to add additional claims based on the authentication method used.
 # [auth.hook.custom_access_token]
@@ -319,19 +285,31 @@ max_frequency = "5s"
 # Use an external OAuth provider. The full list of providers are: `apple`, `azure`, `bitbucket`,
 # `discord`, `facebook`, `github`, `gitlab`, `google`, `keycloak`, `linkedin_oidc`, `notion`, `twitch`,
 # `twitter`, `x`, `slack`, `spotify`, `workos`, `zoom`.
+[auth.external.google]
+enabled = true
+client_id = "env(GOOGLE_CLIENT_ID)"
+secret = "env(GOOGLE_CLIENT_SECRET)"
+redirect_uri = ""
+url = ""
+skip_nonce_check = false
+email_optional = false
+
+[auth.external.discord]
+enabled = true
+client_id = "env(DISCORD_CLIENT_ID)"
+secret = "env(DISCORD_CLIENT_SECRET)"
+redirect_uri = ""
+url = ""
+skip_nonce_check = false
+email_optional = false
+
 [auth.external.apple]
 enabled = false
 client_id = ""
-# DO NOT commit your OAuth provider secret to git. Use environment variable substitution instead:
 secret = "env(SUPABASE_AUTH_EXTERNAL_APPLE_SECRET)"
-# Overrides the default auth redirectUrl.
 redirect_uri = ""
-# Overrides the default auth provider URL. Used to support self-hosted gitlab, single-tenant Azure,
-# or any other third-party OIDC providers.
 url = ""
-# If enabled, the nonce check will be skipped. Required for local sign in with Google auth.
 skip_nonce_check = false
-# If enabled, it will allow the user to successfully authenticate when the provider does not return an email address.
 email_optional = false
 
 # Allow Solana wallet holders to sign in to your project via the Sign in with Solana (SIWS, EIP-4361) standard.
