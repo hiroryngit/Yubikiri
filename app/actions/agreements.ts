@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { generateContentHash } from "@/lib/agreements";
+import { encryptAgreement } from "@/lib/encryption";
 import { getRequestInfo } from "@/lib/request-info";
 
 export async function createAgreement(formData: FormData) {
@@ -23,17 +24,22 @@ export async function createAgreement(formData: FormData) {
   }
 
   const contentHash = await generateContentHash(content);
+  const { encTitle, titleIv, encContent, contentIv } =
+    await encryptAgreement(user.id, user.email!, title, content);
 
   const { data, error } = await supabase
     .from("agreements")
     .insert({
-      title,
-      content,
+      title: encTitle,
+      content: encContent,
       content_hash: contentHash,
       creator_id: user.id,
       creator_email: user.email!,
       target_email: null,
       original_locale: originalLocale,
+      title_iv: titleIv,
+      content_iv: contentIv,
+      is_encrypted: true,
     })
     .select("id")
     .single();
@@ -443,16 +449,21 @@ export async function editAgreement(id: string, formData: FormData) {
   }
 
   const contentHash = await generateContentHash(content);
+  const { encTitle, titleIv, encContent, contentIv } =
+    await encryptAgreement(user.id, user.email!, title, content);
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
     supabase
       .from("agreements")
       .update({
-        title,
-        content,
+        title: encTitle,
+        content: encContent,
         content_hash: contentHash,
         status: "pending",
+        title_iv: titleIv,
+        content_iv: contentIv,
+        is_encrypted: true,
       })
       .eq("id", id),
     supabase.from("agreement_logs").insert({

@@ -10,6 +10,9 @@ export type AgreementRow = {
   target_email: string | null;
   previous_status: string | null;
   original_locale: string | null;
+  title_iv: string | null;
+  content_iv: string | null;
+  is_encrypted: boolean;
   created_at: string;
   updated_at: string;
 };
@@ -39,6 +42,9 @@ export type Agreement = {
   targetEmail: string | null;
   previousStatus: string | null;
   originalLocale: string | null;
+  titleIv: string | null;
+  contentIv: string | null;
+  isEncrypted: boolean;
   createdAt: string;
   updatedAt: string;
 };

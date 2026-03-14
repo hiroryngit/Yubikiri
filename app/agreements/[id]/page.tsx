@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { toAgreement, toAgreementLog } from "@/lib/agreements";
+import { decryptAgreement } from "@/lib/encryption";
 import { AgreementDetail } from "@/components/agreement-detail";
 import { AgreementNotFound } from "@/components/agreement-not-found";
 import { headers } from "next/headers";
@@ -31,7 +32,12 @@ async function AgreementContent({
     .order("recorded_at", { ascending: true })
     .returns<AgreementLogRow[]>();
 
-  const agreement = toAgreement(row);
+  const { title, content } = await decryptAgreement(
+    row.creator_id,
+    row.creator_email,
+    row,
+  );
+  const agreement = toAgreement({ ...row, title, content });
   const logs = (logRows ?? []).map(toAgreementLog);
 
   const {

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { toAgreement } from "@/lib/agreements";
+import { decryptAgreement } from "@/lib/encryption";
 import { AgreementCard } from "@/components/agreement-card";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardEmpty } from "@/components/dashboard-empty";
@@ -39,7 +40,16 @@ async function AgreementList() {
 
   const { data: rows } = await query.returns<AgreementRow[]>();
 
-  const agreements = (rows ?? []).map(toAgreement);
+  const agreements = await Promise.all(
+    (rows ?? []).map(async (row) => {
+      const { title, content } = await decryptAgreement(
+        row.creator_id,
+        row.creator_email,
+        row,
+      );
+      return toAgreement({ ...row, title, content });
+    }),
+  );
 
   if (agreements.length === 0) {
     return <DashboardEmpty />;
