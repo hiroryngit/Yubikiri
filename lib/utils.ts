@@ -16,7 +16,7 @@ export const hasEnvVars =
  */
 export function getBaseUrl(): string {
   if (process.env.NEXT_PUBLIC_SITE_URL) {
-    return process.env.NEXT_PUBLIC_SITE_URL.replace(/\/$/, "");
+    return process.env.NEXT_PUBLIC_SITE_URL.trim().replace(/\/$/, "");
   }
   if (process.env.NEXT_PUBLIC_VERCEL_URL) {
     return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
