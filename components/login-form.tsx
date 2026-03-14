@@ -72,27 +72,27 @@ export function LoginForm({
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full justify-start"
               onClick={() => handleOAuthLogin("google")}
             >
-              <GoogleIcon className="mr-2" />
-              {t("auth.googleLogin")}
+              <span className="w-5 flex-shrink-0 flex justify-center"><GoogleIcon /></span>
+              <span className="ml-3">{t("auth.googleLogin")}</span>
             </Button>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full justify-start"
               onClick={handleLineLogin}
             >
-              <Image src="/icons8-line.svg" alt="LINE" width={16} height={16} className="mr-2" />
-              {t("auth.lineLogin")}
+              <span className="w-5 flex-shrink-0 flex justify-center"><Image src="/icons8-line.svg" alt="LINE" width={16} height={16} /></span>
+              <span className="ml-3">{t("auth.lineLogin")}</span>
             </Button>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full justify-start"
               onClick={() => handleOAuthLogin("discord")}
             >
-              <DiscordIcon className="mr-2" />
-              {t("auth.discordLogin")}
+              <span className="w-5 flex-shrink-0 flex justify-center"><DiscordIcon /></span>
+              <span className="ml-3">{t("auth.discordLogin")}</span>
             </Button>
           </div>
         </CardContent>
