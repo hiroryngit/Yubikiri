@@ -70,30 +70,23 @@ export function LoginForm({
         <CardContent>
           <div className="flex flex-col gap-3">
             {error && <p className="text-sm text-red-500">{error}</p>}
-            <Button
-              variant="outline"
-              className="w-full justify-center"
-              onClick={() => handleOAuthLogin("google")}
-            >
-              <GoogleIcon />
-              {t("auth.googleLogin")}
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full justify-center"
-              onClick={handleLineLogin}
-            >
-              <Image src="/icons8-line.svg" alt="LINE" width={16} height={16} />
-              {t("auth.lineLogin")}
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full justify-center"
-              onClick={() => handleOAuthLogin("discord")}
-            >
-              <DiscordIcon />
-              {t("auth.discordLogin")}
-            </Button>
+            {([
+              { key: "google", icon: <GoogleIcon />, label: t("auth.googleLogin"), onClick: () => handleOAuthLogin("google") },
+              { key: "line", icon: <Image src="/icons8-line.svg" alt="LINE" width={16} height={16} />, label: t("auth.lineLogin"), onClick: handleLineLogin },
+              { key: "discord", icon: <DiscordIcon />, label: t("auth.discordLogin"), onClick: () => handleOAuthLogin("discord") },
+            ] as const).map((item) => (
+              <Button
+                key={item.key}
+                variant="outline"
+                className="w-full"
+                onClick={item.onClick}
+              >
+                <span className="grid grid-cols-[20px_1fr] items-center gap-3 w-48">
+                  <span className="flex justify-center">{item.icon}</span>
+                  <span className="text-left">{item.label}</span>
+                </span>
+              </Button>
+            ))}
           </div>
         </CardContent>
       </Card>
