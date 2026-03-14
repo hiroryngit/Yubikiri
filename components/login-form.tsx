@@ -15,8 +15,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { GoogleIcon } from "@/components/google-icon";
-import { MessageCircle } from "lucide-react";
 import { DiscordIcon } from "@/components/discord-icon";
+import Image from "next/image";
 
 export function LoginForm({
   className,
@@ -83,7 +83,7 @@ export function LoginForm({
               className="w-full"
               onClick={handleLineLogin}
             >
-              <MessageCircle className="h-4 w-4 mr-2" />
+              <Image src="/icons8-line.svg" alt="LINE" width={16} height={16} className="mr-2" />
               {t("auth.lineLogin")}
             </Button>
             <Button
