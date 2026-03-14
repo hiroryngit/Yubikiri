@@ -72,33 +72,27 @@ export function LoginForm({
             {error && <p className="text-sm text-red-500">{error}</p>}
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full justify-center"
               onClick={() => handleOAuthLogin("google")}
             >
-              <span className="inline-flex items-center">
-                <span className="w-5 flex-shrink-0 flex justify-center"><GoogleIcon /></span>
-                <span className="ml-3 text-left w-40">{t("auth.googleLogin")}</span>
-              </span>
+              <GoogleIcon />
+              {t("auth.googleLogin")}
             </Button>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full justify-center"
               onClick={handleLineLogin}
             >
-              <span className="inline-flex items-center">
-                <span className="w-5 flex-shrink-0 flex justify-center"><Image src="/icons8-line.svg" alt="LINE" width={16} height={16} /></span>
-                <span className="ml-3 text-left w-40">{t("auth.lineLogin")}</span>
-              </span>
+              <Image src="/icons8-line.svg" alt="LINE" width={16} height={16} />
+              {t("auth.lineLogin")}
             </Button>
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full justify-center"
               onClick={() => handleOAuthLogin("discord")}
             >
-              <span className="inline-flex items-center">
-                <span className="w-5 flex-shrink-0 flex justify-center"><DiscordIcon /></span>
-                <span className="ml-3 text-left w-40">{t("auth.discordLogin")}</span>
-              </span>
+              <DiscordIcon />
+              {t("auth.discordLogin")}
             </Button>
           </div>
         </CardContent>
