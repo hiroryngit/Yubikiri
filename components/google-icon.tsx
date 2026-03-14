@@ -3,7 +3,6 @@ export function GoogleIcon({ className }: { className?: string }) {
     <svg
       className={className}
       viewBox="0 0 24 24"
-      className={className}
       width="24"
       height="24"
     >
