@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
         grant_type: "authorization_code",
         code,
         redirect_uri: `${origin}/auth/callback/line`,
-        client_id: process.env.NEXT_PUBLIC_LINE_CHANNEL_ID!,
+        client_id: process.env.LINE_CHANNEL_ID || process.env.NEXT_PUBLIC_LINE_CHANNEL_ID!,
         client_secret: process.env.LINE_CHANNEL_SECRET!,
       }),
     });
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
           id_token: idToken,
-          client_id: process.env.NEXT_PUBLIC_LINE_CHANNEL_ID!,
+          client_id: process.env.LINE_CHANNEL_ID || process.env.NEXT_PUBLIC_LINE_CHANNEL_ID!,
         }),
       });
 
