@@ -1,20 +1,24 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { generateContentHash } from "@/lib/agreements";
 import { encryptAgreement } from "@/lib/encryption";
 import { generateUrlToken, hashUrlToken } from "@/lib/url-token";
 import { getRequestInfo } from "@/lib/request-info";
 
-export async function createAgreement(formData: FormData) {
+/** 認証済みユーザーを取得。未認証ならnull */
+async function getAuthUser() {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  return user;
+}
 
-  if (!user) {
-    return { error: "login_required" };
-  }
+export async function createAgreement(formData: FormData) {
+  const user = await getAuthUser();
+  if (!user) return { error: "login_required" };
 
   const title = formData.get("title") as string;
   const content = formData.get("content") as string;
@@ -24,11 +28,12 @@ export async function createAgreement(formData: FormData) {
     return { error: "タイトルと内容を入力してください" };
   }
 
+  const admin = createAdminClient();
   const contentHash = await generateContentHash(content);
   const { encTitle, titleIv, encContent, contentIv } =
     await encryptAgreement(user.id, user.email!, title, content);
 
-  const { data, error } = await supabase
+  const { data, error } = await admin
     .from("agreements")
     .insert({
       title: encTitle,
@@ -51,7 +56,7 @@ export async function createAgreement(formData: FormData) {
   // URLトークンのハッシュを保存
   const urlToken = await generateUrlToken(data.id);
   const urlHash = await hashUrlToken(urlToken);
-  await supabase
+  await admin
     .from("agreements")
     .update({ url_hash: urlHash })
     .eq("id", data.id);
@@ -60,16 +65,12 @@ export async function createAgreement(formData: FormData) {
 }
 
 export async function acceptAgreement(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -90,8 +91,8 @@ export async function acceptAgreement(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase.from("agreements").update({ status: "accepted" }).eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreements").update({ status: "accepted" }).eq("id", id),
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "accept",
       user_agent: userAgent,
@@ -114,16 +115,12 @@ export async function acceptAgreement(id: string, userAgent: string) {
 }
 
 export async function rejectAgreement(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -144,8 +141,8 @@ export async function rejectAgreement(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase.from("agreements").update({ status: "rejected" }).eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreements").update({ status: "rejected" }).eq("id", id),
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "reject",
       user_agent: userAgent,
@@ -168,16 +165,12 @@ export async function rejectAgreement(id: string, userAgent: string) {
 }
 
 export async function withdrawAgreement(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -196,7 +189,7 @@ export async function withdrawAgreement(id: string, userAgent: string) {
   }
 
   // 合意した相手がいるか確認
-  const { data: acceptLog } = await supabase
+  const { data: acceptLog } = await admin
     .from("agreement_logs")
     .select("actor_id")
     .eq("agreement_id", id)
@@ -206,7 +199,7 @@ export async function withdrawAgreement(id: string, userAgent: string) {
 
   // まだ誰も合意していないなら即削除
   if (!acceptLog) {
-    const { error: deleteError, count } = await supabase
+    const { error: deleteError, count } = await admin
       .from("agreements")
       .delete({ count: "exact" })
       .eq("id", id)
@@ -222,11 +215,11 @@ export async function withdrawAgreement(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase
+    admin
       .from("agreements")
       .update({ status: "withdraw_pending", previous_status: agreement.status })
       .eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "withdraw_request",
       user_agent: userAgent,
@@ -249,16 +242,12 @@ export async function withdrawAgreement(id: string, userAgent: string) {
 }
 
 export async function approveWithdraw(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -279,7 +268,7 @@ export async function approveWithdraw(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   // ログを残してから削除（CASCADEでログも消えるが、承認の記録として先に入れる）
-  await supabase.from("agreement_logs").insert({
+  await admin.from("agreement_logs").insert({
     agreement_id: id,
     action_type: "withdraw_approve",
     user_agent: userAgent,
@@ -290,7 +279,7 @@ export async function approveWithdraw(id: string, userAgent: string) {
     ip_region: req.ipRegion,
   });
 
-  const { error: deleteError } = await supabase
+  const { error: deleteError } = await admin
     .from("agreements")
     .delete()
     .eq("id", id);
@@ -303,16 +292,12 @@ export async function approveWithdraw(id: string, userAgent: string) {
 }
 
 export async function rejectWithdraw(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id, previous_status")
     .eq("id", id)
@@ -333,11 +318,11 @@ export async function rejectWithdraw(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase
+    admin
       .from("agreements")
       .update({ status: agreement.previous_status ?? "accepted", previous_status: null })
       .eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "withdraw_reject",
       user_agent: userAgent,
@@ -360,16 +345,12 @@ export async function rejectWithdraw(id: string, userAgent: string) {
 }
 
 export async function rerequestAgreement(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -390,8 +371,8 @@ export async function rerequestAgreement(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase.from("agreements").update({ status: "pending" }).eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreements").update({ status: "pending" }).eq("id", id),
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "rerequest",
       user_agent: userAgent,
@@ -414,16 +395,12 @@ export async function rerequestAgreement(id: string, userAgent: string) {
 }
 
 export async function editAgreement(id: string, formData: FormData) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("creator_id")
     .eq("id", id)
@@ -450,7 +427,7 @@ export async function editAgreement(id: string, formData: FormData) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase
+    admin
       .from("agreements")
       .update({
         title: encTitle,
@@ -462,7 +439,7 @@ export async function editAgreement(id: string, formData: FormData) {
         is_encrypted: true,
       })
       .eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "edit",
       user_agent: null,
@@ -485,16 +462,12 @@ export async function editAgreement(id: string, formData: FormData) {
 }
 
 export async function revokeAgreement(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -509,7 +482,7 @@ export async function revokeAgreement(id: string, userAgent: string) {
   }
 
   // 当事者チェック（合意した側のみ解除申請可能）
-  const { data: acceptLog } = await supabase
+  const { data: acceptLog } = await admin
     .from("agreement_logs")
     .select("actor_id")
     .eq("agreement_id", id)
@@ -525,11 +498,11 @@ export async function revokeAgreement(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase
+    admin
       .from("agreements")
       .update({ status: "revoke_pending", previous_status: agreement.status })
       .eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "revoke_request",
       user_agent: userAgent,
@@ -552,16 +525,12 @@ export async function revokeAgreement(id: string, userAgent: string) {
 }
 
 export async function approveRevoke(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id")
     .eq("id", id)
@@ -581,7 +550,7 @@ export async function approveRevoke(id: string, userAgent: string) {
 
   const req = await getRequestInfo();
 
-  await supabase.from("agreement_logs").insert({
+  await admin.from("agreement_logs").insert({
     agreement_id: id,
     action_type: "revoke_approve",
     user_agent: userAgent,
@@ -592,7 +561,7 @@ export async function approveRevoke(id: string, userAgent: string) {
     ip_region: req.ipRegion,
   });
 
-  const { error: deleteError } = await supabase
+  const { error: deleteError } = await admin
     .from("agreements")
     .delete()
     .eq("id", id);
@@ -605,16 +574,12 @@ export async function approveRevoke(id: string, userAgent: string) {
 }
 
 export async function rejectRevoke(id: string, userAgent: string) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
+  if (!user) return { error: "ログインが必要です" };
 
-  if (!user) {
-    return { error: "ログインが必要です" };
-  }
+  const admin = createAdminClient();
 
-  const { data: agreement, error: fetchError } = await supabase
+  const { data: agreement, error: fetchError } = await admin
     .from("agreements")
     .select("status, creator_id, previous_status")
     .eq("id", id)
@@ -635,11 +600,11 @@ export async function rejectRevoke(id: string, userAgent: string) {
   const req = await getRequestInfo();
 
   const [updateResult, logResult] = await Promise.all([
-    supabase
+    admin
       .from("agreements")
       .update({ status: agreement.previous_status ?? "accepted", previous_status: null })
       .eq("id", id),
-    supabase.from("agreement_logs").insert({
+    admin.from("agreement_logs").insert({
       agreement_id: id,
       action_type: "revoke_reject",
       user_agent: userAgent,
