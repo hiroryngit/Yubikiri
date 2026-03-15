@@ -82,8 +82,8 @@ export function AgreementForm() {
       return;
     }
 
-    if (result && "agreementId" in result) {
-      const url = `${window.location.origin}/agreements/${result.agreementId}`;
+    if (result && "urlToken" in result) {
+      const url = `${window.location.origin}/agreements/${result.urlToken}`;
       setShareUrl(url);
     }
     setPending(false);

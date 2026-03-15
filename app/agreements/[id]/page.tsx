@@ -1,6 +1,8 @@
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { toAgreement, toAgreementLog } from "@/lib/agreements";
 import { decryptAgreement } from "@/lib/encryption";
+import { generateUrlToken, hashUrlToken } from "@/lib/url-token";
 import { AgreementDetail } from "@/components/agreement-detail";
 import { AgreementNotFound } from "@/components/agreement-not-found";
 import { AgreementLoginRequired } from "@/components/agreement-login-required";
@@ -8,28 +10,63 @@ import { headers } from "next/headers";
 import { Suspense } from "react";
 import type { AgreementRow, AgreementLogRow } from "@/types/database";
 
+/**
+ * URLトークンからagreementを検索する。
+ * 1. トークンをハッシュして url_hash で検索
+ * 2. 見つからない場合は旧URL互換のため id で検索し、url_hash をバックフィル
+ */
+async function findAgreement(token: string) {
+  const supabase = await createClient();
+  const urlHash = await hashUrlToken(token);
+
+  // url_hash で検索
+  const { data: row } = await supabase
+    .from("agreements")
+    .select("*")
+    .eq("url_hash", urlHash)
+    .single<AgreementRow>();
+
+  if (row) return row;
+
+  // 旧URL互換: UUID で検索（既存の共有リンク対応）
+  const { data: legacyRow } = await supabase
+    .from("agreements")
+    .select("*")
+    .eq("id", token)
+    .single<AgreementRow>();
+
+  if (legacyRow && !legacyRow.url_hash) {
+    // バックフィル: url_hash を保存
+    const legacyToken = await generateUrlToken(legacyRow.id);
+    const legacyHash = await hashUrlToken(legacyToken);
+    const admin = createAdminClient();
+    await admin
+      .from("agreements")
+      .update({ url_hash: legacyHash })
+      .eq("id", legacyRow.id);
+  }
+
+  return legacyRow;
+}
+
 async function AgreementContent({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = await params;
-  const supabase = await createClient();
+  const { id: token } = await params;
+  const row = await findAgreement(token);
 
-  const { data: row, error } = await supabase
-    .from("agreements")
-    .select("*")
-    .eq("id", id)
-    .single<AgreementRow>();
-
-  if (error || !row) {
+  if (!row) {
     return <AgreementNotFound />;
   }
+
+  const supabase = await createClient();
 
   const { data: logRows } = await supabase
     .from("agreement_logs")
     .select("*")
-    .eq("agreement_id", id)
+    .eq("agreement_id", row.id)
     .order("recorded_at", { ascending: true })
     .returns<AgreementLogRow[]>();
 
@@ -61,7 +98,8 @@ async function AgreementContent({
     row.creator_email,
     row,
   );
-  const agreement = toAgreement({ ...row, title, content });
+  const urlToken = await generateUrlToken(row.id);
+  const agreement = toAgreement({ ...row, title, content }, urlToken);
   const agreementLogs = logs.map(toAgreementLog);
 
   const headersList = await headers();

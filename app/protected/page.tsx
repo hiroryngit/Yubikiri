@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { toAgreement } from "@/lib/agreements";
 import { decryptAgreement } from "@/lib/encryption";
+import { generateUrlToken } from "@/lib/url-token";
 import { DashboardHeader } from "@/components/dashboard-header";
 import { DashboardContent } from "@/components/dashboard-content";
 import { Suspense } from "react";
@@ -46,7 +47,8 @@ async function AgreementList() {
         row.creator_email,
         row,
       );
-      return toAgreement({ ...row, title, content });
+      const urlToken = await generateUrlToken(row.id);
+      return toAgreement({ ...row, title, content }, urlToken);
     }),
   );
 

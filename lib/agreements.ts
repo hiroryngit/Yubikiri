@@ -5,7 +5,10 @@ import type {
   AgreementLog,
 } from "@/types/database";
 
-export function toAgreement(row: AgreementRow): Agreement {
+export function toAgreement(
+  row: AgreementRow,
+  urlToken: string,
+): Agreement {
   return {
     id: row.id,
     title: row.title,
@@ -20,6 +23,7 @@ export function toAgreement(row: AgreementRow): Agreement {
     titleIv: row.title_iv,
     contentIv: row.content_iv,
     isEncrypted: row.is_encrypted,
+    urlToken,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };

@@ -71,7 +71,7 @@ export function AgreementCard({
   const displayContent = showTranslation && translated ? translated.content : agreement.content;
 
   return (
-    <Link href={`/agreements/${agreement.id}`}>
+    <Link href={`/agreements/${agreement.urlToken}`}>
       <Card className="hover:bg-accent/50 transition-colors">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
@@ -99,7 +99,7 @@ export function AgreementCard({
             </div>
           </div>
           <CardDescription className="font-mono text-xs truncate">
-            {`/agreements/${agreement.id}`}
+            {`/agreements/${agreement.urlToken}`}
           </CardDescription>
         </CardHeader>
         <CardContent>

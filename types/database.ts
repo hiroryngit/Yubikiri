@@ -13,6 +13,7 @@ export type AgreementRow = {
   title_iv: string | null;
   content_iv: string | null;
   is_encrypted: boolean;
+  url_hash: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -45,6 +46,7 @@ export type Agreement = {
   titleIv: string | null;
   contentIv: string | null;
   isEncrypted: boolean;
+  urlToken: string;
   createdAt: string;
   updatedAt: string;
 };

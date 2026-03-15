@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { generateContentHash } from "@/lib/agreements";
 import { encryptAgreement } from "@/lib/encryption";
+import { generateUrlToken, hashUrlToken } from "@/lib/url-token";
 import { getRequestInfo } from "@/lib/request-info";
 
 export async function createAgreement(formData: FormData) {
@@ -48,7 +49,15 @@ export async function createAgreement(formData: FormData) {
     return { error: "お約束事の作成に失敗しました" };
   }
 
-  return { agreementId: data.id };
+  // URLトークンのハッシュを保存
+  const urlToken = await generateUrlToken(data.id);
+  const urlHash = await hashUrlToken(urlToken);
+  await supabase
+    .from("agreements")
+    .update({ url_hash: urlHash })
+    .eq("id", data.id);
+
+  return { agreementId: data.id, urlToken };
 }
 
 export async function acceptAgreement(id: string, userAgent: string) {

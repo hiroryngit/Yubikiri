@@ -120,7 +120,7 @@ export function AgreementDetail({
         <CardContent className="space-y-5">
           {editing ? (
             <AgreementEditForm
-              agreementId={agreement.id}
+              agreementId={agreement.urlToken}
               initialTitle={agreement.title}
               initialContent={agreement.content}
               onCancel={() => setEditing(false)}
@@ -164,8 +164,8 @@ export function AgreementDetail({
                 <div className="sm:col-span-2">
                   <p className="text-muted-foreground text-xs mb-1">{t("agreement.approvalUrl")}</p>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <code className="text-xs break-all">{`${origin}/agreements/${agreement.id}`}</code>
-                    <CopyButton text={`${origin}/agreements/${agreement.id}`} size="sm" />
+                    <code className="text-xs break-all">{`${origin}/agreements/${agreement.urlToken}`}</code>
+                    <CopyButton text={`${origin}/agreements/${agreement.urlToken}`} size="sm" />
                   </div>
                 </div>
                 <div>
@@ -185,28 +185,28 @@ export function AgreementDetail({
             {agreement.status === "pending" && !isCreator && (
               isAuthenticated ? (
                 <>
-                  <AcceptButton agreementId={agreement.id} />
-                  <RejectButton agreementId={agreement.id} />
+                  <AcceptButton agreementId={agreement.urlToken} />
+                  <RejectButton agreementId={agreement.urlToken} />
                 </>
               ) : (
                 <>
-                  <LoginRequiredButton agreementId={agreement.id}>
+                  <LoginRequiredButton agreementId={agreement.urlToken}>
                     {t("action.accept")}
                   </LoginRequiredButton>
-                  <LoginRequiredButton agreementId={agreement.id} variant="outline">
+                  <LoginRequiredButton agreementId={agreement.urlToken} variant="outline">
                     {t("action.reject")}
                   </LoginRequiredButton>
                 </>
               )
             )}
-            {canRevoke && <RevokeButton agreementId={agreement.id} />}
+            {canRevoke && <RevokeButton agreementId={agreement.urlToken} />}
             {isCreator && agreement.status === "rejected" && (
-              <RerequestButton agreementId={agreement.id} />
+              <RerequestButton agreementId={agreement.urlToken} />
             )}
             {agreement.status === "withdraw_pending" && !isCreator && isAuthenticated && (
               <>
-                <WithdrawApproveButton agreementId={agreement.id} />
-                <WithdrawRejectButton agreementId={agreement.id} />
+                <WithdrawApproveButton agreementId={agreement.urlToken} />
+                <WithdrawRejectButton agreementId={agreement.urlToken} />
               </>
             )}
             {agreement.status === "withdraw_pending" && isCreator && (
@@ -214,8 +214,8 @@ export function AgreementDetail({
             )}
             {agreement.status === "revoke_pending" && isCreator && isAuthenticated && (
               <>
-                <RevokeApproveButton agreementId={agreement.id} />
-                <RevokeRejectButton agreementId={agreement.id} />
+                <RevokeApproveButton agreementId={agreement.urlToken} />
+                <RevokeRejectButton agreementId={agreement.urlToken} />
               </>
             )}
             {agreement.status === "revoke_pending" && !isCreator && isAuthenticated && (
@@ -227,7 +227,7 @@ export function AgreementDetail({
                   <Pencil className="h-4 w-4 mr-1" />
                   {t("common.edit")}
                 </Button>
-                <WithdrawButton agreementId={agreement.id} />
+                <WithdrawButton agreementId={agreement.urlToken} />
               </>
             )}
           </CardFooter>
