@@ -126,7 +126,7 @@ Yubikiri（ゆびきり）は、個人間の約束事をデータベースに証
 
 | カラム | 型 | 説明 |
 |--------|------|------|
-| `id` | uuid (PK) | 自動生成、共有URLに使用 |
+| `id` | uuid (PK) | 自動生成、内部PK（URLには非公開） |
 | `title` | text | タイトル（暗号化時は暗号文） |
 | `content` | text | 内容（暗号化時は暗号文） |
 | `status` | text | ステータス（下記参照） |
@@ -139,6 +139,7 @@ Yubikiri（ゆびきり）は、個人間の約束事をデータベースに証
 | `title_iv` | text? | タイトル暗号化のIV (hex) |
 | `content_iv` | text? | コンテンツ暗号化のIV (hex) |
 | `is_encrypted` | boolean | 暗号化フラグ（デフォルト: false） |
+| `url_hash` | text? | URLトークンのSHA-256ハッシュ（ルックアップ用） |
 | `created_at` | timestamptz | 作成日時 |
 | `updated_at` | timestamptz | 更新日時（トリガーで自動更新） |
 
@@ -195,6 +196,7 @@ pending ──→ accepted ──→ revoke_pending ──→ revoked (削除)
 | `008_add_original_locale.sql` | original_localeフィールド追加 |
 | `009_tighten_rls_policies.sql` | RLSポリシー強化 |
 | `010_add_encryption.sql` | 暗号化カラム（title_iv, content_iv, is_encrypted）追加 |
+| `011_add_url_hash.sql` | URLハッシュカラム追加（DB漏洩時のURL推測防止） |
 
 ---
 
@@ -259,6 +261,89 @@ UEK = PBKDF2(
 - `app/actions/agreements.ts` — createAgreement/editAgreementで暗号化
 - `app/agreements/[id]/page.tsx` — 詳細ページで復号
 - `app/protected/page.tsx` — ダッシュボード一覧で復号
+
+---
+
+## URLハッシュ（DB漏洩対策）
+
+データベースが漏洩した場合でも、同意書のURLを構築できないようにするため、URLに生のUUIDを使用せず、HMAC由来のトークンを使用しています。
+
+### 問題
+
+同意書のURLが `/agreements/{uuid}` の形式で、DBに `id` (UUID) がそのまま保存されている場合、DB漏洩時に攻撃者が全同意書のURLを構築し、アクセスできてしまいます。
+
+### 解決策: 二重ハッシュ方式
+
+URLにはDBに保存されない**URLトークン**を使用し、DBにはその**不可逆ハッシュ**のみを保存します。
+
+```
+┌─────────────────────────────────────────────────────────┐
+│ 同意書作成時                                              │
+│                                                         │
+│   id (UUID, PK)                                         │
+│     ↓                                                   │
+│   url_token = HMAC-SHA256(id, APP_ENCRYPTION_SECRET)    │
+│     │                                                   │
+│     ├──→ SHA-256(url_token) ──→ DB に url_hash として保存│
+│     │                                                   │
+│     └──→ ユーザーに返却（URLとして使用）                    │
+│           /agreements/{url_token}                        │
+│                                                         │
+│   ※ url_token 自体はDBに保存されない                      │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│ URLアクセス時                                             │
+│                                                         │
+│   /agreements/{url_token}                               │
+│     ↓                                                   │
+│   SHA-256(url_token) ──→ DB から url_hash で検索          │
+│     ↓                                                   │
+│   一致するレコードがあれば同意書を表示                       │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 計算の詳細
+
+| ステップ | 計算 | 保存先 |
+|---------|------|--------|
+| 1. URLトークン導出 | `url_token = HMAC-SHA256(id, APP_ENCRYPTION_SECRET)` | **保存しない**（毎回計算） |
+| 2. URLハッシュ計算 | `url_hash = SHA-256(url_token)` | DBの`url_hash`カラム |
+| 3. URLルックアップ | `SHA-256(受信したtoken) == url_hash ?` | — |
+
+### DB漏洩時の安全性
+
+| 攻撃者が持つ情報 | URLトークンの導出 |
+|----------------|------------------|
+| `id` (UUID) | `APP_ENCRYPTION_SECRET`がないためHMACを計算不可 → **不可能** |
+| `url_hash` (SHA-256) | SHA-256は不可逆 → URLトークンを逆算**不可能** |
+| `id` + `url_hash` | 両方あっても`APP_ENCRYPTION_SECRET`がなければ**不可能** |
+
+### ダッシュボードでのURL表示
+
+ダッシュボードや詳細ページでURLを表示する際は、サーバーサイドで`id`から`url_token`を再計算します。`HMAC-SHA256`は決定的なので、同じ`id`と`APP_ENCRYPTION_SECRET`からは常に同じ`url_token`が生成されます。
+
+### 旧URL互換
+
+- `url_hash`が未設定の既存同意書は、旧UUID形式 (`/agreements/{uuid}`) でもアクセス可能
+- アクセス時に自動的に`url_hash`をバックフィルし、以降は新形式で動作
+
+### 承認後のアクセス制限
+
+URLハッシュに加えて、承認済みの同意書にはアプリケーションレベルのアクセス制限があります：
+
+| 状態 | アクセス |
+|------|---------|
+| 承認前（pending） | URLを知っていれば誰でも閲覧可能 |
+| 承認後（accepted以降） + 未ログイン | 「ログインが必要です」を表示 |
+| 承認後 + ログイン済み第三者 | 「当事者のみ閲覧できます」を表示 |
+| 承認後 + 当事者（作成者 or 合意者） | 通常表示 |
+
+### 関連ファイル
+
+- `lib/url-token.ts` — URLトークン導出（generateUrlToken）とハッシュ計算（hashUrlToken）
+- `app/actions/agreements.ts` — 作成時にurl_hashを保存
+- `app/agreements/[id]/page.tsx` — URLトークンからurl_hashでルックアップ + 旧URL互換バックフィル
 
 ---
 
@@ -349,9 +434,10 @@ LINEは標準的なOAuthフローとは異なるため、専用のコールバ�
 ```
 1. 作成者がリッチテキストエディタで同意書を作成
 2. Server Actionでcontent_hashを計算 → 暗号化 → DB保存
-3. 共有URL (/agreements/[uuid]) を相手に送信
-4. 相手がURLを開く → サーバーで復号 → 平文を表示
-5. 相手が「合意する」をクリック → ログ記録 → ステータス更新
+3. URLトークン = HMAC-SHA256(id, SECRET) を計算、url_hash = SHA-256(token) をDB保存
+4. 共有URL (/agreements/[url_token]) を相手に送信
+5. 相手がURLを開く → SHA-256(token)でDB検索 → 復号 → 平文を表示
+6. 相手が「合意する」をクリック → ログ記録 → ステータス更新
 ```
 
 ### 取り下げワークフロー
@@ -381,7 +467,8 @@ LINEは標準的なOAuthフローとは異なるため、専用のコールバ�
 | 機能 | 説明 |
 |------|------|
 | Row Level Security | PostgreSQLのRLSにより、認可されたユーザーのみデータにアクセス可能 |
-| UUIDベースのURL | 推測困難なUUIDで同意書にアクセス（知識ベースのアクセス制御） |
+| URLハッシュ | HMAC-SHA256由来のURLトークン + DB漏洩時のURL推測防止 |
+| 承認後アクセス制限 | 承認済み同意書は当事者のみ閲覧可能（第三者はブロック） |
 | 不変の操作ログ | INSERT-onlyの`agreement_logs`テーブル。UPDATE/DELETEは不可 |
 | コンテンツハッシュ | SHA-256による改ざん検知 |
 | サーバーサイドタイムスタンプ | `recorded_at`はDB側の`now()`で記録（クライアント改ざん不可） |
@@ -408,6 +495,8 @@ yubikiri/
 │   ├── api/
 │   │   ├── translate/
 │   │   │   └── route.ts        # AI翻訳エンドポイント
+│   │   ├── search/
+│   │   │   └── route.ts        # AIセマンティック検索エンドポイント
 │   │   └── cron/
 │   │       └── keep-alive/
 │   │           └── route.ts    # DB keep-alive cronジョブ
@@ -437,7 +526,9 @@ yubikiri/
 │   └── ui/                    # shadcn/ui コンポーネント
 ├── lib/
 │   ├── agreements.ts           # 型変換・ハッシュ生成ユーティリティ
+│   ├── ai-search.ts            # AIセマンティック検索（マルチプロバイダー）
 │   ├── encryption.ts           # AES-GCM暗号化/復号ユーティリティ
+│   ├── url-token.ts            # URLトークン導出・ハッシュ（HMAC-SHA256 + SHA-256）
 │   ├── translate.ts            # AI翻訳（マルチプロバイダー）
 │   ├── request-info.ts         # リクエスト情報（IP, UA, Geo）取得
 │   ├── sanitize.ts             # HTMLサニタイズ
@@ -453,7 +544,7 @@ yubikiri/
 ├── messages/                   # 33言語の翻訳JSONファイル
 ├── supabase/
 │   ├── config.toml             # Supabase設定（認証プロバイダー等）
-│   └── migrations/             # DBマイグレーション（001〜010）
+│   └── migrations/             # DBマイグレーション（001〜011）
 ├── middleware.ts               # セッション更新ミドルウェア
 ├── .env.local                  # 環境変数（gitignore済み）
 └── package.json
