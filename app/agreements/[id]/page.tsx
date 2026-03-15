@@ -15,12 +15,17 @@ import type { AgreementRow, AgreementLogRow } from "@/types/database";
  * 1. トークンをハッシュして url_hash で検索
  * 2. 見つからない場合は旧URL互換のため id で検索し、url_hash をバックフィル
  */
+/**
+ * URLトークンからagreementを検索する（RLSバイパス）。
+ * 詳細ページはURLトークンを知っていればアクセス可能で、
+ * アクセス制御はアプリケーション側で行うためadmin clientを使用。
+ */
 async function findAgreement(token: string) {
-  const supabase = await createClient();
+  const admin = createAdminClient();
   const urlHash = await hashUrlToken(token);
 
   // url_hash で検索
-  const { data: row } = await supabase
+  const { data: row } = await admin
     .from("agreements")
     .select("*")
     .eq("url_hash", urlHash)
@@ -29,7 +34,7 @@ async function findAgreement(token: string) {
   if (row) return row;
 
   // 旧URL互換: UUID で検索（既存の共有リンク対応）
-  const { data: legacyRow } = await supabase
+  const { data: legacyRow } = await admin
     .from("agreements")
     .select("*")
     .eq("id", token)
@@ -39,7 +44,6 @@ async function findAgreement(token: string) {
     // バックフィル: url_hash を保存
     const legacyToken = await generateUrlToken(legacyRow.id);
     const legacyHash = await hashUrlToken(legacyToken);
-    const admin = createAdminClient();
     await admin
       .from("agreements")
       .update({ url_hash: legacyHash })
@@ -61,9 +65,9 @@ async function AgreementContent({
     return <AgreementNotFound />;
   }
 
-  const supabase = await createClient();
+  const admin = createAdminClient();
 
-  const { data: logRows } = await supabase
+  const { data: logRows } = await admin
     .from("agreement_logs")
     .select("*")
     .eq("agreement_id", row.id)
@@ -73,6 +77,7 @@ async function AgreementContent({
   const logs = logRows ?? [];
   const hasBeenAccepted = logs.some((l) => l.action_type === "accept");
 
+  const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();

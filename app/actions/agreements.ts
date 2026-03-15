@@ -45,8 +45,7 @@ export async function createAgreement(formData: FormData) {
     .single();
 
   if (error) {
-    console.error("createAgreement error:", error);
-    return { error: `お約束事の作成に失敗しました: ${error.message}` };
+    return { error: "お約束事の作成に失敗しました" };
   }
 
   // URLトークンのハッシュを保存
