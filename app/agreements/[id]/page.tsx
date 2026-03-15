@@ -84,11 +84,9 @@ async function AgreementContent({
     }
 
     const isCreator = user.id === row.creator_id;
-    const isTarget =
-      row.target_email !== null && row.target_email === user.email;
     const hasActed = logs.some((l) => l.actor_id === user.id);
 
-    if (!isCreator && !isTarget && !hasActed) {
+    if (!isCreator && !hasActed) {
       return <AgreementLoginRequired showLogin={false} />;
     }
   }

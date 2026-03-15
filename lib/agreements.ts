@@ -17,7 +17,6 @@ export function toAgreement(
     contentHash: row.content_hash,
     creatorId: row.creator_id,
     creatorEmail: row.creator_email,
-    targetEmail: row.target_email,
     previousStatus: row.previous_status,
     originalLocale: row.original_locale,
     titleIv: row.title_iv,

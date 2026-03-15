@@ -32,10 +32,10 @@ async function AgreementList() {
 
   if (actedIds.length > 0) {
     query = query.or(
-      `creator_id.eq.${user.id},target_email.eq.${user.email},id.in.(${actedIds.join(",")})`,
+      `creator_id.eq.${user.id},id.in.(${actedIds.join(",")})`,
     );
   } else {
-    query = query.or(`creator_id.eq.${user.id},target_email.eq.${user.email}`);
+    query = query.eq("creator_id", user.id);
   }
 
   const { data: rows } = await query.returns<AgreementRow[]>();

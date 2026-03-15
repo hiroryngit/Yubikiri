@@ -36,7 +36,6 @@ export async function createAgreement(formData: FormData) {
       content_hash: contentHash,
       creator_id: user.id,
       creator_email: user.email!,
-      target_email: null,
       original_locale: originalLocale,
       title_iv: titleIv,
       content_iv: contentIv,
@@ -72,7 +71,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
 
   const { data: agreement, error: fetchError } = await supabase
     .from("agreements")
-    .select("status, target_email, creator_id")
+    .select("status, creator_id")
     .eq("id", id)
     .single();
 
@@ -84,14 +83,8 @@ export async function acceptAgreement(id: string, userAgent: string) {
     return { error: "このお約束事は既に処理済みです" };
   }
 
-  if (agreement.target_email !== null) {
-    if (agreement.target_email !== user.email) {
-      return { error: "このお約束事の対象者ではありません" };
-    }
-  } else {
-    if (agreement.creator_id === user.id) {
-      return { error: "自分が作成したお約束事には合意できません" };
-    }
+  if (agreement.creator_id === user.id) {
+    return { error: "自分が作成したお約束事には合意できません" };
   }
 
   const req = await getRequestInfo();
@@ -132,7 +125,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
 
   const { data: agreement, error: fetchError } = await supabase
     .from("agreements")
-    .select("status, creator_id, target_email")
+    .select("status, creator_id")
     .eq("id", id)
     .single();
 
@@ -144,14 +137,8 @@ export async function rejectAgreement(id: string, userAgent: string) {
     return { error: "このお約束事は既に処理済みです" };
   }
 
-  if (agreement.target_email !== null) {
-    if (agreement.target_email !== user.email) {
-      return { error: "このお約束事の対象者ではありません" };
-    }
-  } else {
-    if (agreement.creator_id === user.id) {
-      return { error: "自分が作成したお約束事は拒否できません" };
-    }
+  if (agreement.creator_id === user.id) {
+    return { error: "自分が作成したお約束事は拒否できません" };
   }
 
   const req = await getRequestInfo();
@@ -509,7 +496,7 @@ export async function revokeAgreement(id: string, userAgent: string) {
 
   const { data: agreement, error: fetchError } = await supabase
     .from("agreements")
-    .select("status, creator_id, target_email")
+    .select("status, creator_id")
     .eq("id", id)
     .single();
 
@@ -521,24 +508,18 @@ export async function revokeAgreement(id: string, userAgent: string) {
     return { error: "合意済みのお約束事のみ解除申請できます" };
   }
 
-  // 当事者チェック（非作成者＝合意した側のみ解除申請可能）
-  const isTarget =
-    agreement.target_email !== null &&
-    agreement.target_email === user.email;
+  // 当事者チェック（合意した側のみ解除申請可能）
+  const { data: acceptLog } = await supabase
+    .from("agreement_logs")
+    .select("actor_id")
+    .eq("agreement_id", id)
+    .eq("action_type", "accept")
+    .eq("actor_id", user.id)
+    .limit(1)
+    .maybeSingle();
 
-  if (!isTarget) {
-    const { data: acceptLog } = await supabase
-      .from("agreement_logs")
-      .select("actor_id")
-      .eq("agreement_id", id)
-      .eq("action_type", "accept")
-      .eq("actor_id", user.id)
-      .limit(1)
-      .maybeSingle();
-
-    if (!acceptLog) {
-      return { error: "このお約束事の当事者ではありません" };
-    }
+  if (!acceptLog) {
+    return { error: "このお約束事の当事者ではありません" };
   }
 
   const req = await getRequestInfo();

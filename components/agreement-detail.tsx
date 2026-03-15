@@ -89,13 +89,10 @@ export function AgreementDetail({
   }
 
   const isCreator = currentUserId === agreement.creatorId;
-  const isTarget =
-    agreement.targetEmail !== null &&
-    currentUserEmail === agreement.targetEmail;
   const canAccept =
     isAuthenticated &&
     agreement.status === "pending" &&
-    (agreement.targetEmail !== null ? isTarget : !isCreator);
+    !isCreator;
   const isAcceptor = logs.some(
     (log) => log.actionType === "accept" && log.actorId === currentUserId,
   );
@@ -103,7 +100,7 @@ export function AgreementDetail({
     isAuthenticated &&
     !isCreator &&
     agreement.status === "accepted" &&
-    (isTarget || isAcceptor);
+    isAcceptor;
   const canTranslate = agreement.originalLocale !== locale;
 
   return (
@@ -120,7 +117,7 @@ export function AgreementDetail({
         <CardContent className="space-y-5">
           {editing ? (
             <AgreementEditForm
-              agreementId={agreement.urlToken}
+              agreementId={agreement.id}
               initialTitle={agreement.title}
               initialContent={agreement.content}
               onCancel={() => setEditing(false)}
@@ -185,8 +182,8 @@ export function AgreementDetail({
             {agreement.status === "pending" && !isCreator && (
               isAuthenticated ? (
                 <>
-                  <AcceptButton agreementId={agreement.urlToken} />
-                  <RejectButton agreementId={agreement.urlToken} />
+                  <AcceptButton agreementId={agreement.id} />
+                  <RejectButton agreementId={agreement.id} />
                 </>
               ) : (
                 <>
@@ -199,14 +196,14 @@ export function AgreementDetail({
                 </>
               )
             )}
-            {canRevoke && <RevokeButton agreementId={agreement.urlToken} />}
+            {canRevoke && <RevokeButton agreementId={agreement.id} />}
             {isCreator && agreement.status === "rejected" && (
-              <RerequestButton agreementId={agreement.urlToken} />
+              <RerequestButton agreementId={agreement.id} />
             )}
             {agreement.status === "withdraw_pending" && !isCreator && isAuthenticated && (
               <>
-                <WithdrawApproveButton agreementId={agreement.urlToken} />
-                <WithdrawRejectButton agreementId={agreement.urlToken} />
+                <WithdrawApproveButton agreementId={agreement.id} />
+                <WithdrawRejectButton agreementId={agreement.id} />
               </>
             )}
             {agreement.status === "withdraw_pending" && isCreator && (
@@ -214,8 +211,8 @@ export function AgreementDetail({
             )}
             {agreement.status === "revoke_pending" && isCreator && isAuthenticated && (
               <>
-                <RevokeApproveButton agreementId={agreement.urlToken} />
-                <RevokeRejectButton agreementId={agreement.urlToken} />
+                <RevokeApproveButton agreementId={agreement.id} />
+                <RevokeRejectButton agreementId={agreement.id} />
               </>
             )}
             {agreement.status === "revoke_pending" && !isCreator && isAuthenticated && (
@@ -227,7 +224,7 @@ export function AgreementDetail({
                   <Pencil className="h-4 w-4 mr-1" />
                   {t("common.edit")}
                 </Button>
-                <WithdrawButton agreementId={agreement.urlToken} />
+                <WithdrawButton agreementId={agreement.id} />
               </>
             )}
           </CardFooter>

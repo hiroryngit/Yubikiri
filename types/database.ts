@@ -7,7 +7,6 @@ export type AgreementRow = {
   content_hash: string;
   creator_id: string;
   creator_email: string;
-  target_email: string | null;
   previous_status: string | null;
   original_locale: string | null;
   title_iv: string | null;
@@ -40,7 +39,6 @@ export type Agreement = {
   contentHash: string;
   creatorId: string;
   creatorEmail: string;
-  targetEmail: string | null;
   previousStatus: string | null;
   originalLocale: string | null;
   titleIv: string | null;
