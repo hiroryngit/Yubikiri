@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "Yubikiri",
   description: "Record personal agreements as evidence with timestamps and metadata.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Yubikiri",
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 const geistSans = Geist({
@@ -28,6 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" suppressHydrationWarning>
+      <head>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#0d0d0d" />
+      </head>
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
