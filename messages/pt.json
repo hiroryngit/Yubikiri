@@ -156,6 +156,10 @@
     "editFailed": "Falha ao editar",
     "logFailed": "Falha ao registrar o log"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

@@ -156,6 +156,10 @@
     "editFailed": "Misslyckades att redigera",
     "logFailed": "Misslyckades att registrera logg"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

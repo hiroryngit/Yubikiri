@@ -156,6 +156,10 @@
     "editFailed": "Nepodařilo se upravit",
     "logFailed": "Nepodařilo se zaznamenat protokol"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

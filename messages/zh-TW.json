@@ -156,6 +156,10 @@
     "editFailed": "編輯失敗",
     "logFailed": "記錄日誌失敗"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

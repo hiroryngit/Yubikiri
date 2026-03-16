@@ -156,6 +156,10 @@
     "editFailed": "A szerkesztés sikertelen",
     "logFailed": "A napló rögzítése sikertelen"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

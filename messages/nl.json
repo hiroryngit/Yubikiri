@@ -156,6 +156,10 @@
     "editFailed": "Bewerken mislukt",
     "logFailed": "Log registreren mislukt"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

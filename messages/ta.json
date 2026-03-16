@@ -156,6 +156,10 @@
     "editFailed": "திருத்துவதில் தோல்வி",
     "logFailed": "பதிவு செய்வதில் தோல்வி"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

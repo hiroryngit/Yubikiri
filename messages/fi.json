@@ -156,6 +156,10 @@
     "editFailed": "Muokkaus epäonnistui",
     "logFailed": "Lokin tallentaminen epäonnistui"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

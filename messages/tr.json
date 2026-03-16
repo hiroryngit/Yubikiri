@@ -156,6 +156,10 @@
     "editFailed": "Düzenleme başarısız",
     "logFailed": "Günlük kaydı başarısız"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

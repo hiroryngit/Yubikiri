@@ -156,6 +156,10 @@
     "editFailed": "Gagal mengedit",
     "logFailed": "Gagal merekod log"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

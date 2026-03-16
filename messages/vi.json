@@ -156,6 +156,10 @@
     "editFailed": "Chỉnh sửa thất bại",
     "logFailed": "Ghi nhật ký thất bại"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

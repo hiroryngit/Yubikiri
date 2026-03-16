@@ -156,6 +156,10 @@
     "editFailed": "編集に失敗しました",
     "logFailed": "ログの記録に失敗しました"
   },
+  "push": {
+    "enable": "通知を有効にする",
+    "disable": "通知を無効にする"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

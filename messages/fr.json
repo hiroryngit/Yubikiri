@@ -156,6 +156,10 @@
     "editFailed": "Échec de la modification",
     "logFailed": "Échec de l'enregistrement du journal"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

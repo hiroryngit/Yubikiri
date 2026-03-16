@@ -156,6 +156,10 @@
     "editFailed": "Editarea a eșuat",
     "logFailed": "Înregistrarea jurnalului a eșuat"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

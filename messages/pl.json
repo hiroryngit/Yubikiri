@@ -156,6 +156,10 @@
     "editFailed": "Nie udało się edytować",
     "logFailed": "Nie udało się zarejestrować dziennika"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

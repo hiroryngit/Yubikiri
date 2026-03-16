@@ -156,6 +156,10 @@
     "editFailed": "সম্পাদনা ব্যর্থ",
     "logFailed": "লগ রেকর্ড ব্যর্থ"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

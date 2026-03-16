@@ -156,6 +156,10 @@
     "editFailed": "편집에 실패했습니다",
     "logFailed": "로그 기록에 실패했습니다"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",

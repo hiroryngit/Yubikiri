@@ -156,6 +156,10 @@
     "editFailed": "Error al editar",
     "logFailed": "Error al registrar el log"
   },
+  "push": {
+    "enable": "Enable notifications",
+    "disable": "Disable notifications"
+  },
   "localeNames": {
     "ja": "日本語",
     "en": "English",
