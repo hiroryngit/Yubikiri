@@ -71,11 +71,11 @@ export function AgreementCard({
   const displayContent = showTranslation && translated ? translated.content : agreement.content;
 
   return (
-    <Link href={`/agreements/${agreement.urlToken}`}>
-      <Card className="hover:bg-accent/50 transition-colors overflow-hidden">
-        <CardHeader className="min-w-0">
+    <Link href={`/agreements/${agreement.urlToken}`} className="block min-w-0">
+      <Card className="hover:bg-accent/50 transition-colors overflow-hidden w-full">
+        <CardHeader className="overflow-hidden">
           <div className="flex items-start justify-between gap-2 min-w-0">
-            <CardTitle className="text-lg leading-tight min-w-0 break-words">
+            <CardTitle className="text-lg leading-tight min-w-0 break-words overflow-hidden">
               {highlightWords.length > 0 ? (
                 <HighlightedText text={displayTitle} words={highlightWords} />
               ) : (
@@ -98,12 +98,12 @@ export function AgreementCard({
               <AgreementStatusBadge status={agreement.status} />
             </div>
           </div>
-          <CardDescription className="font-mono text-xs truncate min-w-0">
+          <CardDescription className="font-mono text-xs truncate block overflow-hidden">
             {`/agreements/${agreement.urlToken}`}
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="text-sm text-muted-foreground line-clamp-2">
+        <CardContent className="overflow-hidden">
+          <div className="text-sm text-muted-foreground line-clamp-2 overflow-hidden">
             {highlightWords.length > 0 ? (
               <HighlightedText
                 text={stripHtml(displayContent)}

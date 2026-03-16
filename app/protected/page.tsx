@@ -57,7 +57,7 @@ async function AgreementList() {
 
 export default function DashboardPage() {
   return (
-    <div className="flex-1 w-full flex flex-col gap-8">
+    <div className="flex-1 w-full flex flex-col gap-8 min-w-0 overflow-hidden">
       <DashboardHeader />
       <Suspense fallback={<p className="text-muted-foreground">...</p>}>
         <AgreementList />

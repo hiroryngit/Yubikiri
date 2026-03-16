@@ -111,7 +111,7 @@ export function DashboardContent({
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 min-w-0 overflow-hidden">
       <div className="flex gap-2">
         <div className="relative flex-1">
           {searching ? (
@@ -145,7 +145,7 @@ export function DashboardContent({
           {t("dashboard.noResults")}
         </p>
       ) : (
-        <div className="grid gap-4">
+        <div className="grid gap-4 min-w-0 overflow-hidden">
           {sorted.map((result) => (
             <AgreementCard
               key={result.agreement.id}
