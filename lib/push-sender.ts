@@ -1,15 +1,4 @@
-import webpush from "web-push";
 import { createAdminClient } from "@/lib/supabase/admin";
-
-const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!;
-const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY!;
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yubikiri.vercel.app";
-
-webpush.setVapidDetails(
-  `mailto:noreply@yubikiri.vercel.app`,
-  VAPID_PUBLIC_KEY,
-  VAPID_PRIVATE_KEY,
-);
 
 type PushPayload = {
   title: string;
@@ -17,7 +6,29 @@ type PushPayload = {
   url?: string;
 };
 
+let vapidInitialized = false;
+
+async function getWebPush() {
+  const webpush = (await import("web-push")).default;
+  if (!vapidInitialized) {
+    const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+    const privateKey = process.env.VAPID_PRIVATE_KEY;
+    if (!publicKey || !privateKey) return null;
+    webpush.setVapidDetails(
+      "mailto:noreply@yubikiri.vercel.app",
+      publicKey,
+      privateKey,
+    );
+    vapidInitialized = true;
+  }
+  return webpush;
+}
+
 export async function sendPushToUser(userId: string, payload: PushPayload) {
+  const webpush = await getWebPush();
+  if (!webpush) return;
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://yubikiri.vercel.app";
   const admin = createAdminClient();
   const { data: subscriptions } = await admin
     .from("push_subscriptions")
@@ -28,7 +39,7 @@ export async function sendPushToUser(userId: string, payload: PushPayload) {
 
   const fullPayload = {
     ...payload,
-    url: payload.url ? `${SITE_URL}${payload.url}` : SITE_URL,
+    url: payload.url ? `${siteUrl}${payload.url}` : siteUrl,
   };
 
   const expiredIds: string[] = [];
