@@ -112,7 +112,7 @@ export async function acceptAgreement(id: string, userAgent: string) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "accept", user.id, user.email!);
+  await notifyAgreementAction(id, "accept", user.id, user.email!);
   return { success: true };
 }
 
@@ -163,7 +163,7 @@ export async function rejectAgreement(id: string, userAgent: string) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "reject", user.id, user.email!);
+  await notifyAgreementAction(id, "reject", user.id, user.email!);
   return { success: true };
 }
 
@@ -241,7 +241,7 @@ export async function withdrawAgreement(id: string, userAgent: string) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "withdraw_request", user.id, user.email!);
+  await notifyAgreementAction(id, "withdraw_request", user.id, user.email!);
   return { success: true, deleted: false };
 }
 
@@ -292,7 +292,7 @@ export async function approveWithdraw(id: string, userAgent: string) {
     return { error: `削除に失敗しました: ${deleteError.message}` };
   }
 
-  notifyAgreementAction(id, "withdraw_approve", user.id, user.email!);
+  await notifyAgreementAction(id, "withdraw_approve", user.id, user.email!);
   return { success: true };
 }
 
@@ -346,7 +346,7 @@ export async function rejectWithdraw(id: string, userAgent: string) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "withdraw_reject", user.id, user.email!);
+  await notifyAgreementAction(id, "withdraw_reject", user.id, user.email!);
   return { success: true };
 }
 
@@ -397,7 +397,7 @@ export async function rerequestAgreement(id: string, userAgent: string) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "rerequest", user.id, user.email!);
+  await notifyAgreementAction(id, "rerequest", user.id, user.email!);
   return { success: true };
 }
 
@@ -465,7 +465,7 @@ export async function editAgreement(id: string, formData: FormData) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "edit", user.id, user.email!);
+  await notifyAgreementAction(id, "edit", user.id, user.email!);
   return { success: true };
 }
 
@@ -529,7 +529,7 @@ export async function revokeAgreement(id: string, userAgent: string) {
     return { error: "ログの記録に失敗しました" };
   }
 
-  notifyAgreementAction(id, "revoke_request", user.id, user.email!);
+  await notifyAgreementAction(id, "revoke_request", user.id, user.email!);
   return { success: true };
 }
 
@@ -579,7 +579,7 @@ export async function approveRevoke(id: string, userAgent: string) {
     return { error: `削除に失敗しました: ${deleteError.message}` };
   }
 
-  notifyAgreementAction(id, "revoke_approve", user.id, user.email!);
+  await notifyAgreementAction(id, "revoke_approve", user.id, user.email!);
   return { success: true };
 }
 
@@ -633,6 +633,6 @@ export async function rejectRevoke(id: string, userAgent: string) {
     return { error: `ログの記録に失敗しました: ${logResult.error.message}` };
   }
 
-  notifyAgreementAction(id, "revoke_reject", user.id, user.email!);
+  await notifyAgreementAction(id, "revoke_reject", user.id, user.email!);
   return { success: true };
 }

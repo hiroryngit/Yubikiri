@@ -72,7 +72,7 @@ export function AgreementCard({
 
   return (
     <Link href={`/agreements/${agreement.urlToken}`}>
-      <Card className="hover:bg-accent/50 transition-colors">
+      <Card className="hover:bg-accent/50 transition-colors overflow-hidden">
         <CardHeader>
           <div className="flex items-start justify-between gap-2">
             <CardTitle className="text-lg leading-tight">
@@ -98,7 +98,7 @@ export function AgreementCard({
               <AgreementStatusBadge status={agreement.status} />
             </div>
           </div>
-          <CardDescription className="font-mono text-xs truncate">
+          <CardDescription className="font-mono text-xs truncate max-w-full">
             {`/agreements/${agreement.urlToken}`}
           </CardDescription>
         </CardHeader>
