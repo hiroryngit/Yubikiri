@@ -156,9 +156,14 @@
     "editFailed": "編集に失敗しました",
     "logFailed": "ログの記録に失敗しました"
   },
-  "push": {
-    "enable": "通知を有効にする",
-    "disable": "通知を無効にする"
+  "notification": {
+    "title": "通知",
+    "empty": "通知はありません",
+    "markAllRead": "すべて既読",
+    "justNow": "たった今",
+    "minutesAgo": "{count}分前",
+    "hoursAgo": "{count}時間前",
+    "daysAgo": "{count}日前"
   },
   "localeNames": {
     "ja": "日本語",

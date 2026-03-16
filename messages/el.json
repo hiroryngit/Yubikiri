@@ -156,9 +156,14 @@
     "editFailed": "Αποτυχία επεξεργασίας",
     "logFailed": "Αποτυχία καταγραφής αρχείου"
   },
-  "push": {
-    "enable": "Enable notifications",
-    "disable": "Disable notifications"
+  "notification": {
+    "title": "Notifications",
+    "empty": "No notifications",
+    "markAllRead": "Mark all read",
+    "justNow": "Just now",
+    "minutesAgo": "{count}m ago",
+    "hoursAgo": "{count}h ago",
+    "daysAgo": "{count}d ago"
   },
   "localeNames": {
     "ja": "日本語",

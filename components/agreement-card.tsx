@@ -73,9 +73,9 @@ export function AgreementCard({
   return (
     <Link href={`/agreements/${agreement.urlToken}`}>
       <Card className="hover:bg-accent/50 transition-colors overflow-hidden">
-        <CardHeader>
-          <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-lg leading-tight">
+        <CardHeader className="min-w-0">
+          <div className="flex items-start justify-between gap-2 min-w-0">
+            <CardTitle className="text-lg leading-tight min-w-0 break-words">
               {highlightWords.length > 0 ? (
                 <HighlightedText text={displayTitle} words={highlightWords} />
               ) : (
@@ -98,7 +98,7 @@ export function AgreementCard({
               <AgreementStatusBadge status={agreement.status} />
             </div>
           </div>
-          <CardDescription className="font-mono text-xs truncate max-w-full">
+          <CardDescription className="font-mono text-xs truncate min-w-0">
             {`/agreements/${agreement.urlToken}`}
           </CardDescription>
         </CardHeader>

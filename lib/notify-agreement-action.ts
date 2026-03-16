@@ -1,7 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { decryptAgreement } from "@/lib/encryption";
 import { generateUrlToken } from "@/lib/url-token";
-import { sendPushToUser } from "@/lib/push-sender";
 import type { AgreementRow } from "@/types/database";
 
 const ACTION_LABELS: Record<string, string> = {
@@ -18,7 +17,7 @@ const ACTION_LABELS: Record<string, string> = {
 };
 
 /**
- * 同意書のアクション後に関係者へPush通知を送信する。
+ * 同意書のアクション後に関係者へサイト内通知を保存する。
  * 失敗してもエラーは握りつぶす（通知は best-effort）。
  */
 export async function notifyAgreementAction(
@@ -49,7 +48,7 @@ export async function notifyAgreementAction(
       title.length > 40 ? title.slice(0, 40) + "..." : title;
 
     const label = ACTION_LABELS[actionType] || "が操作しました";
-    const body = `${actorEmail} ${label}\n「${truncatedTitle}」`;
+    const notifTitle = `${actorEmail} ${label}`;
 
     // URLトークンを生成
     const urlToken = await generateUrlToken(row.id);
@@ -58,9 +57,8 @@ export async function notifyAgreementAction(
     // 通知先を決定: アクターでない当事者に送信
     const recipientIds: string[] = [];
 
-    // 作成者が操作 → 合意者に通知 / 合意者が操作 → 作成者に通知
     if (actorId === row.creator_id) {
-      // 合意者（acceptログのactor）を探す
+      // 作成者が操作 → 合意者（acceptログのactor）に通知
       const { data: logs } = await admin
         .from("agreement_logs")
         .select("actor_id")
@@ -71,15 +69,24 @@ export async function notifyAgreementAction(
         recipientIds.push(logs[0].actor_id);
       }
     } else {
+      // 合意者が操作 → 作成者に通知
       recipientIds.push(row.creator_id);
     }
 
-    // 通知送信
-    await Promise.allSettled(
-      recipientIds.map((userId) =>
-        sendPushToUser(userId, { title: "Yubikiri", body, url }),
-      ),
-    );
+    // サイト内通知を保存
+    if (recipientIds.length > 0) {
+      await admin.from("notifications").insert(
+        recipientIds.map((userId) => ({
+          user_id: userId,
+          agreement_id: agreementId,
+          action_type: actionType,
+          actor_email: actorEmail,
+          title: `${notifTitle}\n「${truncatedTitle}」`,
+          url,
+          is_read: false,
+        })),
+      );
+    }
   } catch {
     // 通知失敗は握りつぶす
   }
